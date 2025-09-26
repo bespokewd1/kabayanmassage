@@ -470,6 +470,26 @@
     }
   }
 }
+//Sticky-Button
+//Mobile
+@media only screen and (min-width: 0em) { //hides hero cta button for mobile
+  #hero{
+    #hero-cta{
+      visibility: hidden !important;
+    }
+  }
+}
+//Tablet
+@media only screen and (min-width: 48em){ //hides sticky button for tablet-desktop
+  #hero{
+    #hero-cta{
+      visibility: visible !important;
+    }
+  }
+  #sticky-call-button{
+    visibility: hidden !important;
+  }
+}
 // Footer
 // Mobile -
 @media only screen and (min-width: 0em) {
