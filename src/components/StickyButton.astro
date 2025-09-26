@@ -11,11 +11,11 @@ const { phoneNumber } = Astro.props;
 <div
   id="sticky-call-button"
   class="fixed bottom-8 w-full z-[1000] flex justify-center items-center translate-y-1/2 transition-all duration-200 ease-in gap-6"
+  style="color: #fff !important;"
 >
   <a
     href={`tel:${phoneNumber}`}
     class="bg-(--primary) text-sm text-black rounded-full bg-secondary p-3 md:text-base md:py-3 md:px-6 font-medium shadow-md hover:shadow-lg"
-    style="color: #fff;"
   >
     Call <span class="hidden md:inline">Now</span> {phoneNumber}
   </a>
@@ -31,9 +31,14 @@ const { phoneNumber } = Astro.props;
   </button> -->
   <!--Pop Up for Book Online Button -->
         <!-- Trigger Button -->
-          <button onclick="document.getElementById('popup').classList.remove('hidden')" class="border rounded-full bg-black text-white text-sm md:text-base p-3 md:py-3 md:px-6 font-medium shadow-md hover:shadow-lg">
+          <!-- <button onclick="document.getElementById('popup').classList.remove('hidden')" class="border rounded-full bg-black text-white text-sm md:text-base p-3 md:py-3 md:px-6 font-medium shadow-md hover:shadow-lg">
             Book Your Massage
-          </button>
+          </button> -->
+          <a href="#">
+            <button class="border rounded-full bg-black text-white text-sm md:text-base p-3 md:py-3 md:px-6 font-medium shadow-md hover:shadow-lg">
+              Book Your Massage
+            </button>
+          </a>   
 </div>
 
 <!-- <script>
