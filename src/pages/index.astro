@@ -184,7 +184,55 @@ posts.sort(
   </section>
 
   <!-- ================= Why Choose Us ================= -->
-  <WhyChooseUs />
+  <!-- <WhyChooseUs /> -->
+   <!-- ============================================ -->
+<!--                 Why Choose                   -->
+<!-- ============================================ -->
+
+<section id="why-choose-289">
+    <div class="cs-container">
+        <div class="cs-content">
+            <div class="cs-flex">
+                <span class="cs-topper">Our Process</span>
+                <h2 class="cs-title">Why Choose Kabayan Massage</h2>
+            </div>
+            <p class="cs-text">
+                We deliver thoughtful, therapeutic care tailored to your body—so you leave lighter, looser, and genuinely restored.
+            </p>
+        </div>
+        <ul class="cs-card-group">
+            <li class="cs-item">
+                <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Why-Choose/award.svg" alt="icon" width="48" height="48">
+                <h3 class="cs-h3">Expert Therapists You Can Trust</h3>
+                <p class="cs-item-text">
+                    Registered, experienced therapists focused on results.
+                </p>
+            </li>
+            <li class="cs-item">
+                <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Why-Choose/sheild-black.svg" alt="icon" width="40" height="48">
+                <h3 class="cs-h3">Tailored Care for Your Body</h3>
+                <p class="cs-item-text">
+                    Personalized treatment plans for pain relief and relaxation.
+                </p>
+            </li>
+            <li class="cs-item">
+                <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Why-Choose/call.svg" alt="icon" width="48" height="48">
+                <h3 class="cs-h3">Proven Techniques That Work</h3>
+                <p class="cs-item-text">
+                    Evidence‑based techniques: deep tissue, hot stone, Swedish, and more.
+                </p>
+            </li>
+            <li class="cs-item">
+                <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Why-Choose/call.svg" alt="icon" width="48" height="48">
+                <h3 class="cs-h3">Relaxing Clinic, On Your Schedule</h3>
+                <p class="cs-item-text">
+                    Welcoming clinic with easy booking and flexible hours.
+                </p>
+            </li>
+        </ul>
+    </div>
+</section>
+                                
 
   <!-- ================= How to Book (Steps) ================= -->
   <section class="bg-orange-50">
@@ -844,5 +892,149 @@ posts.sort(
     }
   }
 }
+
+/*-- -------------------------- -->
+<---        Why Choose          -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #why-choose-289 {
+        text-align: center;
+        padding: var(--sectionPadding);
+
+        .cs-container {
+            width: 100%;
+            /* changes to 1280px on tablet */
+            max-width: (550/16rem);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* 48px - 64px */
+            gap: clamp(3rem, 6vw, 4rem);
+        }
+
+        .cs-content {
+            /* set text align to left if content needs to be left aligned */
+            text-align: left;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            /* centers content horizontally, set to flex-start to left align */
+            align-items: flex-start;
+        }
+
+        .cs-text {
+            max-width: (522/16rem);
+        }
+
+        .cs-card-group {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: (16/16rem);
+        }
+
+        .cs-item {
+            list-style: none;
+            text-align: left;
+            width: 100%;
+            padding: (32/16rem);
+            background-color: #f7f7f7;
+            border-radius: (16/16rem);
+            /* prevents padding from adding to height and width */
+            box-sizing: border-box;
+            transition: background-color 0.3s;
+            &:hover {
+                background-color: var(--primary);
+                cursor: pointer;
+
+                .cs-icon {
+                    filter: grayscale(1) brightness(200%);
+                }
+
+                .cs-h3 {
+                    color: var(--bodyTextColorWhite);
+                }
+
+                .cs-item-text {
+                    color: var(--bodyTextColorWhite);
+                }
+            }
+        }
+
+        .cs-icon {
+            width: auto;
+            height: (48/16rem);
+            margin-bottom: (24/16rem);
+            display: block;
+            transition: filter 0.3s;
+        }
+
+        .cs-h3 {
+            /* 20px - 25px */
+            font-size: clamp(1.25rem, 2.5vw, 1.5625rem);
+            line-height: 1.2em;
+            margin: 0;
+            margin-bottom: (16/16rem);
+            color: var(--headerColor);
+            transition: color 0.3s;
+        }
+
+        .cs-item-text {
+            font-size: (16/16rem);
+            line-height: 1.5em;
+            margin: 0;
+            color: var(--bodyTextColor);
+            transition: color 0.3s;
+        }
+    }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #why-choose-289 {
+        .cs-container {
+            max-width: (1280/16rem);
+        }
+
+        .cs-content {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: (64/16rem);
+        }
+
+        .cs-flex {
+            width: 50%;
+        }
+
+        .cs-title {
+            margin: 0;
+        }
+
+        .cs-card-group {
+            justify-content: space-between;
+            /* makes sure every box "stretches" to be the same height as the tallest box */
+            align-items: stretch;
+            flex-direction: row;
+            /* 16px - 20px */
+            gap: clamp(1rem, 1.5vw, 1.25rem);
+        }
+
+        .cs-item {
+            width: auto;
+            /* 16px - 32px */
+            padding: (32/16rem) clamp(1rem, 2.1vw, 2rem);
+        }
+    }
+}
+
+                                
 
 </style>
