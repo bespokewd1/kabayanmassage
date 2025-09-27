@@ -39,7 +39,7 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
           benefits.map((b) => (
             <article>
               <p class="text-sm font-bold" id="b-number">{b.num}</p>
-              <h3 class="mt-1 font-semibold" id="b-number">{b.title}</h3>
+              <h3 class="mt-1 font-semibold" id="b-title">{b.title}</h3>
               <p class="mt-2 text-sm" id="b-body">{b.body}</p>
             </article>
           ))
@@ -124,13 +124,13 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
         color: #fff !important;
       }
       #b-number{
-        color: var(--primary);
+        color: var(--secondaryLight);
       }
       #b-title{
         color: #eee !important;
       }
       #b-body{
-        columns: #ddd !important;
+        color: #ddd !important;
       }
     }
   }
