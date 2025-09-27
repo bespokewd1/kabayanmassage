@@ -27,7 +27,7 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
     <div class="rounded-xl p-6 md:p-10 ring-1 ring-black/5" id="benefits-container">
       <header class="mb-8 md:mb-10">
         <!-- <p class="text-sm text-emerald-900/80">{updatedNote}</p> -->
-        <h2 class="mt-2 font-serif text-2xl md:text-3xl text-gray-900">
+        <h2 class="mt-2 font-serif text-2xl md:text-3xl" id="benefits-title">
           {benefitsTitle}
         </h2>
       </header>
@@ -38,9 +38,9 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
         {
           benefits.map((b) => (
             <article>
-              <p class="text-sm font-bold text-emerald-900">{b.num}</p>
-              <h3 class="mt-1 font-semibold text-gray-900">{b.title}</h3>
-              <p class="mt-2 text-sm text-gray-800">{b.body}</p>
+              <p class="text-sm font-bold" id="b-number">{b.num}</p>
+              <h3 class="mt-1 font-semibold" id="b-number">{b.title}</h3>
+              <p class="mt-2 text-sm" id="b-body">{b.body}</p>
             </article>
           ))
         }
@@ -119,7 +119,19 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
 <style lang="less">
   #price-benefits{
     #benefits-container{
-      background-color: var(--secondaryLight) !important;
+      background-color: var(--primary) !important;
+      #benefits-title{
+        color: #fff !important;
+      }
+      #b-number{
+        color: var(--primary);
+      }
+      #b-title{
+        color: #eee !important;
+      }
+      #b-body{
+        columns: #ddd !important;
+      }
     }
   }
 </style>
