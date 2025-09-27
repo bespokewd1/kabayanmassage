@@ -76,62 +76,35 @@ posts.sort(
 </section>
 
 <!-- ============================================ -->
-<!--                  Services                    -->
+<!--                    Hero                      -->
 <!-- ============================================ -->
 
-<section id="Hservices-2274">
+<section id="hero-1785">
     <div class="cs-container">
-        <ul class="cs-card-group">
-            <li class="cs-item">
-                <a href="" class="cs-link">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/construction1.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
-                    <h3 class="cs-h3">Best House Renovation </h3>
-                    <p class="cs-item-text">
-                        Transform your home with trendy flooring and finishes!
-                    </p>
-                </a>
-            </li>
-            <li class="cs-item">
-                <a href="" class="cs-link">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/construction2.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
-                    <h3 class="cs-h3">Quality Always Matters </h3>
-                    <p class="cs-item-text">
-                        Quality renovations provide lasting beauty and functionality.
-                    </p>
-                </a>
-            </li>
-            <li class="cs-item">
-                <a href="" class="cs-link">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/construction3.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
-                    <h3 class="cs-h3">Effective Teamwork </h3>
-                    <p class="cs-item-text">
-                        Collaboration drives success through shared goals and communication.
-                    </p>
-                </a>
-            </li>
-            <li class="cs-item">
-                <a href="" class="cs-link">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/construction4.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
-                    <span class="cs-number">3K+</span>
-                    <h3 class="cs-h3">Happy Customers</h3>
-                    <p class="cs-item-text">
-                        With more than 7 years of expertise we served our clients.
-                    </p>
-                    <span class="cs-fake-link">
-                        Let's Work Together
-                        <img class="cs-arrow" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/orange-arrow-up.svg" decoding="async" alt="arrow" width="20" height="20" aria-hidden="true">
-                    </span>
-                    <picture class="cs-background">
-                        <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/construction3.jpg">
-                        <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/construction3.jpg">
-                        <img aria-hidden="true" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/construction3.jpg" alt="construction site" width="630" height="684">
-                    </picture>
-                </a>
-            </li>
-        </ul>
+        <div class="cs-content">
+            <span class="cs-topper">Best Gym Of The City For Fitness</span>
+            <h1 class="cs-title">You Can Boost Your Strength</h1>
+            <p class="cs-text">
+                Develop confidence, composure under pressure and the discipline needed to be a champ. This is the club you’ve been looking for.
+            </p>
+            <div class="cs-button-group">
+                <a href="" class="cs-button-solid cs-button1">Read More</a>
+            </div>
+        </div>
     </div>
+
+    <!-- Background Image -->
+    <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="https://csimages2.nyc3.digitaloceanspaces.com/Images/People/gym-hero.jpg">
+        <source media="(min-width: 601px)" srcset="https://csimages2.nyc3.digitaloceanspaces.com/Images/People/gym-hero.jpg">
+        <img loading="lazy" decoding="async" src="https://csimages2.nyc3.digitaloceanspaces.com/Images/People/gym-hero.jpg" alt="field" width="1920" height="1200" aria-hidden="true">
+    </picture>
+
+    <img class="cs-graphic" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/white-splatter2.svg" alt="graphic" height="161" width="1920" loading="lazy" decoding="async" >
+    <!--This is a dark version. Download the image and change the fill color to match the color of the section background below it-->
+    <img class="cs-graphic cs-graphic-dark" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/dark-mode-splatter2.svg" alt="graphic" height="161" width="1920" loading="lazy" decoding="async" >
 </section>
-                                
+                                                           
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
@@ -689,387 +662,141 @@ posts.sort(
     scroll-behavior: smooth;
   }
 
-  /*-- -------------------------- -->
+/*-- -------------------------- -->
 <---           Hero             -->
 <--- -------------------------- -*/
 
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-  #hero-2274 {
-    /* 150px - 350px Top */
-    padding: clamp(9rem, 30.95vw, 21.875rem) 1rem 0;
+  #hero-1785 {
+    /* 200px - 300px - leaving extra space for the navigation */
+    padding: clamp(12.5rem, 25.95vw, 18.75em) 1rem;
+    /* prevents the topper line from causing an overflow */
     overflow: hidden;
     position: relative;
-    z-index: 10;
+    z-index: 1;
   }
-  #hero-2274 .cs-container {
+  #hero-1785 .cs-container {
     width: 100%;
     max-width: 80rem;
     margin: auto;
-    position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 5.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
   }
-  #hero-2274 .cs-content {
-    /* set text align to left if content needs to be left aligned */
-    text-align: left;
-    width: 100%;
-    max-width: 39.375rem;
-    display: flex;
-    flex-direction: column;
-    /* centers content horizontally, set to flex-start to left align */
-    align-items: flex-start;
-    position: relative;
-    z-index: 10;
-  }
-  #hero-2274 .cs-title {
-    /* 39px - 61px */
-    font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    line-height: 1.2em;
-    width: 100%;
-    max-width: 17ch;
-    margin: 0 0 1rem;
-    color: var(--bodyTextColorWhite);
-    position: relative;
-  }
-  #hero-2274 .cs-text {
-    /* 16px - 20px */
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    line-height: 1.5em;
-    width: 100%;
-    max-width: 43.75rem;
-    /* 28px - 40px */
-    margin: 0 0 clamp(1.75rem, 4vw, 2.5rem);
-    color: var(--bodyTextColorWhite);
-    opacity: 0.8;
-  }
-  #hero-2274 .cs-button-solid {
-    font-size: 1rem;
+  #hero-1785 .cs-content {
     text-align: center;
+    width: 100%;
+    max-width: 46.875rem;
+  }
+  #hero-1785 .cs-title {
+    /* 49px - 84px */
+    font-size: clamp(3.0625rem, 6vw, 5.25rem);
+  }
+  #hero-1785 .cs-title,
+  #hero-1785 .cs-text {
+    color: var(--bodyTextColorWhite);
+  }
+  #hero-1785 .cs-text {
+    margin-bottom: 2rem;
+  }
+  #hero-1785 .cs-button-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  #hero-1785 .cs-button-solid {
+    font-size: 1rem;
+    font-weight: 700;
     /* 46px - 56px */
     line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+    text-align: center;
     text-decoration: none;
-    font-weight: 700;
-    /* clips corners of the before element */
-    overflow: hidden;
+    min-width: 12.5rem;
     margin: 0;
-    color: #fff;
-    padding: 0 1.75rem;
+    /* prevents padding from adding to the width */
+    box-sizing: border-box;
+    padding: 0 1.5rem;
     background-color: var(--primary);
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
+    color: var(--bodyTextColorWhite);
+    border-radius: 0.25rem;
+    display: inline-block;
     position: relative;
     z-index: 1;
-    transition: color 0.3s;
   }
-  #hero-2274 .cs-button-solid:before {
+  #hero-1785 .cs-button-solid:before {
     content: "";
-    position: absolute;
-    display: block;
-    height: 100%;
     width: 0%;
+    height: 100%;
     background: #000;
     opacity: 1;
+    border-radius: 0.25rem;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: -1;
     transition: width 0.3s;
   }
-  #hero-2274 .cs-button-solid:hover {
-    color: #fff;
-  }
-  #hero-2274 .cs-button-solid:hover:before {
+  #hero-1785 .cs-button-solid:hover:before {
     width: 100%;
   }
-  #hero-2274 .cs-picture {
+  #hero-1785 .cs-graphic {
     width: 100%;
-    /* 427px - 581px */
-    max-width: clamp(26.6875rem, 50vw, 36.3125rem);
+    min-width: 120rem;
     height: auto;
-    display: flex;
-    align-items: flex-end;
-    position: relative;
-    z-index: 7;
-  }
-  #hero-2274 .cs-picture img {
-    width: 100%;
-    height: auto;
-  }
-  #hero-2274 .cs-image-group {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-  }
-  #hero-2274 .cs-background {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 1;
-  }
-  #hero-2274 .cs-background img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
     position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 0;
+    transform: translateX(-50%);
+  }
+  #hero-1785 .cs-graphic-dark {
+    display: none;
+  }
+  #hero-1785 .cs-background {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: -2;
   }
-  #hero-2274 .cs-background1:before {
-    content: '';
+  #hero-1785 .cs-background:before {
+    /* Overlay */
+    content: "";
     width: 100%;
     height: 100%;
     background: #000;
-    opacity: 0.72;
+    /* prevents the cursor from interacting with it */
+    pointer-events: none;
+    opacity: 0.7;
     display: block;
     position: absolute;
     top: 0;
     left: 0;
-  }
-  #hero-2274 .cs-background2 {
-    height: 100vw;
-    max-height: 30rem;
-    flex: none;
-  }
-}
-/* Tablet - 768px */
-@media only screen and (min-width: 48rem) {
-  #hero-2274 {
-    padding-bottom: 9.375rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5.625rem;
-  }
-  #hero-2274 .cs-container {
-    justify-content: flex-start;
-    flex-direction: row;
-  }
-  #hero-2274 .cs-content {
-    text-align: left;
-    width: 53%;
-    align-items: flex-start;
-  }
-  #hero-2274 .cs-picture {
-    width: 56%;
-    position: absolute;
-    bottom: -4.0625rem;
-    right: -1.875rem;
-  }
-  #hero-2274 .cs-image-group {
-    flex-direction: row;
-  }
-  #hero-2274 .cs-background2 {
-    width: 25vw;
-    height: 100%;
-    max-height: 100%;
-    border-left: 2px solid #FFC219;
-  }
-}
-/* Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
-  #hero-2274 {
-    /* 100px - 172px */
-    padding-bottom: clamp(6.25rem, 12vw, 10.9375rem);
-  }
-  #hero-2274 .cs-picture {
-    width: 45%;
-    /* same value as the padding, but opposite */
-    bottom: calc(clamp(6.25rem, 12vw, 10.9375rem)*-1);
-    /* 32px - 80px */
-    right: clamp(2rem, 5vw, 5rem);
-  }
-  #hero-2274 .cs-background2 {
-    width: 32.8125vw;
-  }
-}
-
-/*-- -------------------------- -->
-<---         Services           -->
-<--- -------------------------- -*/
-
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
-  #Hservices-2274 {
-    width: 100%;
-    padding: var(--sectionPadding);
-    position: relative;
-    z-index: 20;
-  }
-  #Hservices-2274 .cs-container {
-    max-width: 80rem;
-    margin: auto;
-    position: relative;
     z-index: 1;
   }
-  #Hservices-2274 .cs-card-group {
-    width: 100%;
-    max-width: 80rem;
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    row-gap: 2rem;
-  }
-  #Hservices-2274 .cs-item {
-    text-align: left;
-    list-style: none;
-    width: 100%;
-    box-sizing: border-box;
-    grid-column: span 12;
-    position: relative;
-    z-index: 1;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  #Hservices-2274 .cs-item:last-of-type .cs-link {
-    /* 32px - 80px top & bottom */
-    /* 16px - 80px left & right */
-    padding: clamp(2rem, 7vw, 5rem) clamp(1rem, 4vw, 5rem);
-    box-sizing: border-box;
-  }
-  #Hservices-2274 .cs-item:last-of-type .cs-icon {
-    width: 4rem;
-    margin-bottom: 1.5rem;
-  }
-  #Hservices-2274 .cs-item:last-of-type .cs-h3 {
-    font-size: 1.5625rem;
-  }
-  #Hservices-2274 .cs-item:last-of-type .cs-item-text {
-    margin-bottom: 2rem;
-  }
-  #Hservices-2274 .cs-number {
-    font-size: 4.5rem;
-    line-height: 1.2em;
-    font-weight: 700;
-    margin: 0;
-    color: var(--headerColor);
-  }
-  #Hservices-2274 .cs-fake-link {
-    font-size: 1rem;
-    line-height: 1.2em;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 0;
-    padding: 0 0 0.25rem 0;
-    border-bottom: 1px solid var(--primary);
-    color: var(--primary);
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  #Hservices-2274 .cs-background {
+  #hero-1785 .cs-background img {
     width: 100%;
     height: 100%;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-  #Hservices-2274 .cs-background:before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    opacity: 1;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-  #Hservices-2274 .cs-background img {
-    width: 100%;
-    height: 100%;
-    opacity: 0.08;
     object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
   }
-  #Hservices-2274 .cs-link {
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-  }
-  #Hservices-2274 .cs-icon {
-    width: 2.5rem;
-    height: auto;
-    margin: 0 0 1.25rem 0;
-  }
-  #Hservices-2274 .cs-h3 {
-    /* 20px - 25px */
-    font-size: clamp(1.25rem, 2vw, 1.5625rem);
-    font-weight: 700;
-    text-align: inherit;
-    line-height: 1.2em;
-    margin: 0 0 0.5rem 0;
-    color: var(--headerColor);
-    transition: color 0.3s;
-  }
-  #Hservices-2274 .cs-item-text {
-    /* 14px - 16px */
-    font-size: clamp(0.875rem, 1.5vw, 1rem);
-    text-align: inherit;
-    line-height: 1.5em;
-    margin: 0;
-    color: var(--bodyTextColor);
-    transition: color 0.3s, opacity 0.3s;
+}
+/* Large Desktop - 1920px */
+@media only screen and (min-width: 120rem) {
+  #hero-1785 {
+    /* this ties the padding bottom value to the size of the screen width. The wider the image gets the taller it gets, meaning it will get clsoer and closer to the content. This makes the padding bottom value grow with the screen size so it accounts for the growing height of the svg graphic getting taller */
+    padding-bottom: 14vw;
   }
 }
-/* Tablet - 768px */
-@media only screen and (min-width: 48rem) {
-  #Hservices-2274 .cs-card-group {
-    width: 44%;
-  }
-  #Hservices-2274 .cs-item:last-of-type {
-    width: 49%;
-    position: absolute;
-    right: 0;
-    top: calc(clamp(10rem, 20vw, 12.5rem)*-1);
-  }
-}
-/* Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
-  #Hservices-2274 .cs-item:last-of-type {
-    width: 37vw;
-    max-width: 25rem;
-  }
-}
-/* Large Desktop - 1300px */
-@media only screen and (min-width: 81.25rem) {
-  #Hservices-2274 {
-    padding: 0;
-  }
-  #Hservices-2274 .cs-card-group {
-    width: 53.75rem;
-    padding: 3.75rem 0;
-    column-gap: 1.25rem;
-  }
-  #Hservices-2274 .cs-item {
-    grid-column: span 4;
-  }
-  #Hservices-2274 .cs-item:last-of-type {
-    top: auto;
-    bottom: 0;
-  }
-}
+                                
                                 
 </style>
