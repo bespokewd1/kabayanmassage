@@ -14,8 +14,8 @@
     "url": "/services/",
     "children": [
       {
-        "key": "Deep Tissue Massage",
-        "url": "/services/deep-tissue"
+        "key": "Therapeutic Massage",
+        "url": "/services/therapeutic-masssage"
       },
       {
         "key": "Hot Stone Massage",
