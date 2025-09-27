@@ -53,64 +53,80 @@ const services: Service[] = [
       'Customized massage designed to relieve tension, improve circulation, and promote relaxation and well-being.',
     cta: 'Read More',
     img: services2Img,
-    href: '/services/therapeutic-massage',
+    href: '/services/therapeutic',
   },
   {
-    title: 'Hot Stone Massage',
+    title: 'Deep Tissue Massage',
     blurb:
-      'Uses smooth, heated stones to melt away muscle tension and promote deep relaxation.',
+      'Targets deeper layers of muscle and connective tissue to release chronic tension, knots, and stiffness. Ideal for persistent pain or tight muscles.',
     cta: 'Read More',
     img: services5Img,
-    href: '/services/hot-stone',
+    href: '/services/deep-tissue',
   },
   {
-    title: 'Relaxation Massage',
+    title: 'Prenatal Massage',
     blurb:
-      'A gentle, full-body massage designed to reduce stress, ease tension, and promote overall relaxation.',
+      'Gentle massage tailored for expectant mothers to reduce discomfort, ease stress, and support a healthy pregnancy.',
     cta: 'Read More',
     img: services3Img,
-    href: '/services/relaxation',
+    href: '/services/prenatal',
   },
   {
-    title: 'Pregnancy Massage',
+    title: 'Sports Massage',
     blurb:
-      'A soothing massage tailored to the needs of expectant mothers to ease discomfort and support prenatal wellness.',
+      'Improves flexibility, prevents injuries, and accelerates recovery for athletes and active individuals.',
     cta: 'Read More',
     img: services1Img,
-    href: '/services/pregnancy',
+    href: '/services/sports',
   },
   {
-    title: 'Cupping',
+    title: 'Cupping Therapy',
     blurb:
-      'An ancient therapy using suction cups to improve circulation, relieve muscle tension, and promote healing.',
+      'Ancient technique using suction cups to improve blood flow, relieve muscle tension, and promote healing.',
     cta: 'Read More',
     img: services4Img,
     href: '/services/cupping',
   },
   {
-    title: 'Sports Massage',
+    title: 'Hot Stone Massage',
     blurb:
-      'Focused therapy for athletes to enhance performance, prevent injury, and aid recovery.',
+      'Warm stones gently ease muscle tension, creating deep relaxation.',
     cta: 'Read More',
     img: services6Img,
-    href: '/services/sports',
+    href: '/services/hot-stone',
   },
   {
-    title: 'Craniosacral Massage',
+    title: 'Lymphatic Drainage Massage',
     blurb:
-      'A light-touch technique that releases tension in the central nervous system to improve overall health and well-being.',
+      'Light, rhythmic massage that stimulates the lymphatic system to reduce swelling and improve circulation.',
     cta: 'Read More',
     img: services7Img,
-    href: '/services/craniosacral',
+    href: '/services/lymphatic-drainage',
   },
   {
-    title: 'MVA (Motor Vehicle Accident) Massage',
+    title: 'TMJ Massage',
     blurb:
-      'Therapeutic treatment to address pain and soft tissue injuries resulting from car accidents, often covered by insurance.',
+      'Relieves pain and tension in the jaw, neck, and head caused by temporomandibular joint issues.',
     cta: 'Read More',
     img: services8Img,
-    href: '/services/mva',
+    href: '/services/tmj',
   },
+  {
+    title: 'Japanese Head Spa',
+    blurb:
+      'Scalp treatment that improves blood flow, reduces stress, and promotes healthy hair.',
+    cta: 'Read More',
+    img: services8Img,
+    href: '/services/japanese',
+  },
+  {
+    title: '90-Minute Wellness Package',
+    blurb:
+      'Includes Japanese head massage, back massage, hand and foot massage, and face massage for a full-body reset.',
+    cta: 'Read More',
+    img: services8Img,
+    href: '/services/90-min',
+  }
 ];
 
 type Benefit = {
@@ -242,15 +258,16 @@ const mapNote =
                 {/* <div class="absolute inset-0 bg-gradient-to-l from-emerald-900 from-10% via-10% to-emerald-500/10" /> */}
               </div>
 
-              <div class="p-5 bg-emerald-200 z-10 text-emerald-50 h-full place-content-center space-y-4 ">
-                <h3 class="font-semibold text-shadow-md text-emerald-950 text-xl text-balance">
+              <div class="p-5 z-10 text-emerald-50 h-full place-content-center space-y-4 " id="services-card-content">
+                <h3 class="font-semibold text-shadow-md text-xl text-balance" id="s-title">
                   {s.title}
                 </h3>
-                <p class="text-sm/6 text-emerald-900 text-pretty">{s.blurb}</p>
+                <p class="text-sm/6 text-pretty" id="s-blurb">{s.blurb}</p>
                 <div class="mt-4">
                   <a
                     href={s.href ?? '/services'}
-                    class="inline-flex items-center rounded-full bg-orange-200 hover:bg-orange-100 transition-colors text-gray-900 px-4 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
+                    id="s-button"
+                    class="inline-flex items-center rounded-full transition-colors px-4 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-2"
                   >
                     {s.cta ?? 'Learn More'}
                   </a>
@@ -489,3 +506,20 @@ const mapNote =
     </div>
   </section>
 </BaseLayout>
+
+<style lang="less">
+  //services card content colors
+  #services-card-content{
+    background-color: var(--primary);
+    #s-title{
+      color: #fff !important;
+    }
+    #s-blurb{
+      color: #ddd !important;
+    }
+    #s-button{
+      background-color: var(--secondary) !important;
+      color: #000 !important;
+    }
+  }
+</style>
