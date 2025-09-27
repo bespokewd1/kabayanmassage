@@ -42,8 +42,16 @@
         "url": "/services/lymphatic-drainage"
       },
       {
-        "key": "MVA (Motor Vehicle Accident) Massage",
-        "url": "/services/mva"
+        "key": "TMJ Massage",
+        "url": "/services/tmj"
+      },
+      {
+        "key": "Japanese Head Spa",
+        "url": "/services/japanese"
+      },
+      {
+        "key": "90-Minute Wellness Package",
+        "url": "/services/90-min"
       }
   ]
   },
