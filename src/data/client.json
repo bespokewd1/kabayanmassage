@@ -1,6 +1,6 @@
 {
-	"name": "Kabayan Massage",
-	"email": "iMassage@info.ca",
+	"name": "Kabayan Healing Touch Massage",
+	"email": "kabayanhealingmassage8@gmail.com",
 	"phoneForTel": "778-891-9558",
 	"phoneFormatted": "(778) 891-9558",
 	"address": {
@@ -11,5 +11,5 @@
 		"zip": "",
 		"mapLink": "https://www.google.com/maps?q=South+Gate+Mall,+Edmonton,+Alberta,+Canada"
 	},
-	"domain": "https://stonemassage.ca/"
+	"domain": "https://kabayanmassage.netlify.app/"
 }
