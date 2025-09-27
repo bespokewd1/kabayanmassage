@@ -53,7 +53,7 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
     </p>
 
     <!-- Pricing -->
-    <div class="mt-8 rounded-xl bg-orange-100 p-6 md:p-10 ring-1 ring-black/5">
+    <div class="mt-8 rounded-xl p-6 md:p-10 ring-1 ring-black/5" id="pricing-container">
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         <!-- Pricing headline / note -->
         <div class="md:col-span-1">
@@ -74,7 +74,7 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
           >
             {
               prices.map((row) => (
-                <li class="flex items-center justify-between px-5 py-4 bg-orange-50">
+                <li class="flex items-center justify-between px-5 py-4" id="pricing-li">
                   <span class="text-gray-900">{row.duration}</span>
                   <span class="font-semibold text-emerald-900">
                     {row.price}
@@ -124,13 +124,19 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
         color: #fff !important;
       }
       #b-number{
-        color: var(--secondaryLight);
+        color: var(--secondary);
       }
       #b-title{
         color: #eee !important;
       }
       #b-body{
         color: #ddd !important;
+      }
+    }
+    #pricing-container{
+      background-color: var(--secondary);
+      #pricing-li{
+        background-color: var(--secondaryLight);
       }
     }
   }
