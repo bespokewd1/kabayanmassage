@@ -15,7 +15,7 @@ const { title, image, alt, subtitle, highlights, ctaPrimary, ctaSecondary } =
   Astro.props as HeroServiceProps;
 ---
 
-<section class="bg-orange-50">
+<section class="bg-orange-50" id="service-hero">
   <div class="mx-auto max-w-5xl px-6 pt-16 md:pt-20 text-center">
     <header>
       <h1 class="font-serif text-3xl md:text-4xl text-gray-900">
@@ -48,9 +48,9 @@ const { title, image, alt, subtitle, highlights, ctaPrimary, ctaSecondary } =
     >
       {
         highlights.map((h) => (
-          <div class="rounded-lg bg-orange-100/50 p-4 ring-1 ring-black/10">
-            <p class="font-semibold text-emerald-900">{h.title}</p>
-            <p class="mt-1">{h.body}</p>
+          <div class="rounded-lg p-4 ring-1 ring-black/10" id="highlight-card">
+            <p class="font-semibold text-emerald-900" id="highlight-title">{h.title}</p>
+            <p class="mt-1" id="highlight-description">{h.body}</p>
           </div>
         ))
       }
@@ -75,3 +75,17 @@ const { title, image, alt, subtitle, highlights, ctaPrimary, ctaSecondary } =
     </div>
   </div>
 </section>
+
+<style lang="less">
+  #service-hero{
+    #highlight-card{
+      background-color: var(--primary);
+      #highlight-title{
+        color: #fff;
+      }
+      #highlight-description{
+        color: #ddd;
+      }
+    }
+  }
+</style>
