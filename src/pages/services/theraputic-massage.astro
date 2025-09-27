@@ -3,7 +3,7 @@ import BaseLayout from 'src/layouts/BaseLayout.astro';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import { Image } from 'astro:assets';
 // Use your best deep‑tissue hero image here
-import deepTissueHero from '@assets/images/Services-2.DeepTissueMassage.jpg';
+import theraputicMassageHero from '@assets/images/Services-2.DeepTissueMassage.jpg';
 import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
 import { getOptimizedImage } from '@js/utils';
 import ServiceHero from '@components/Services/ServiceHero.astro';
@@ -18,8 +18,8 @@ const optimizedImage = await getOptimizedImage(landingImage);
 
 const deepTissue: HeroServiceProps = {
   title: 'Deep Tissue Massage',
-  image: deepTissueHero,
-  alt: 'Therapeutic deep‑tissue massage focused on relieving stubborn muscle tension',
+  image: theraputicMassageHero,
+  alt: 'Therapeutic massage focused on relieving stubborn muscle tension',
   subtitle: `Targets deeper muscle layers to relieve chronic tension, muscle tightness, and pain.`,
   highlights: [
     {
@@ -36,7 +36,7 @@ const deepTissue: HeroServiceProps = {
     },
   ],
   ctaPrimary: {
-    label: 'Book Deep‑Tissue Session',
+    label: 'Book Theraputic Massage Session',
     href: '/booking',
   },
   ctaSecondary: {
@@ -77,7 +77,7 @@ const prices: ServicePriceRow[] = [
 ];
 
 const priceBenefits: PriceBenefitsProps = {
-  benefitsTitle: 'Benefits of Deep‑Tissue Massage',
+  benefitsTitle: 'Benefits of Theraputic Massage',
   benefits: benefits,
   benefitsTagline: 'Relieve Pain, Reduce Stress & Restore Balance',
   prices: prices,
