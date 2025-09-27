@@ -16,8 +16,8 @@ import PriceBenifits from '@components/Services/PriceBenifits.astro';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
-const deepTissue: HeroServiceProps = {
-  title: 'Deep Tissue Massage',
+const therapeuticMassage: HeroServiceProps = {
+  title: 'Therapeutic Massage',
   image: therapeuticMassageHero,
   alt: 'Therapeutic massage focused on relieving stubborn muscle tension',
   subtitle: `Targets deeper muscle layers to relieve chronic tension, muscle tightness, and pain.`,
@@ -89,6 +89,6 @@ const priceBenefits: PriceBenefitsProps = {
   description="iMassage Therapeutic Clinique- Professional Massage Therapy"
   preloadedImage={optimizedImage}
 >
-  <ServiceHero {...deepTissue} />
+  <ServiceHero {...therapeuticMassage} />
   <PriceBenifits {...priceBenefits} />
 </BaseLayout>
