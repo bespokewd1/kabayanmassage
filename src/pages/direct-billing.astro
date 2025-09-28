@@ -412,7 +412,238 @@ const optimizedImage = await getOptimizedImage(landingImage);
   }
 }
 
+/*-- -------------------------- -->
+<---            FAQ             -->
+<--- -------------------------- -*/
 
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #faq-1193 {
+        padding: var(--sectionPadding);
+        position: relative;
+        overflow: hidden;
+
+        .cs-container {
+            width: 100%;
+            /* chnages to 1280px at desktop */
+            max-width: (584/16rem);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* 40px - 48px */
+            gap: clamp(2.5rem, 5vw, 3rem);
+        }
+
+        .cs-content {
+            text-align: left;
+            max-width: (630/16rem);
+        }
+
+        .cs-title {
+            /* 20 characters wide including spaces */
+            max-width: 20ch;
+            margin: 0 0 (32/16rem) 0;
+        }
+
+        .cs-faq-group {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: (16/16rem);
+        }
+
+        .cs-faq-item {
+            list-style: none;
+            width: 100%;
+            background-color: #f7f7f7;
+            padding: (20/16rem);
+            box-sizing: border-box;
+            transition: border-bottom 0.3s;
+
+            &.active {
+                border-color: var(--primaryLight);
+                .cs-button {
+                    color: var(--primary);
+                    &:before {
+                        background-color: var(--primaryLight);
+                        transform: rotate(315deg);
+                    }
+                    &:after {
+                        background-color: var(--primaryLight);
+                        transform: rotate(-315deg);
+                    }
+                }
+                .cs-item-p {
+                    height: auto;
+                    padding-top: (16/16rem);
+                    opacity: 1;
+                }
+            }
+        }
+
+        .cs-button {
+            /* 16px - 20px */
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.2em;
+            text-align: left;
+            font-weight: bold;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: var(--headerColor);
+            display: block;
+            width: 100%;
+            position: relative;
+            transition:
+                background-color 0.3s,
+                color 0.3s;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &:before {
+                /* left line */
+                content: "";
+                width: (8/16rem);
+                height: (2/16rem);
+                background-color: var(--headerColor);
+                opacity: 1;
+                border-radius: 50%;
+                position: absolute;
+                display: block;
+                top: 45%;
+                right: (4/16rem);
+                transform: rotate(45deg);
+                /* animate the transform from the left side of the x axis, and the center of the y */
+                transform-origin: left center;
+                transition: transform 0.5s;
+            }
+
+            &:after {
+                /* right line */
+                content: "";
+                width: (8/16rem);
+                height: (2/16rem);
+                background-color: var(--headerColor);
+                opacity: 1;
+                border-radius: 50%;
+                position: absolute;
+                display: block;
+                top: 45%;
+                right: (1/16rem);
+                transform: rotate(-45deg);
+                /* animate the transform from the right side of the x axis, and the center of the y */
+                transform-origin: right center;
+                transition: transform 0.5s;
+            }
+        }
+
+        .cs-button-text {
+            width: 90%;
+            display: block;
+        }
+
+        .cs-item-p {
+            /* 14px - 16px */
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            line-height: 1.5em;
+            width: 90%;
+            max-width: (541/16rem);
+            height: 0;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            color: var(--bodyTextColor);
+            /* clips the text so it doesn't show up */
+            overflow: hidden;
+            transition:
+                opacity 0.3s,
+                padding-bottom 0.3s;
+        }
+
+        .cs-image-group {
+            /* we use ems for everything in the container so they pull their value for em from the font size of this parent instead of the root element (html). This font size scales with the view width of the screen and stops when the font size equals the value of 1em (16px) and stops growing */
+            font-size: ~"min(2.43vw, 1em)";
+            width: (598/16em);
+            height: (678/16em);
+            display: block;
+            position: relative;
+        }
+
+        .cs-picture {
+            display: block;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .cs-picture1 {
+            width: (522/16em);
+            height: (609/16em);
+            top: 0;
+            left: 0;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .cs-picture2 {
+            width: (400/16em);
+            height: (650/16em);
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            bottom: 0;
+            right: 0;
+
+            img {
+                width: auto;
+                height: 100%;
+                max-height: (650/16rem);
+                object-fit: contain;
+            }
+        }
+    }
+}
+
+/* Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+    #faq-1193 {
+        .cs-container {
+            max-width: (1280/16rem);
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .cs-content {
+            width: 55%;
+        }
+
+        .cs-image-group {
+            font-size: ~"min(1.4vw, 1em)";
+            height: auto;
+            min-height: (678/16rem);
+        }
+
+        .cs-picture1 {
+            height: 90%;
+        }
+    }
+}
+
+                                
 
 
 
