@@ -459,30 +459,20 @@ const mapNote =
 <section id="why-choose-1662">
     <div class="cs-container">
         <div class="cs-content">
-            <span class="cs-topper">Why Choose Us</span>
-            <h2 class="cs-title">Grow Your Business with Our New Bold Agency</h2>
+            <span class="cs-topper">Healing Tailored to Your Needs</span>
+            <h2 class="cs-title">Who Benefits from Our Services</h2>
         </div>
         <div class="cs-wrapper">
-            <ul class="cs-card-group">
+          <!-- Odd lists 1-3-5-7 and so on -->
+            <ul class="cs-card-group">  
                 <li class="cs-item">
                     <span class="cs-item-number">01</span>
                     <div class="cs-item-wrapper">
                         <h3 class="cs-h3">
-                            Aqestic recusandae laudantium
+                            Individuals with Chronic Pain or Muscle Tension
                         </h3>
                         <p class="cs-item-text">
-                            Optio amet a quisquam saepe aliquid, voluptate praesentium dicta.
-                        </p>
-                    </div>
-                </li>
-                <li class="cs-item">
-                    <span class="cs-item-number">02</span>
-                    <div class="cs-item-wrapper">
-                        <h3 class="cs-h3">
-                            Voluptatem eum cupiditate totam
-                        </h3>
-                        <p class="cs-item-text">
-                            Optio amet a quisquam saepe aliquid, voluptate praesentium dicta.
+                            Persistent discomfort can improve with targeted therapeutic massage—focused work to release tight areas and support easier movement.
                         </p>
                     </div>
                 </li>
@@ -490,10 +480,24 @@ const mapNote =
                     <span class="cs-item-number">03</span>
                     <div class="cs-item-wrapper">
                         <h3 class="cs-h3">
-                            Recusandae laudantium optio amet
+                            Active Individuals Needing Muscle Recovery
                         </h3>
                         <p class="cs-item-text">
-                            Optio amet a quisquam saepe aliquid, voluptate praesentium dicta.
+                            Regular sessions aid recovery between workouts, enhance performance, and help reduce the risk of overuse injuries.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <!-- Even list 2-4-6 and so on -->
+            <ul class="cs-card-group">
+                <li class="cs-item">
+                    <span class="cs-item-number">02</span>
+                    <div class="cs-item-wrapper">
+                        <h3 class="cs-h3">
+                            People Experiencing Stress or Anxiety
+                        </h3>
+                        <p class="cs-item-text">
+                            Massage provides a calm, restorative reset that helps lower stress levels, settle the nervous system, and promote better sleep.
                         </p>
                     </div>
                 </li>
@@ -501,45 +505,10 @@ const mapNote =
                     <span class="cs-item-number">04</span>
                     <div class="cs-item-wrapper">
                         <h3 class="cs-h3">
-                            Aqestic recusandae laudantium
+                            Anyone Seeking Relaxation and Self‑Care
                         </h3>
                         <p class="cs-item-text">
-                            Optio amet a quisquam saepe aliquid, voluptate praesentium dicta.
-                        </p>
-                    </div>
-                </li>
-            </ul>
-            <ul class="cs-card-group">
-                <li class="cs-item">
-                    <span class="cs-item-number">05</span>
-                    <div class="cs-item-wrapper">
-                        <h3 class="cs-h3">
-                            Recusandae laudantium optio amet
-                        </h3>
-                        <p class="cs-item-text">
-                            Optio amet a quisquam saepe aliquid, voluptate praesentium dicta.
-                        </p>
-                    </div>
-                </li>
-                <li class="cs-item">
-                    <span class="cs-item-number">06</span>
-                    <div class="cs-item-wrapper">
-                        <h3 class="cs-h3">
-                            Aqestic recusandae laudantium
-                        </h3>
-                        <p class="cs-item-text">
-                            Optio amet a quisquam saepe aliquid, voluptate praesentium dicta.
-                        </p>
-                    </div>
-                </li>
-                <li class="cs-item">
-                    <span class="cs-item-number">07</span>
-                    <div class="cs-item-wrapper">
-                        <h3 class="cs-h3">
-                            Voluptatem eum cupiditate totam
-                        </h3>
-                        <p class="cs-item-text">
-                            Optio amet a quisquam saepe aliquid, voluptate praesentium dicta.
+                            A rejuvenating way to prioritize well‑being—feel lighter, more balanced, and ready for the rest of your day.
                         </p>
                     </div>
                 </li>
@@ -550,54 +519,6 @@ const mapNote =
     </div>
 </section>
                                 
-  <!-- who can benefit? -->
-  <section class="bg-orange-50">
-    <div class="mx-auto max-w-[120rem] flex flex-col md:flex-row">
-      <!-- Left image -->
-      <div class="relative">
-        <Image
-          src={benefitImg}
-          alt="Therapeutic massage providing relief and relaxation"
-          class="object-cover aspect-video h-full"
-        />
-        <div
-          class="pointer-events-none absolute left-6 top-6 hidden max-w-[24ch] text-white drop-shadow-md lg:block"
-        >
-          <h2
-            class="font-serif drop-shadow-md text-4xl/[1.1] md:text-5xl/[1.1]"
-          >
-            Who Can
-            <br />
-            Benefit?
-          </h2>
-        </div>
-      </div>
-
-      <!-- Right content -->
-      <div class="bg-orange-50 px-6 py-12 md:px-10">
-        <h2 class="font-serif text-3xl md:text-4xl text-gray-900 lg:hidden">
-          Who Can Benefit?
-        </h2>
-
-        <ul class="mt-6 space-y-8">
-          {
-            benefitPoints.map((p) => (
-              <li class="flex gap-4">
-                <span
-                  class="mt-2 inline-block h-2.5 w-2.5 flex-none rounded-full bg-emerald-700"
-                  aria-hidden="true"
-                />
-                <div>
-                  <p class="font-semibold text-emerald-900">{p.title}</p>
-                  <p class="mt-1 text-gray-800">{p.body}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
-  </section>
 
 <!-- how to book -->
   <section class="bg-orange-100">
