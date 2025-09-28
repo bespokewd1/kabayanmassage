@@ -92,7 +92,7 @@ const optimizedImage = await getOptimizedImage(landingImage);
           <div class="mt-8 flex justify-center">
             <a
               href="/booking"
-              class="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+              class="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold transition-colors"
             >
               Book Appointment
             </a>
@@ -185,10 +185,14 @@ const optimizedImage = await getOptimizedImage(landingImage);
         }
         #right-card{
           .bullet{
-            background-color: var(--secondary);
+            background-color: #c35858;
           }
           a{
             background-color: var(--primary);
+            color: #fff !important;
+            &:hover{
+              background-color: #000 !important;
+            }
           }
         }
       }
