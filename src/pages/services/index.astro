@@ -217,16 +217,7 @@ const email = clientData.email || 'info@yourclinic.ca';
 const bookingHref = '/booking'; // change to your actual booking link if different
 const mapNote =
   'We offer in‑clinic massage services at Southgate Centre (Southgate Mall), Edmonton, Alberta. See our contact page for directions and parking details.';
-
-//Services Benefits Section Javascript
-const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
-      for (const item of faqItems) {
-          const onClick = () => {
-          item.classList.toggle('active')
-      }
-      item.addEventListener('click', onClick)
-      }
-                                
+                        
 ---
 
 <BaseLayout
@@ -367,7 +358,16 @@ const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
         </div>
     </div>
 </section>
-
+<!--            Services Benefits Script                -->
+<script>
+  const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
+        for (const item of faqItems) {
+            const onClick = () => {
+            item.classList.toggle('active')
+        }
+        item.addEventListener('click', onClick)
+        }
+</script>
                                 
   <!-- benefits -->
   <section class="bg-orange-100">
@@ -598,6 +598,8 @@ const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
     </div>
   </section>
 </BaseLayout>
+
+                         
 
 <style lang="less">
   //services card content colors
