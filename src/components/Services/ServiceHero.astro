@@ -60,8 +60,13 @@ const { title, image, alt, subtitle, highlights, ctaPrimary, ctaSecondary } =
     <div
       class="mt-10 flex items-center justify-center gap-3 sm:flex-row flex-col hidden"
     >
+
+
+
+    <!-- Original href bellow:  {ctaPrimary.href ?? '/booking'}                  -->
+    <!-- !!!!  replace href with original if /booking page exists -->
       <a
-        href={ctaPrimary.href ?? '/booking'}
+        href="/contact"        
         class="inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
       >
         {ctaPrimary.label}
