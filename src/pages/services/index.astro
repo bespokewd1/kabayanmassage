@@ -217,6 +217,16 @@ const email = clientData.email || 'info@yourclinic.ca';
 const bookingHref = '/booking'; // change to your actual booking link if different
 const mapNote =
   'We offer in‑clinic massage services at Southgate Centre (Southgate Mall), Edmonton, Alberta. See our contact page for directions and parking details.';
+
+//Services Benefits Section Javascript
+const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
+      for (const item of faqItems) {
+          const onClick = () => {
+          item.classList.toggle('active')
+      }
+      item.addEventListener('click', onClick)
+      }
+                                
 ---
 
 <BaseLayout
@@ -280,6 +290,86 @@ const mapNote =
     </div>
   </section>
 
+<!-- ============================================ -->
+<!--            Services Benefits                 -->
+<!-- ============================================ -->
+
+<section id="services-1666">
+    <div class="cs-container">
+        <div class="cs-image-group">
+            <picture class="cs-picture">
+                <!--Mobile Image-->
+                <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/people-standing.jpeg">
+                <!--Tablet and above Image-->
+                <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/people-standing.jpeg">
+                <img loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/people-standing.jpeg" alt="people standing" width="605" height="690">
+            </picture>
+            <!--SVG Graphic-->
+            <img class="cs-floater" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/white-swirl.svg" alt="graphic" loading="lazy" decoding="async" height="710" aria-hidden="true" width="690">
+        </div>
+        <div class="cs-content">
+            <span class="cs-topper">Our Courses</span>
+            <h2 class="cs-title">Stitch Center for Process Safety Training</h2>
+            <p class="cs-text">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum accusantium fuga dolore nulla provident inventore possimus, incidunt, tenetur voluptate laudantium consequuntur commodi. In perferendis quod, non ad veniam similique assumenda deleniti nobis quaerat ipsum cum! Velit provident eligendi cumque excepturi!
+            </p>
+            <ul class="cs-faq-group">
+                <li class="cs-faq-item active">
+                    <button class="cs-button">
+                        <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/computer-gold.svg" alt="icon" width="32" height="32">
+                        <span class="cs-button-text">
+                            On-Demand e-Training
+                        </span>
+                        <span class="cs-indicator" aria-hidden="true"></span>
+                    </button>
+                    <p class="cs-item-p">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod sapiente placeat enim molestias quam, illum ullam ipsa repellat, necessitatibus quis cumque voluptatum nesciunt. Quia possimus est in recusandae saepe nostrum.
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/calendar-gold.svg" alt="icon" width="32" height="32">
+                        <span class="cs-button-text">
+                            Hybrid e-Training
+                        </span>
+                        <span class="cs-indicator" aria-hidden="true"></span>
+                    </button>
+                    <p class="cs-item-p">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod sapiente placeat enim molestias quam, illum ullam ipsa repellat, necessitatibus quis cumque voluptatum nesciunt. Quia possimus est in recusandae saepe nostrum.
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/map-pin-gold.svg" alt="icon" width="32" height="32">
+                        <span class="cs-button-text">
+                            Live Instructor e-Training
+                        </span>
+                        <span class="cs-indicator" aria-hidden="true"></span>
+                    </button>
+                    <p class="cs-item-p">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod sapiente placeat enim molestias quam, illum ullam ipsa repellat, necessitatibus quis cumque voluptatum nesciunt. Quia possimus est in recusandae saepe nostrum.
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/map-pin-gold-2.svg" alt="icon" width="32" height="32">
+                        <span class="cs-button-text">
+                            Onsite Classroom Training
+                        </span>
+                        <span class="cs-indicator" aria-hidden="true"></span>
+                    </button>
+                    <p class="cs-item-p">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod sapiente placeat enim molestias quam, illum ullam ipsa repellat, necessitatibus quis cumque voluptatum nesciunt. Quia possimus est in recusandae saepe nostrum.
+                    </p>
+                </li>
+            </ul>
+            <a href="" class="cs-button-solid">View All Courses</a>
+        </div>
+    </div>
+</section>
+
+                                
+  <!-- benefits -->
   <section class="bg-orange-100">
     <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
       <header class="text-center">
@@ -332,6 +422,7 @@ const mapNote =
     </div>
   </section>
 
+  <!-- who can benefit? -->
   <section class="bg-orange-50">
     <div class="mx-auto max-w-[120rem] flex flex-col md:flex-row">
       <!-- Left image -->
@@ -380,6 +471,7 @@ const mapNote =
     </div>
   </section>
 
+<!-- how to book -->
   <section class="bg-orange-100">
     <div class="mx-auto max-w-4xl px-6 py-16 md:py-20">
       <header class="text-center">
@@ -525,4 +617,312 @@ const mapNote =
       }
     }
   }
+
+/*-- -------------------------- -->
+<---     Services Benefits      -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #services-1666 {
+        padding: var(--sectionPadding);
+        background-color: #f7f7f7;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+
+        .cs-container {
+            width: 100%;
+            /* changes to 1280px at small desktop */
+            max-width: (584/16rem);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* 40px - 64px */
+            gap: clamp(2.5rem, 3.9vw, 4rem);
+        }
+
+        .cs-image-group {
+            width: 100%;
+            height: auto;
+            margin: 0;
+            position: relative;
+        }
+
+        .cs-picture {
+            width: 100%;
+            min-height: (328/16rem);
+            display: block;
+            position: relative;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .cs-floater {
+            width: clamp(20.125rem, 40vw, 28.1875rem);
+            height: clamp(20.1875rem, 40vw, 28.25rem);
+            position: absolute;
+            bottom: (0/16rem);
+            z-index: 1;
+            mix-blend-mode: soft-light;
+        }
+
+        .cs-content {
+            text-align: left;
+            width: 100%;
+            max-width: (650/16rem);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            flex: none;
+        }
+
+        .cs-title {
+            /* 16px - 24px */
+            margin: 0 0 clamp(1rem, 1.96vw, 1.5rem) 0;
+        }
+
+        .cs-text {
+            /* 16px - 24px */
+            margin: 0 0 clamp(1rem, 1.96vw, 1.5rem) 0;
+        }
+
+        .cs-faq-group {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* 16px - 20px */
+            gap: clamp(1rem, 2.4vw, 1.25rem);
+        }
+
+        .cs-faq-item {
+            list-style: none;
+            width: 100%;
+            background-color: transparent;
+            border: 1px solid #e8e8e8;
+            padding: 0;
+            box-sizing: border-box;
+            transition: border-bottom 0.3s;
+
+            &.active {
+                .cs-indicator {
+                    &:before {
+                        transform: translate(-50%, -50%) rotate(360deg);
+                    }
+
+                    &:after {
+                        transform: translate(-50%, -50%) rotate(0deg);
+                    }
+                }
+
+                .cs-item-p {
+                    height: auto;
+                    padding-top: (16/16rem);
+                    opacity: 1;
+                    transform: scaleY(1);
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    
+        .cs-button {
+            /* 16px - 20px */
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.2em;
+            text-align: left;
+            font-weight: bold;
+            width: 100%;
+            padding: (16/16rem) (16/16rem) 0 (16/16rem);
+            border: none;
+            background: transparent;
+            color: var(--headerColor);
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            /* 16px - 24px */
+            gap: clamp(1rem, 2.5vw, 1.5rem);
+            position: relative;
+            transition:
+                background-color 0.3s,
+                color 0.3s;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .cs-indicator {
+            width: (24/16rem);
+            height: (24/16rem);
+            position: relative;
+            z-index: 1;
+
+            &:before {
+                /* left line */
+                content: '';
+                width: (16/16rem);
+                height: (2/16rem);
+                background-color: #767676;
+                opacity: 1;
+                border-radius: 2px;
+                position: absolute;
+                display: block;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                transition: transform .5s;
+            }
+
+            &:after {
+                /* right line */
+                content: '';
+                width: (16/16rem);
+                height: (2/16rem);
+                background-color: #767676;
+                opacity: 1;
+                border-radius: 2px;
+                position: absolute;
+                display: block;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(90deg);
+                transition: transform .5s;
+            }
+        }
+
+        .cs-button-text {
+            width: 90%;
+            padding: 0;
+            display: block;
+        }
+
+        .cs-item-p {
+            font-size: (14/16rem);
+            line-height: 1.5em;
+            width: 100%;
+            max-width: none;
+            height: 0;
+            margin: 0;
+            /* 16px - 24px */
+            padding: 0 (16/16rem) (16/16rem) (16/16rem);
+            /* prevents padding and border from affecting height and width */
+            box-sizing: border-box;
+            opacity: 0;
+            color: var(--bodyTextColor);
+            /* clips the text so it doesn't show up */
+            overflow: hidden;
+            position: relative;
+            transition:
+                opacity 0.3s,
+                padding-bottom 0.3s,
+                padding-top 0.3s;
+        }
+
+        .cs-icon {
+            width: (32/16rem);
+            height: (32/16rem);
+            display: block;
+        }
+
+        .cs-button-solid {
+            font-size: (16/16rem);
+            font-weight: 700;
+            line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+            text-align: center;
+            text-decoration: none;
+            width: clamp(11.625rem, 23vw, 13.625rem);
+            /* 28px - 40px */
+            margin: clamp(1.75rem, 3.9vw, 2.5rem) 0 0 0;
+            /* prevents padding from affecting height and width */
+            box-sizing: border-box;
+            padding: 0 (24/16rem);
+            color: #fff;
+            background-color: var(--primary);
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+
+            &:before {
+                content: "";
+                width: 0%;
+                height: 100%;
+                background: #000;
+                opacity: 1;
+                /* add a border radius below this to round corners */
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                transition: width 0.3s;
+            }
+
+            &:hover:before {
+                width: 100%;
+            }
+        }
+    }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #services-1666 {
+        .cs-picture {
+            height: 100%;
+            min-width: (584/16rem);
+            width: 48vw;
+            right: 0;
+            top: 0;
+        }
+    }
+}
+
+/* Small Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+    #services-1666 {
+        .cs-container {
+            max-width: (1280/16rem);
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .cs-content {
+            width: 55%;
+        }
+
+        .cs-image-group {
+            width: 100%;
+            max-width: (542/16rem);
+        }
+
+        .cs-picture {
+            width: 100%;
+            min-width: 100%;
+        }
+
+        .cs-floater {
+            width: (451/16rem);
+            right: clamp(50%, 18vw, 75%);
+            bottom: (-100/16rem);
+        }
+    }
+}
+                                
 </style>
