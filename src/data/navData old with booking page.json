@@ -64,5 +64,10 @@
     "key": "Direct Billing",
     "url": "/direct-billing/",
     "children": []
+  },
+  {
+    "key": "Book Appointment",
+    "url": "/booking/",
+    "children": []
   }
 ]
