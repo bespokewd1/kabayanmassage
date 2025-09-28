@@ -142,48 +142,113 @@ const optimizedImage = await getOptimizedImage(landingImage);
     <img class="cs-background" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FGraphics%2Fwaves-3.svg" alt="wave graphic" width="1920" height="318" loading="lazy" decoding="async" aria-hidden="true">
 </section>
 
+<!-- ============================================ -->
+<!--                     FAQ                      -->
+<!-- ============================================ -->
 
-  <section class="bg-orange-100/70">
-    <div class="mx-auto max-w-6xl px-6 py-12 md:py-16 text-center">
-      <p class="text-gray-800">
-        We also support less common insurance providers.
-        <br class="hidden sm:block" />
-        Contact us to verify if your plan qualifies for direct billing.
-      </p>
-
-      <h3
-        class="mt-6 font-serif text-2xl md:text-3xl lg:text-4xl text-gray-900"
-      >
-        MVA (Motor Vehicle Accident) Massage Therapy
-      </h3>
-
-      <p class="mt-4 text-gray-700 leading-7 max-w-3xl mx-auto">
-        Selected Registered Massage Therapists (RMTs) at iMassage Therapeutic
-        Clinique provide treatment for MVA clients. If you’ve been injured in a
-        car accident, we can assist you with direct billing to your auto
-        insurance. Reach out for details and next steps.
-      </p>
-
-      <div
-        class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
-      >
-        <a
-          href="/contact"
-          class="inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-        >
-          Contact Us
-        </a>
-        <a
-          href="/booking"
-          class="inline-flex items-center rounded-full border-2 border-emerald-800 px-6 py-3 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-        >
-          Book an Appointment
-        </a>
-      </div>
+<section id="faq-1193">
+    <div class="cs-container">
+        <div class="cs-image-group">
+            <picture class="cs-picture cs-picture1">
+                <!--Mobile Image-->
+                <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/body-shop.jpg">
+                <!--Tablet and above Image-->
+                <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/body-shop.jpg">
+                <img loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/body-shop.jpg" alt="body shop" width="522" height="609" aria-hidden="true">
+            </picture>
+        </div>
+        <div class="cs-content">
+            <span class="cs-topper">Asked questions</span>
+            <h2 class="cs-title">Frequently Asked Questions</h2>
+            <ul class="cs-faq-group">
+                <!-- Active class added as default -->
+                <li class="cs-faq-item active">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            What types of massage you offer?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                      We offer a variety of massages, including Swedish, deep tissue, hot stone, prenatal, and therapeutic massage. Our therapists will help you choose the best option for your needs.
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            How do I book an appointment?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        You can book a mobile massage by calling us — we’ll come to your home. For a clinic massage, simply click “Book Online” to schedule your visit at our location. 
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                          What should I expect during my first massage session?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        Your therapist will discuss your needs and preferences before
+                        beginning the session. You’ll be given privacy to get comfortable,
+                        and the therapist will ensure you feel relaxed throughout the
+                        treatment. 
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            What payment methods do you accept?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        We accept credit/debit cards, cash, and online payments. Gift cards
+                        and package deals are also available for purchase. 
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            What should I wear for my massage?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        You can undress to your comfort level. Our therapists use
+                        professional draping techniques to ensure your privacy and comfort
+                        at all times. 
+                    </p>
+                </li>
+                <li class="cs-faq-item">
+                    <button class="cs-button">
+                        <span class="cs-button-text">
+                            Can I request a specific therapist?
+                        </span>
+                    </button>
+                    <p class="cs-item-p">
+                        Yes! If you have a preferred therapist, please mention it when
+                        booking your appointment, and we’ll do our best to accommodate your
+                        request. 
+                    </p>
+                </li>
+            </ul>
+        </div>
     </div>
-  </section>
+</section>
 
-  <FAQ />
+<!-- FAQ Scripts -->
+ <script>
+  const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
+        for (const item of faqItems) {
+            const onClick = () => {
+            item.classList.toggle('active')
+        }
+        item.addEventListener('click', onClick)
+        }
+                                
+ </script>
+                                
+
+  <!-- <FAQ /> -->
 </BaseLayout>
 
 <style lang="less">
