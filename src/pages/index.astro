@@ -5,6 +5,8 @@ import { getCollection } from 'astro:content';
 import { Image, Picture } from 'astro:assets';
 import client from '@data/client.json';
 import '@styles/blog.less';
+import BlazeSlider from 'blaze-slider';
+import 'blaze-slider/dist/blaze.css';
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
@@ -19,10 +21,12 @@ import InstagramIcon from '@components/Icons/Socials/InstagramIcon.astro';
 import LinkedInIcon from '@components/Icons/Socials/LinkedInIcon.astro';
 import TwitterIcon from '@components/Icons/Socials/TwitterIcon.astro';
 import WhyChooseUs from '@components/why-choose-us.astro';
+import ChevronLeftIconFilled from '@components/Icons/Utility/ChevronLeftIconFilled.astro';
+import ChevronRightIconFilled from '@components/Icons/Utility/ChevronRightIconFilled.astro';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
-// Reviews data - easy to configure
+// Reviews data
 const reviews = [
   {
     text: 'The service is professional, relaxing, and exactly what I need every time. I always leave feeling so much better!',
@@ -308,92 +312,104 @@ posts.sort(
   </section>
 
   <!-- ============================================ -->
-  <!--                   Reviews                    -->
+  <!--                  Reviews                     -->
   <!-- ============================================ -->
-
   <section id="reviews-section" class="py-16 md:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6">
       <!-- Header -->
       <div class="text-center mb-12">
         <span
           class="text-sm font-bold tracking-wider uppercase text-[var(--primary)] mb-2 block"
+          >Client Testimonials</span
         >
-          Client Testimonials
-        </span>
         <h2 class="text-3xl md:text-4xl font-serif text-gray-900">
           What Our Clients Say
         </h2>
       </div>
 
-      <!-- Reviews Container -->
-      <div class="relative">
-        <!-- Desktop: Static Grid (lg and up) -->
-        <div class="hidden lg:grid lg:grid-cols-3 gap-6">
-          {
-            reviews.map((review) => (
-              <div class="bg-gray-50 rounded-2xl p-8 flex flex-col">
-                <div class="mb-6">
-                  <svg
-                    class="w-10 h-10 text-[var(--secondary)] opacity-50"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                  </svg>
-                </div>
-                <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
-                  "{review.text}"
-                </p>
-                <p class="font-semibold text-gray-900">— {review.name}</p>
-              </div>
-            ))
-          }
-        </div>
-
-        <!-- Mobile/Tablet: Carousel (below lg) -->
-        <div class="lg:hidden">
-          <div
-            id="reviews-carousel"
-            class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6 pb-8"
-            style="scroll-behavior: smooth; -webkit-overflow-scrolling: touch;"
-          >
-            {
-              reviews.map((review, index) => (
-                <div
-                  class="flex-shrink-0 w-[85%] sm:w-[70%] md:w-[60%] snap-center"
-                  data-review-index={index}
+      <!-- Desktop: Static 3-column grid on lg+ -->
+      <div class="hidden lg:grid lg:grid-cols-3 gap-6">
+        {
+          reviews.map((review) => (
+            <div class="bg-gray-50 rounded-2xl p-8 flex flex-col">
+              <div class="mb-6">
+                <svg
+                  class="w-10 h-10 text-[var(--secondary)] opacity-50"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <div class="bg-gray-50 rounded-2xl p-8 h-full flex flex-col">
-                    <div class="mb-6">
-                      <svg
-                        class="w-10 h-10 text-[var(--secondary)] opacity-50"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                      </svg>
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+              </div>
+              <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
+                "{review.text}"
+              </p>
+              <p class="font-semibold text-gray-900">— {review.name}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Mobile/Tablet: Blaze Slider below lg -->
+      <div class="lg:hidden">
+        <div class="blaze-slider" id="reviews-blaze">
+          <!-- Track -->
+          <div class="blaze-container">
+            <div class="blaze-track-container">
+              <div class="blaze-track">
+                {
+                  reviews.map((review) => (
+                    <div class="blaze-slide px-2">
+                      <div class="bg-gray-50 rounded-2xl p-8 h-full flex flex-col">
+                        <div class="mb-6">
+                          <svg
+                            class="w-10 h-10 text-[var(--secondary)] opacity-50"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                          </svg>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
+                          "{review.text}"
+                        </p>
+                        <p class="font-semibold text-gray-900">
+                          — {review.name}
+                        </p>
+                      </div>
                     </div>
-                    <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
-                      "{review.text}"
-                    </p>
-                    <p class="font-semibold text-gray-900">— {review.name}</p>
-                  </div>
-                </div>
-              ))
-            }
+                  ))
+                }
+              </div>
+            </div>
           </div>
 
-          <!-- Pagination Dots -->
-          <div class="flex justify-center gap-2 mt-4">
-            {
-              reviews.map((_, index) => (
-                <button
-                  class="dot w-2.5 h-2.5 rounded-full transition-all duration-300"
-                  data-index={index}
-                  aria-label={`Go to review ${index + 1}`}
-                />
-              ))
-            }
+          <div class="mx-auto mt-4 flex items-center justify-center gap-4">
+            <!-- navigation buttons -->
+            <button class="blaze-prev"
+              ><ChevronLeftIconFilled
+                class:list={[
+                  'text-(--secondary) hover:text-(--primary) active:text-(--secondary)  transition-colors duration-300 active:scale-100 hover:scale-105 size-7',
+                ]}
+              /></button
+            >
+
+            <!-- pagination container -->
+            <div
+              class:list={[
+                'blaze-pagination [&>button]:w-3 [&>button]:h-3 [&>button]:rounded-full [&>button]:bg-gray-300 [&>button]:p-0 [&>button]:border-0 [&>button]:text-transparent [&>button]:leading-none [&>button]:overflow-hidden [&>button]:transition [&>button]:duration-200 [&>button:hover]:scale-110 [&>button.active]:bg-[var(--primary)]',
+                'flex items-center justify-center gap-2',
+              ]}
+            >
+            </div>
+
+            <button class="blaze-next">
+              <ChevronRightIconFilled
+                class:list={[
+                  'text-(--secondary) hover:text-(--primary) active:text-(--secondary) active:scale-100  transition-colors duration-300 hover:scale-105 size-7',
+                ]}
+              />
+            </button>
           </div>
         </div>
       </div>
@@ -1627,121 +1643,23 @@ posts.sort(
 </style>
 
 <script>
-  // Reviews data - easy to configure
-  const reviews = [
-    {
-      text: 'The service is professional, relaxing, and exactly what I need every time. I always leave feeling so much better!',
-      name: 'Melanie B.',
-    },
-    {
-      text: 'The best Massage in town!!!!! I Feel relaxed everytime. Rutchel is the best',
-      name: 'Febalia C.',
-    },
-    {
-      text: 'The lady was very professional, she knows what she is doing, felt very relaxed, the environment was nice as well as the mood just makes you feel calm. Overall would definitely come back.',
-      name: 'Carl G.',
-    },
-  ];
+  import BlazeSlider from 'blaze-slider';
+  import 'blaze-slider/dist/blaze.css';
 
-  // Carousel configuration - easy to adjust
-  const AUTOPLAY_INTERVAL = 1500; // 1.5 seconds - change this value as needed
-
-  // Carousel logic
-  const carousel = document.getElementById('reviews-carousel');
-  const dots = document.querySelectorAll('.dot');
-
-  if (carousel && dots.length > 0) {
-    let currentIndex = 0;
-    let autoplayTimer: number;
-    let isUserInteracting = false;
-
-    // Update active dot
-    function updateDots() {
-      dots.forEach((dot, index) => {
-        if (index === currentIndex) {
-          dot.classList.add('bg-[var(--primary)]');
-          dot.classList.remove('bg-gray-300');
-        } else {
-          dot.classList.add('bg-gray-300');
-          dot.classList.remove('bg-[var(--primary)]');
-        }
-      });
-    }
-
-    // Scroll to specific index
-    function scrollToIndex(index: number) {
-      const items = carousel?.querySelectorAll('[data-review-index]');
-      if (items && items[index]) {
-        items[index].scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center',
-        });
-        currentIndex = index;
-        updateDots();
-      }
-    }
-
-    // Autoplay function
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayTimer = window.setInterval(() => {
-        if (!isUserInteracting) {
-          const nextIndex = (currentIndex + 1) % reviews.length;
-          scrollToIndex(nextIndex);
-        }
-      }, AUTOPLAY_INTERVAL);
-    }
-
-    function stopAutoplay() {
-      if (autoplayTimer) {
-        clearInterval(autoplayTimer);
-      }
-    }
-
-    // Detect scroll position to update dots
-    function handleScroll() {
-      const scrollLeft = carousel?.scrollLeft ?? 0;
-      const itemWidth = carousel?.scrollWidth ?? 0 / reviews.length;
-      const newIndex = Math.round(scrollLeft / itemWidth);
-
-      if (newIndex !== currentIndex) {
-        currentIndex = newIndex;
-        updateDots();
-      }
-    }
-
-    // Dot click handlers
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        isUserInteracting = true;
-        scrollToIndex(index);
-        setTimeout(() => {
-          isUserInteracting = false;
-        }, 1000);
-      });
+  document.querySelectorAll('.blaze-slider').forEach((el) => {
+    new BlazeSlider(el as HTMLElement, {
+      all: {
+        enableAutoplay: true,
+        autoplayInterval: 2000,
+        transitionDuration: 300,
+        slidesToShow: 3,
+      },
+      '(max-width: 900px)': {
+        slidesToShow: 2,
+      },
+      '(max-width: 650px)': {
+        slidesToShow: 1,
+      },
     });
-
-    // Touch/scroll event handlers
-    carousel.addEventListener('touchstart', () => {
-      isUserInteracting = true;
-      stopAutoplay();
-    });
-
-    carousel.addEventListener('touchend', () => {
-      setTimeout(() => {
-        isUserInteracting = false;
-        startAutoplay();
-      }, 1000);
-    });
-
-    carousel.addEventListener('scroll', handleScroll);
-
-    // Initialize
-    updateDots();
-    startAutoplay();
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', stopAutoplay);
-  }
+  });
 </script>
