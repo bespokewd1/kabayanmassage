@@ -2,7 +2,8 @@
 import BaseLayout from 'src/layouts/BaseLayout.astro';
 import CTA from '@components/CTA.astro';
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
+import client from '@data/client.json';
 import '@styles/blog.less';
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
@@ -21,6 +22,22 @@ import WhyChooseUs from '@components/why-choose-us.astro';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
+// Reviews data - easy to configure
+const reviews = [
+  {
+    text: 'The service is professional, relaxing, and exactly what I need every time. I always leave feeling so much better!',
+    name: 'Melanie B.',
+  },
+  {
+    text: 'The best Massage in town!!!!! I Feel relaxed everytime. Rutchel is the best',
+    name: 'Febalia C.',
+  },
+  {
+    text: 'The lady was very professional, she knows what she is doing, felt very relaxed, the environment was nice as well as the mood just makes you feel calm. Overall would definitely come back.',
+    name: 'Carl G.',
+  },
+];
+
 const posts = await getCollection('blog');
 posts.sort(
   (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
@@ -34,56 +51,77 @@ posts.sort(
 <BaseLayout
   title="Kabayan Healing Touch Massage - Professional Massage Therapy"
   description="Professional massage therapy for relaxation, pain relief, and overall wellness in Edmonton."
-  preloadedImage={optimizedImage}
+  preloadedImage={heroImg}
 >
+  <!-- ============================================ -->
+  <!--                    Hero                      -->
+  <!-- ============================================ -->
 
-<!-- ============================================ -->
-<!--                    Hero                      -->
-<!-- ============================================ -->
-
-<section id="hero-856">
+  <section id="hero-856">
     <div class="cs-container">
-        <div class="cs-content">
-            <span class="cs-topper">Kabayan Healing Touch Massage</span>
-            <h1 class="cs-title">West Edmonton's Premier Massage Clinic</h1>
-            <p class="cs-text">
-                Expert care from a certified Registered Massage Therapist — helping you reduce pain, restore mobility, and recharge your wellbeing.
-            </p>
-            <a href="/contact" id="hero-cta" class="cs-button-solid">Book Your Massage</a>
-        </div>
-        <!--Hero Image-->
-        <picture class="cs-picture">
-            <!--Mobile-->
-            <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FPeople%2Ftherapy.jpg">
-            <!--Tablet-->
-            <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FPeople%2Ftherapy.jpg">
-            <!--Desktop-->
-            <source media="(min-width: 1024px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FPeople%2Ftherapy.jpg">
-            <img aria-hidden="true" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FPeople%2Ftherapy.jpg" alt="therapy" width="570" height="701">
-            </picture>
+      <div class="cs-content">
+        <span class="cs-topper">Kabayan Healing Touch Massage</span>
+        <h1 class="cs-title">West Edmonton's Premier Massage Clinic</h1>
+        <p class="cs-text">
+          Expert care from a certified Registered Massage Therapist — helping
+          you reduce pain, restore mobility, and recharge your wellbeing.
+        </p>
+        <a
+          href={`tel:${client.phoneForTel}`}
+          id="hero-cta"
+          class="cs-button-solid">Book Your Massage</a
+        >
+      </div>
+      <Picture
+        loading={'eager'}
+        pictureAttributes={{ class: 'cs-picture' }}
+        src={heroImg}
+        formats={['avif', 'webp']}
+        alt="lady in massage"
+      />
     </div>
     <!--Change the svg path fill color to whatever color the section below is so you can match it and create the illusion it is all one piece-->
-    <svg class="cs-wave" width="1920" height="179" viewBox="0 0 1920 179" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M1920 179V91.3463C1835.33 91.3463 1715.47 76.615 1549.2 32.9521C1299.48 -32.3214 1132.77 12.1006 947.32 61.5167C810.762 97.9044 664.042 137 466.533 137C331.607 137 256.468 123.447 188.082 111.113C130.974 100.812 78.5746 91.3609 0 91.3609V179H1920Z" fill="white"/>
+    <svg
+      class="cs-wave"
+      width="1920"
+      height="179"
+      viewBox="0 0 1920 179"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M1920 179V91.3463C1835.33 91.3463 1715.47 76.615 1549.2 32.9521C1299.48 -32.3214 1132.77 12.1006 947.32 61.5167C810.762 97.9044 664.042 137 466.533 137C331.607 137 256.468 123.447 188.082 111.113C130.974 100.812 78.5746 91.3609 0 91.3609V179H1920Z"
+        fill="white"></path>
     </svg>
-</section>                                                   
+  </section>
 
-<!-- ============================================ -->
-<!--                     CTA                      -->
-<!-- ============================================ -->
+  <!-- ============================================ -->
+  <!--                     CTA                      -->
+  <!-- ============================================ -->
 
-<section id="cta-697">
+  <section id="cta-697">
     <div class="cs-container">
-        <div class="cs-content">
-            <h2 class="cs-title">Expert therapeutic massage tailored to your needs.</h2>
-            <a href="/contact" class="cs-button-solid">Contact Us</a>
-        </div>
+      <div class="cs-content">
+        <h2 class="cs-title">
+          Expert therapeutic massage tailored to your needs.
+        </h2>
+        <a href="/contact" class="cs-button-solid">Contact Us</a>
+      </div>
     </div>
     <!--SVG Waves Background-->
-    <img class="cs-background" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FGraphics%2Fwaves-3.svg" alt="wave graphic" width="1920" height="318" loading="lazy" decoding="async" aria-hidden="true">
-</section>
-                                
-
+    <img
+      class="cs-background"
+      src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FGraphics%2Fwaves-3.svg"
+      alt="wave graphic"
+      width="1920"
+      height="318"
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+    />
+  </section>
 
   <!-- ================= CTA (Green band) ================ -->
   <!-- <CTA
@@ -126,11 +164,10 @@ posts.sort(
           id="services-content"
         >
           <div class="w-full max-w-xl text-center md:text-left">
-            <h3 class="font-semibold tracking-wide">
-              Therapeutic Massage
-            </h3>
+            <h3 class="font-semibold tracking-wide">Therapeutic Massage</h3>
             <p class="mt-4 leading-7">
-              Customized massage designed to relieve tension, improve circulation, and promote relaxation and well-being.
+              Customized massage designed to relieve tension, improve
+              circulation, and promote relaxation and well-being.
             </p>
             <div class="mt-6">
               <a
@@ -156,8 +193,9 @@ posts.sort(
                     Deep Tissue Massage
                   </h3>
                   <p class="mt-4 leading-7">
-                    Targets deeper layers of muscle and connective tissue to release chronic tension, 
-                    knots, and stiffness. Ideal for persistent pain or tight muscles.
+                    Targets deeper layers of muscle and connective tissue to
+                    release chronic tension, knots, and stiffness. Ideal for
+                    persistent pain or tight muscles.
                   </p>
                   <div class="mt-6">
                     <a
@@ -183,182 +221,456 @@ posts.sort(
     </div>
   </section>
 
-  <!-- ================= Why Choose Us ================= -->
-  <!-- <WhyChooseUs /> -->
-   
-<!-- ============================================ -->
-<!--                 Why Choose                   -->
-<!-- ============================================ -->
+  <!-- ============================================ -->
+  <!--                 Why Choose                   -->
+  <!-- ============================================ -->
 
-<section id="why-choose-289">
+  <section id="why-choose-289">
     <div class="cs-container">
-        <div class="cs-content">
-            <div class="cs-flex">
-                <span class="cs-topper">Experience, Expertise, and Real Results</span>
-                <h2 class="cs-title">Why Choose Kabayan Massage</h2>
-            </div>
-            <p class="cs-text">
-                We deliver thoughtful, therapeutic care tailored to your body—so you leave lighter, looser, and genuinely restored.
-            </p>
+      <div class="cs-content">
+        <div class="cs-flex">
+          <span class="cs-topper">Experience, Expertise, and Real Results</span>
+          <h2 class="cs-title">Why Choose Kabayan Massage</h2>
         </div>
-        <ul class="cs-card-group">
-            <li class="cs-item">
-                <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iOSIgcj0iMiIvPjxwYXRoIGQ9Ik0xNiAxNWMwIDEuMTA1IDAgMi00IDJzLTQtLjg5NS00LTJzMS43OS0yIDQtMnM0IC44OTUgNCAyWiIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZD0iTTMgMTAuNDE3YzAtMy4xOTggMC00Ljc5Ny4zNzgtNS4zMzVjLjM3Ny0uNTM3IDEuODgtMS4wNTIgNC44ODctMi4wODFsLjU3My0uMTk2QzEwLjQwNSAyLjI2OCAxMS4xODggMiAxMiAyczEuNTk1LjI2OCAzLjE2Mi44MDVsLjU3My4xOTZjMy4wMDcgMS4wMjkgNC41MSAxLjU0NCA0Ljg4NyAyLjA4MUMyMSA1LjYyIDIxIDcuMjIgMjEgMTAuNDE3djEuNTc0YzAgMi41MDUtLjgzNyA0LjQzNy0yIDUuOTEzTTMuMTkzIDE0Yy44NTcgNC4yOTggNC4zODMgNi41MTMgNi43MDYgNy41MjdjLjcyMS4zMTUgMS4wODIuNDczIDIuMTAxLjQ3M2MxLjAyIDAgMS4zOC0uMTU4IDIuMTAxLS40NzNjLjU3OS0uMjUyIDEuMjMxLS41OCAxLjg5OS0uOTk0Ii8+PC9nPjwvc3ZnPg==" alt="icon" width="48" height="48">
-                <h3 class="cs-h3">Expert Therapists You Can Trust</h3>
-                <p class="cs-item-text">
-                    Registered, experienced therapists focused on results.
-                </p>
-            </li>
-            <li class="cs-item">
-                <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik00IDIwdi0yLjhxMC0uODUuNDM4LTEuNTYyVDUuNiAxNC41NXExLjU1LS43NzUgMy4xNS0xLjE2MlQxMiAxM2guMzVxLS4yNzUuNDUtLjQxMy45NjNUMTEuOCAxNXEtMS4zNS4wMjUtMi42ODcuMzYzVDYuNSAxNi4zNXEtLjIyNS4xMjUtLjM2My4zNVQ2IDE3LjJ2LjhoNy4wNzVsMiAyem04LThxLTEuNjUgMC0yLjgyNS0xLjE3NVQ4IDh0MS4xNzUtMi44MjVUMTIgNHQyLjgyNSAxLjE3NVQxNiA4dC0xLjE3NSAyLjgyNVQxMiAxMm0wLTJxLjgyNSAwIDEuNDEzLS41ODdUMTQgOHQtLjU4Ny0xLjQxMlQxMiA2dC0xLjQxMi41ODhUMTAgOHQuNTg4IDEuNDEzVDEyIDEwbTUuOSAxMGwtMy41LTMuNXEtLjMyNS0uMzI1LS40NjItLjd0LS4xMzgtLjc1cTAtLjguNTc1LTEuNDI1VDE1Ljg1IDEzcS43IDAgMS4xLjMyNXQuOTUuODc1cS41LS41LjkxMy0uODVUMTkuOTUgMTNxLjkyNSAwIDEuNDg4LjYzOFQyMiAxNS4wNzRxMCAuMzc1LS4xNS43NXQtLjQ1LjY3NXoiLz48L3N2Zz4=" alt="icon" width="40" height="48">
-                <h3 class="cs-h3">Tailored Care for Your Body</h3>
-                <p class="cs-item-text">
-                    Personalized treatment plans for pain relief and relaxation.
-                </p>
-            </li>
-            <li class="cs-item">
-                <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMjI5LjEyIDE0Mi42NWEyMi40MyAyMi40MyAwIDAgMC0xOS41NS0zLjg4bC00LjMyIDFDMjI3IDExOS41NSAyMzggOTkuNTEgMjM4IDgwYzAtMjUuMzYtMjAuMzktNDYtNDUuNDYtNDZBNDUuNTEgNDUuNTEgMCAwIDAgMTU2IDUyYTQ1LjUxIDQ1LjUxIDAgMCAwLTM2LjU0LTE4Qzk0LjM5IDM0IDc0IDU0LjY0IDc0IDgwYzAgMTEuMzggMy42MyAyMi40OSAxMS4yOSAzNC4zNmEyOS43MyAyOS43MyAwIDAgMC0xNi41NiA4LjQzTDQ1LjUyIDE0NkgxNmExNCAxNCAwIDAgMC0xNCAxNHY0MGExNCAxNCAwIDAgMCAxNCAxNGgxMDRhNiA2IDAgMCAwIDEuNDYtLjE4bDY0LTE2YTcgNyAwIDAgMCAuODktLjNMMjI1LjE3IDE4MWwuMzMtLjE1YTIyLjYgMjIuNiAwIDAgMCAzLjYyLTM4LjE4Wk0xMTkuNDYgNDZhMzMuMTYgMzMuMTYgMCAwIDEgMzEgMjAuMjhhNiA2IDAgMCAwIDExLjEgMGEzMy4xNiAzMy4xNiAwIDAgMSAzMS0yMC4yOEMyMTAuNjggNDYgMjI2IDYxLjU3IDIyNiA4MGMwIDIwLjI0LTE2LjE4IDQzLTQ2LjggNjUuNzVsLTE0Ljg3IDMuNDJBMjYgMjYgMCAwIDAgMTQwIDExNEg5OS42N0M5MC4zNiAxMDEuNjcgODYgOTAuODEgODYgODBjMC0xOC40MyAxNS4zMi0zNCAzMy40Ni0zNE0xNCAyMDB2LTQwYTIgMiAwIDAgMSAyLTJoMjZ2NDRIMTZhMiAyIDAgMCAxLTItMm0yMDYuMjgtMzBsLTM4LjIgMTYuMjdMMTE5LjI2IDIwMkg1NHYtNDcuNTFsMjMuMjEtMjMuMjJBMTcuODggMTcuODggMCAwIDEgODkuOTQgMTI2SDE0MGExNCAxNCAwIDAgMSAwIDI4aC0yOGE2IDYgMCAwIDAgMCAxMmgzMmE2IDYgMCAwIDAgMS4zNC0uMTVsNjctMTUuNDFsLjI0LS4wNmExMC42IDEwLjYgMCAwIDEgNy43IDE5LjYyIi8+PC9zdmc+" alt="icon" width="48" height="48">
-                <h3 class="cs-h3">Proven Techniques That Work</h3>
-                <p class="cs-item-text">
-                    Evidence‑based techniques: deep tissue, hot stone, Swedish, and more.
-                </p>
-            </li>
-            <li class="cs-item">
-                <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik01IDhoMTRWNkg1em0wIDBWNnptMCAxNHEtLjgyNSAwLTEuNDEyLS41ODdUMyAyMFY2cTAtLjgyNS41ODgtMS40MTJUNSA0aDFWM3EwLS40MjUuMjg4LS43MTJUNyAydC43MTMuMjg4VDggM3YxaDhWM3EwLS40MjUuMjg4LS43MTJUMTcgMnQuNzEzLjI4OFQxOCAzdjFoMXEuODI1IDAgMS40MTMuNTg4VDIxIDZ2NC42NzVxMCAuNDI1LS4yODguNzEzdC0uNzEyLjI4N3QtLjcxMi0uMjg4dC0uMjg4LS43MTJWMTBINXYxMGg1LjhxLjQyNSAwIC43MTMuMjg4VDExLjggMjF0LS4yODguNzEzVDEwLjggMjJ6bTEzIDFxLTIuMDc1IDAtMy41MzctMS40NjNUMTMgMTh0MS40NjMtMy41MzdUMTggMTN0My41MzggMS40NjNUMjMgMTh0LTEuNDYzIDMuNTM4VDE4IDIzbS41LTUuMnYtMi4zcTAtLjItLjE1LS4zNVQxOCAxNXQtLjM1LjE1dC0uMTUuMzV2Mi4yNzVxMCAuMi4wNzUuMzg4dC4yMjUuMzM3bDEuNTI1IDEuNTI1cS4xNS4xNS4zNS4xNXQuMzUtLjE1dC4xNS0uMzV0LS4xNS0uMzV6Ii8+PC9zdmc+" alt="icon" width="48" height="48">
-                <h3 class="cs-h3">Relaxing Clinic, On Your Schedule</h3>
-                <p class="cs-item-text">
-                    Welcoming clinic with easy booking and flexible hours.
-                </p>
-            </li>
-        </ul>
+        <p class="cs-text">
+          We deliver thoughtful, therapeutic care tailored to your body—so you
+          leave lighter, looser, and genuinely restored.
+        </p>
+      </div>
+      <ul class="cs-card-group">
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iOSIgcj0iMiIvPjxwYXRoIGQ9Ik0xNiAxNWMwIDEuMTA1IDAgMi00IDJzLTQtLjg5NS00LTJzMS43OS0yIDQtMnM0IC44OTUgNCAyWiIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZD0iTTMgMTAuNDE3YzAtMy4xOTggMC00Ljc5Ny4zNzgtNS4zMzVjLjM3Ny0uNTM3IDEuODgtMS4wNTIgNC44ODctMi4wODFsLjU3My0uMTk2QzEwLjQwNSAyLjI2OCAxMS4xODggMiAxMiAyczEuNTk1LjI2OCAzLjE2Mi44MDVsLjU3My4xOTZjMy4wMDcgMS4wMjkgNC41MSAxLjU0NCA0Ljg4NyAyLjA4MUMyMSA1LjYyIDIxIDcuMjIgMjEgMTAuNDE3djEuNTc0YzAgMi41MDUtLjgzNyA0LjQzNy0yIDUuOTEzTTMuMTkzIDE0Yy44NTcgNC4yOTggNC4zODMgNi41MTMgNi43MDYgNy41MjdjLjcyMS4zMTUgMS4wODIuNDczIDIuMTAxLjQ3M2MxLjAyIDAgMS4zOC0uMTU4IDIuMTAxLS40NzNjLjU3OS0uMjUyIDEuMjMxLS41OCAxLjg5OS0uOTk0Ii8+PC9nPjwvc3ZnPg=="
+            alt="icon"
+            width="48"
+            height="48"
+          />
+          <h3 class="cs-h3">Expert Therapists You Can Trust</h3>
+          <p class="cs-item-text">
+            Registered, experienced therapists focused on results.
+          </p>
+        </li>
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik00IDIwdi0yLjhxMC0uODUuNDM4LTEuNTYyVDUuNiAxNC41NXExLjU1LS43NzUgMy4xNS0xLjE2MlQxMiAxM2guMzVxLS4yNzUuNDUtLjQxMy45NjNUMTEuOCAxNXEtMS4zNS4wMjUtMi42ODcuMzYzVDYuNSAxNi4zNXEtLjIyNS4xMjUtLjM2My4zNVQ2IDE3LjJ2LjhoNy4wNzVsMiAyem04LThxLTEuNjUgMC0yLjgyNS0xLjE3NVQ4IDh0MS4xNzUtMi44MjVUMTIgNHQyLjgyNSAxLjE3NVQxNiA4dC0xLjE3NSAyLjgyNVQxMiAxMm0wLTJxLjgyNSAwIDEuNDEzLS41ODdUMTQgOHQtLjU4Ny0xLjQxMlQxMiA2dC0xLjQxMi41ODhUMTAgOHQuNTg4IDEuNDEzVDEyIDEwbTUuOSAxMGwtMy41LTMuNXEtLjMyNS0uMzI1LS40NjItLjd0LS4xMzgtLjc1cTAtLjguNTc1LTEuNDI1VDE1Ljg1IDEzcS43IDAgMS4xLjMyNXQuOTUuODc1cS41LS41LjkxMy0uODVUMTkuOTUgMTNxLjkyNSAwIDEuNDg4LjYzOFQyMiAxNS4wNzRxMCAuMzc1LS4xNS43NXQtLjQ1LjY3NXoiLz48L3N2Zz4="
+            alt="icon"
+            width="40"
+            height="48"
+          />
+          <h3 class="cs-h3">Tailored Care for Your Body</h3>
+          <p class="cs-item-text">
+            Personalized treatment plans for pain relief and relaxation.
+          </p>
+        </li>
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMjI5LjEyIDE0Mi42NWEyMi40MyAyMi40MyAwIDAgMC0xOS41NS0zLjg4bC00LjMyIDFDMjI3IDExOS41NSAyMzggOTkuNTEgMjM4IDgwYzAtMjUuMzYtMjAuMzktNDYtNDUuNDYtNDZBNDUuNTEgNDUuNTEgMCAwIDAgMTU2IDUyYTQ1LjUxIDQ1LjUxIDAgMCAwLTM2LjU0LTE4Qzk0LjM5IDM0IDc0IDU0LjY0IDc0IDgwYzAgMTEuMzggMy42MyAyMi40OSAxMS4yOSAzNC4zNmEyOS43MyAyOS43MyAwIDAgMC0xNi41NiA4LjQzTDQ1LjUyIDE0NkgxNmExNCAxNCAwIDAgMC0xNCAxNHY0MGExNCAxNCAwIDAgMCAxNCAxNGgxMDRhNiA2IDAgMCAwIDEuNDYtLjE4bDY0LTE2YTcgNyAwIDAgMCAuODktLjNMMjI1LjE3IDE4MWwuMzMtLjE1YTIyLjYgMjIuNiAwIDAgMCAzLjYyLTM4LjE4Wk0xMTkuNDYgNDZhMzMuMTYgMzMuMTYgMCAwIDEgMzEgMjAuMjhhNiA2IDAgMCAwIDExLjEgMGEzMy4xNiAzMy4xNiAwIDAgMSAzMS0yMC4yOEMyMTAuNjggNDYgMjI2IDYxLjU3IDIyNiA4MGMwIDIwLjI0LTE2LjE4IDQzLTQ2LjggNjUuNzVsLTE0Ljg3IDMuNDJBMjYgMjYgMCAwIDAgMTQwIDExNEg5OS42N0M5MC4zNiAxMDEuNjcgODYgOTAuODEgODYgODBjMC0xOC40MyAxNS4zMi0zNCAzMy40Ni0zNE0xNCAyMDB2LTQwYTIgMiAwIDAgMSAyLTJoMjZ2NDRIMTZhMiAyIDAgMCAxLTItMm0yMDYuMjgtMzBsLTM4LjIgMTYuMjdMMTE5LjI2IDIwMkg1NHYtNDcuNTFsMjMuMjEtMjMuMjJBMTcuODggMTcuODggMCAwIDEgODkuOTQgMTI2SDE0MGExNCAxNCAwIDAgMSAwIDI4aC0yOGE2IDYgMCAwIDAgMCAxMmgzMmE2IDYgMCAwIDAgMS4zNC0uMTVsNjctMTUuNDFsLjI0LS4wNmExMC42IDEwLjYgMCAwIDEgNy43IDE5LjYyIi8+PC9zdmc+"
+            alt="icon"
+            width="48"
+            height="48"
+          />
+          <h3 class="cs-h3">Proven Techniques That Work</h3>
+          <p class="cs-item-text">
+            Evidence‑based techniques: deep tissue, hot stone, Swedish, and
+            more.
+          </p>
+        </li>
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik01IDhoMTRWNkg1em0wIDBWNnptMCAxNHEtLjgyNSAwLTEuNDEyLS41ODdUMyAyMFY2cTAtLjgyNS41ODgtMS40MTJUNSA0aDFWM3EwLS40MjUuMjg4LS43MTJUNyAydC43MTMuMjg4VDggM3YxaDhWM3EwLS40MjUuMjg4LS43MTJUMTcgMnQuNzEzLjI4OFQxOCAzdjFoMXEuODI1IDAgMS40MTMuNTg4VDIxIDZ2NC42NzVxMCAuNDI1LS4yODguNzEzdC0uNzEyLjI4N3QtLjcxMi0uMjg4dC0uMjg4LS43MTJWMTBINXYxMGg1LjhxLjQyNSAwIC43MTMuMjg4VDExLjggMjF0LS4yODguNzEzVDEwLjggMjJ6bTEzIDFxLTIuMDc1IDAtMy41MzctMS40NjNUMTMgMTh0MS40NjMtMy41MzdUMTggMTN0My41MzggMS40NjNUMjMgMTh0LTEuNDYzIDMuNTM4VDE4IDIzbS41LTUuMnYtMi4zcTAtLjItLjE1LS4zNVQxOCAxNXQtLjM1LjE1dC0uMTUuMzV2Mi4yNzVxMCAuMi4wNzUuMzg4dC4yMjUuMzM3bDEuNTI1IDEuNTI1cS4xNS4xNS4zNS4xNXQuMzUtLjE1dC4xNS0uMzV0LS4xNS0uMzV6Ii8+PC9zdmc+"
+            alt="icon"
+            width="48"
+            height="48"
+          />
+          <h3 class="cs-h3">Relaxing Clinic, On Your Schedule</h3>
+          <p class="cs-item-text">
+            Welcoming clinic with easy booking and flexible hours.
+          </p>
+        </li>
+      </ul>
     </div>
-</section>
-                                
-<!-- ============================================ -->
-<!--                   Steps                      -->
-<!-- ============================================ -->
+  </section>
 
-<section id="steps-889">
+  <!-- ============================================ -->
+  <!--                   Reviews                    -->
+  <!-- ============================================ -->
+
+  <section id="reviews-section" class="py-16 md:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <span
+          class="text-sm font-bold tracking-wider uppercase text-[var(--primary)] mb-2 block"
+        >
+          Client Testimonials
+        </span>
+        <h2 class="text-3xl md:text-4xl font-serif text-gray-900">
+          What Our Clients Say
+        </h2>
+      </div>
+
+      <!-- Reviews Container -->
+      <div class="relative">
+        <!-- Desktop: Static Grid (lg and up) -->
+        <div class="hidden lg:grid lg:grid-cols-3 gap-6">
+          {
+            reviews.map((review) => (
+              <div class="bg-gray-50 rounded-2xl p-8 flex flex-col">
+                <div class="mb-6">
+                  <svg
+                    class="w-10 h-10 text-[var(--secondary)] opacity-50"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                </div>
+                <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
+                  "{review.text}"
+                </p>
+                <p class="font-semibold text-gray-900">— {review.name}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Mobile/Tablet: Carousel (below lg) -->
+        <div class="lg:hidden">
+          <div
+            id="reviews-carousel"
+            class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6 pb-8"
+            style="scroll-behavior: smooth; -webkit-overflow-scrolling: touch;"
+          >
+            {
+              reviews.map((review, index) => (
+                <div
+                  class="flex-shrink-0 w-[85%] sm:w-[70%] md:w-[60%] snap-center"
+                  data-review-index={index}
+                >
+                  <div class="bg-gray-50 rounded-2xl p-8 h-full flex flex-col">
+                    <div class="mb-6">
+                      <svg
+                        class="w-10 h-10 text-[var(--secondary)] opacity-50"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                      </svg>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
+                      "{review.text}"
+                    </p>
+                    <p class="font-semibold text-gray-900">— {review.name}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- Pagination Dots -->
+          <div class="flex justify-center gap-2 mt-4">
+            {
+              reviews.map((_, index) => (
+                <button
+                  class="dot w-2.5 h-2.5 rounded-full transition-all duration-300"
+                  data-index={index}
+                  aria-label={`Go to review ${index + 1}`}
+                />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="text-center mt-12">
+        <a
+          href="https://share.google/T2TeTP7hO7jAPi3rl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-white bg-[var(--primary)] rounded hover:bg-black transition-colors duration-300"
+        >
+          View More Reviews
+          <svg
+            class="ml-2 w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                   Steps                      -->
+  <!-- ============================================ -->
+
+  <section id="steps-889">
     <div class="cs-container">
-        <div class="cs-content">
-            <span class="cs-topper">Your Path to Relaxation Starts Here</span>
-            <h2 class="cs-title">Booking Made Simple</h2>
-            <!-- <p class="cs-text">
+      <div class="cs-content">
+        <span class="cs-topper">Your Path to Relaxation Starts Here</span>
+        <h2 class="cs-title">Booking Made Simple</h2>
+        <!-- <p class="cs-text">
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.
             </p> -->
-        </div>
-        <ul class="cs-card-group">
-            <li class="cs-item">
-                <picture class="cs-picture">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Ficon-orange.svg" alt="icon" width="32" height="32" loading="lazy" decoding="async" aria-hidden="true">
-                </picture>
-                <h3 class="cs-h3">Find Your Treatment</h3>
-                <p class="cs-item-p">
-                    Deep tissue, hot stone, Swedish—choose the care your body needs.
-                </p>
-            </li>
-            <!--Arrow-->
-            <li class="cs-item cs-arrow" aria-hidden="true">
-                <img class="cs-arrow-img" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Farrow-curve-right.svg" alt="icon" width="80" height="76" loading="lazy" decoding="async" aria-hidden="true">
-            </li>
-            <li class="cs-item">
-                <picture class="cs-picture">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Ficon-orange.svg" alt="icon" width="32" height="32" loading="lazy" decoding="async" aria-hidden="true">
-                </picture>
-                <h3 class="cs-h3">Schedule in Minutes</h3>
-                <p class="cs-item-p">
-                    Pick the date and time that works best for you.
-                </p>
-            </li>
-            <!--Arrow-->
-            <li class="cs-item cs-arrow" aria-hidden="true">
-                <img class="cs-arrow-img" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Farrow-curve-right.svg" alt="icon" width="80" height="76" loading="lazy" decoding="async" aria-hidden="true">
-            </li>
-            <li class="cs-item">
-                <picture class="cs-picture">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Ficon-orange.svg" alt="icon" width="32" height="32" loading="lazy" decoding="async" aria-hidden="true">
-                </picture>
-                <h3 class="cs-h3">Confirm & Enjoy</h3>
-                <p class="cs-item-p">
-                    Secure your spot and let us take care of the rest.
-                </p>
-            </li>
-        </ul>
-        <a href="/direct-billing" class="cs-button-solid">Book Appointment</a>
+      </div>
+      <ul class="cs-card-group">
+        <li class="cs-item">
+          <picture class="cs-picture">
+            <img
+              class="cs-icon"
+              src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Ficon-orange.svg"
+              alt="icon"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+          </picture>
+          <h3 class="cs-h3">Find Your Treatment</h3>
+          <p class="cs-item-p">
+            Deep tissue, hot stone, Swedish—choose the care your body needs.
+          </p>
+        </li>
+        <!--Arrow-->
+        <li class="cs-item cs-arrow" aria-hidden="true">
+          <img
+            class="cs-arrow-img"
+            src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Farrow-curve-right.svg"
+            alt="icon"
+            width="80"
+            height="76"
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+          />
+        </li>
+        <li class="cs-item">
+          <picture class="cs-picture">
+            <img
+              class="cs-icon"
+              src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Ficon-orange.svg"
+              alt="icon"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+          </picture>
+          <h3 class="cs-h3">Schedule in Minutes</h3>
+          <p class="cs-item-p">
+            Pick the date and time that works best for you.
+          </p>
+        </li>
+        <!--Arrow-->
+        <li class="cs-item cs-arrow" aria-hidden="true">
+          <img
+            class="cs-arrow-img"
+            src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Farrow-curve-right.svg"
+            alt="icon"
+            width="80"
+            height="76"
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+          />
+        </li>
+        <li class="cs-item">
+          <picture class="cs-picture">
+            <img
+              class="cs-icon"
+              src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Ficon-orange.svg"
+              alt="icon"
+              width="32"
+              height="32"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+          </picture>
+          <h3 class="cs-h3">Confirm & Enjoy</h3>
+          <p class="cs-item-p">
+            Secure your spot and let us take care of the rest.
+          </p>
+        </li>
+      </ul>
+      <a href="/direct-billing" class="cs-button-solid">Book Appointment</a>
     </div>
-</section>
-                                
-<!-- ============================================ -->
-<!--                   Contact                    -->
-<!-- ============================================ -->
+  </section>
 
-<section id="contact-1150">
+  <!-- ============================================ -->
+  <!--                   Contact                    -->
+  <!-- ============================================ -->
+
+  <section id="contact-1150">
     <div class="cs-container">
-        <div class="cs-content">
-            <span class="cs-topper">Contact Us</span>
-            <h2 class="cs-title">We Love to Hear from Our Happy Customers</h2>
-        </div>
-        <div class="cs-contact-group">
-            <picture class="cs-picture">
-                <!--Mobile Image-->
-                <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/group.jpg">
-                <!--Tablet and above Image-->
-                <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/group.jpg">
-                <img loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/group.jpg" alt="people" width="630" height="300">
+      <div class="cs-content">
+        <span class="cs-topper">Contact Us</span>
+        <h2 class="cs-title">We Love to Hear from Our Happy Customers</h2>
+      </div>
+      <div class="cs-contact-group">
+        <picture class="cs-picture">
+          <!--Mobile Image-->
+          <source
+            media="(max-width: 600px)"
+            srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/group.jpg"
+          />
+          <!--Tablet and above Image-->
+          <source
+            media="(min-width: 601px)"
+            srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/group.jpg"
+          />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/group.jpg"
+            alt="people"
+            width="630"
+            height="300"
+          />
+        </picture>
+        <p class="cs-contact-text">
+          Whether you're seeking pain relief, relaxation, or ongoing care, we’d
+          love to hear from you. Contact us today to begin your wellness
+          journey.
+        </p>
+        <ul class="cs-ul">
+          <li class="cs-li">
+            <picture class="cs-icon-wrapper">
+              <img
+                aria-hidden="true"
+                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-phone.svg"
+                alt="phone icon"
+                class="cs-icon"
+                width="40"
+                height="40"
+                decoding="async"
+              />
             </picture>
-            <p class="cs-contact-text">
-                Whether you're seeking pain relief, relaxation, or ongoing care, we’d love to hear from you. Contact us today to begin your wellness journey.
-            </p>
-            <ul class="cs-ul">
-                <li class="cs-li">
-                    <picture class="cs-icon-wrapper">
-                        <img aria-hidden="true" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-phone.svg" alt="phone icon" class="cs-icon" width="40" height="40" decoding="async">
-                    </picture>
-                    <div class="cs-flex-group">
-                        <span class="cs-header">Phone</span>
-                        <a href="tel:778-891-9558
-                        " class="cs-link">(778) 891-9558
-                        </a>
-                    </div>
-                </li>
-                <li class="cs-li">
-                    <picture class="cs-icon-wrapper">
-                        <img aria-hidden="true" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-pin.svg" alt="address icon" class="cs-icon" width="40" height="40" decoding="async">
-                    </picture>
-                    <div class="cs-flex-group">
-                        <span class="cs-header">Address</span>
-                        <a href="" class="cs-link">2553 Woodbridge Lane, Boston Ware 120</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <!--Form-->
-        <form class="cs-form" id="cs-form-1150" name="Contact Form" method="post">
-            <label class="cs-label">
-                Name
-                <input class="cs-input" required type="text" id="name-1150" name="name" placeholder="Name">
-            </label>
-            <label class="cs-label cs-email">
-                Email
-                <input class="cs-input" required type="email" id="email-1150" name="email" placeholder="Email">
-            </label>
-            <label class="cs-label cs-phone">
-                Phone
-                <input class="cs-input" required type="number" id="phone-1150" name="phone" placeholder="Phone">
-            </label>
-            <label class="cs-label">
-                Message
-                <textarea class="cs-input cs-textarea" required name="Message" id="message-1150" placeholder="Write message..."></textarea>
-            </label>
-            <button class="cs-button-solid cs-submit" type="submit">Make an Appointment</button>
-        </form>
-        <!--Bounce Graphic-->
-        <img class="cs-graphic cs-graphic1" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/bounce.svg" alt="bounce" width="208" height="124">
-        <!--Coin Graphic-->
-        <img class="cs-graphic cs-graphic2" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/coin.svg" alt="bounce" width="205" height="161">
+            <div class="cs-flex-group">
+              <span class="cs-header">Phone</span>
+              <a href={`tel:${client.phoneForTel}`} class="cs-link">
+                {client.phoneFormatted}
+              </a>
+            </div>
+          </li>
+          <li class="cs-li">
+            <picture class="cs-icon-wrapper">
+              <img
+                aria-hidden="true"
+                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-pin.svg"
+                alt="address icon"
+                class="cs-icon"
+                width="40"
+                height="40"
+                decoding="async"
+              />
+            </picture>
+            <div class="cs-flex-group">
+              <span class="cs-header">Address</span>
+              <a href="" class="cs-link">
+                {client.address.lineOne}
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--Form-->
+      <form class="cs-form" id="cs-form-1150" name="Contact Form" method="post">
+        <label class="cs-label">
+          Name
+          <input
+            class="cs-input"
+            required
+            type="text"
+            id="name-1150"
+            name="name"
+            placeholder="Name"
+          />
+        </label>
+        <label class="cs-label cs-email">
+          Email
+          <input
+            class="cs-input"
+            required
+            type="email"
+            id="email-1150"
+            name="email"
+            placeholder="Email"
+          />
+        </label>
+        <label class="cs-label cs-phone">
+          Phone
+          <input
+            class="cs-input"
+            required
+            type="number"
+            id="phone-1150"
+            name="phone"
+            placeholder="Phone"
+          />
+        </label>
+        <label class="cs-label">
+          Message
+          <textarea
+            class="cs-input cs-textarea"
+            required
+            name="Message"
+            id="message-1150"
+            placeholder="Write message..."></textarea>
+        </label>
+        <button class="cs-button-solid cs-submit" type="submit"
+          >Make an Appointment</button
+        >
+      </form>
+      <!--Bounce Graphic-->
+      <img
+        class="cs-graphic cs-graphic1"
+        loading="lazy"
+        decoding="async"
+        src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/bounce.svg"
+        alt="bounce"
+        width="208"
+        height="124"
+      />
+      <!--Coin Graphic-->
+      <img
+        class="cs-graphic cs-graphic2"
+        loading="lazy"
+        decoding="async"
+        src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/coin.svg"
+        alt="bounce"
+        width="205"
+        height="161"
+      />
     </div>
-</section>
-
+  </section>
 
   <!-- <CTA /> -->
 </BaseLayout>
@@ -369,932 +681,1067 @@ posts.sort(
     scroll-behavior: smooth;
   }
 
-/*-- -------------------------- -->
+  /*-- -------------------------- -->
 <---            Hero            -->
 <--- -------------------------- -*/
 
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
     #hero-856 {
-        /* centers button */
+      /* centers button */
+      text-align: center;
+      /* 116px - 164px top */
+      /* 60px - 100px  bottom */
+      padding: clamp(7.25rem, 16.82vw, 10.25rem) (16/16rem)
+        clamp(3.75rem, 7.82vw, 6.25rem);
+      background-color: #f7f7f7;
+      /* clips the svg wave from overflowing */
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+
+      .cs-container {
+        width: 100%;
+        max-width: (1280/16rem);
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: (48/16rem);
+      }
+
+      .cs-content {
+        max-width: (630/16rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .cs-topper {
+        font-size: (16/16rem);
+        line-height: 1.2em;
+        text-transform: uppercase;
+        text-align: inherit;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: (4/16rem);
+        display: block;
+      }
+
+      .cs-title {
+        /* 39px - 61px */
+        font-size: clamp(2.4375rem, 5vw, 3.8125rem);
+        font-weight: 900;
+        line-height: 1.2em;
         text-align: center;
-        /* 116px - 164px top */
-        /* 60px - 100px  bottom */
-        padding: clamp(7.25rem, 16.82vw, 10.25rem) (16/16rem)
-            clamp(3.75rem, 7.82vw, 6.25rem);
-        background-color: #f7f7f7;
-        /* clips the svg wave from overflowing */
-        overflow: hidden;
+        /* 23 characters including spaces wide */
+        max-width: 23ch;
+        margin: 0 0 (16/16rem) 0;
+        color: var(--headerColor);
         position: relative;
-        z-index: 1;
+      }
 
-        .cs-container {
-            width: 100%;
-            max-width: (1280/16rem);
-            margin: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: (48/16rem);
-        }
+      .cs-text {
+        /* 16px - 20px */
+        font-size: clamp(1rem, 1.5vw, 1.25rem);
+        line-height: 1.5em;
+        text-align: center;
+        width: 100%;
+        max-width: (531/16rem);
+        /* 28px - 40px */
+        margin: 0 0 clamp(1.75rem, 3.92vw, 2.5rem) 0;
+        color: var(--bodyTextColor);
+      }
 
-        .cs-content {
-            max-width: (630/16rem);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .cs-topper {
-            font-size: (16/16rem);
-            line-height: 1.2em;
-            text-transform: uppercase;
-            text-align: inherit;
-            letter-spacing: 0.1em;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: (4/16rem);
-            display: block;
-        }
-
-        .cs-title {
-            /* 39px - 61px */
-            font-size: clamp(2.4375rem, 5vw, 3.8125rem);
-            font-weight: 900;
-            line-height: 1.2em;
-            text-align: center;
-            /* 23 characters including spaces wide */
-            max-width: 23ch;
-            margin: 0 0 (16/16rem) 0;
-            color: var(--headerColor);
-            position: relative;
-        }
-
-        .cs-text {
-            /* 16px - 20px */
-            font-size: clamp(1rem, 1.5vw, 1.25rem);
-            line-height: 1.5em;
-            text-align: center;
-            width: 100%;
-            max-width: (531/16rem);
-            /* 28px - 40px */
-            margin: 0 0 clamp(1.75rem, 3.92vw, 2.5rem) 0;
-            color: var(--bodyTextColor);
-        }
-
-        .cs-button-solid {
-            font-size: (16/16rem);
-            /* 46px - 56px */
-            line-height: clamp(2.875rem, 5.5vw, 3.5rem);
-            text-decoration: none;
-            font-weight: 700;
-            text-align: center;
-            margin: 0;
-            color: #fff;
-            min-width: (150/16rem);
-            padding: 0 (24/16rem);
-            background-color: var(--primary);
-            border-radius: (4/16rem);
-            display: inline-block;
-            position: relative;
-            z-index: 1;
-            /* prevents padding from adding to the width */
-            box-sizing: border-box;
-
-            &:before {
-                content: "";
-                position: absolute;
-                height: 100%;
-                width: 0%;
-                background: #000;
-                opacity: 1;
-                top: 0;
-                left: 0;
-                z-index: -1;
-                border-radius: (4/16rem);
-                transition: width 0.3s;
-            }
-
-            &:hover {
-                &:before {
-                    width: 100%;
-                }
-            }
-        }
-
-        .cs-picture {
-            width: 100%;
-            max-width: (570/16rem);
-            /* 400px - 712px */
-            height: clamp(25rem, 95vw, 44.5rem);
-            /* 100px - 200px */
-            border-radius: 0 clamp(6.25rem, 17vw, 12.5rem) 0
-                clamp(6.25rem, 17vw, 12.5rem);
-            box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.16);
-            /* clips the img tag corners */
-            overflow: hidden;
-            display: block;
-            position: relative;
-
-            img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 100%;
-                /* makes image act as a background image */
-                object-fit: cover;
-                /* ensures the top of the images is at the top of the container, no heads getting cut off */
-                object-position: top;
-            }
-        }
-
-        .cs-wave {
-            /* we're stretching the svg wider than the viewport so it's taller and has more of a presence */
-            width: 320%;
-            height: auto;
-            display: block;
-            position: absolute;
-            left: 50%;
-            bottom: -1px;
-            transform: translateX(-50%);
-            z-index: -1;
-        }
-    }
-}
-
-/* Small Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
-    #hero-856 {
-      padding: 2rem (16/16rem)
-            clamp(3.75rem, 7.82vw, 6.25rem);
-        text-align: left;
-        .cs-container {
-            flex-direction: row;
-            justify-content: space-between;
-        }
-
-        .cs-content {
-            width: 40vw;
-            /* prevents flex-box from squishing it */
-            flex: none;
-            align-items: flex-start;
-            /* sends it to the right in the 2nd position */
-            order: 2;
-        }
-
-        .cs-title,
-        .cs-text {
-            text-align: left;
-        }
-
-        .cs-picture {
-            /* 623px - 814px */
-            height: clamp(38.9375rem, 60vw, 50.875rem);
-        }
-
-        .cs-wave {
-            width: 100%;
-            left: 0;
-            /* flips it horizontally */
-            transform: scaleX(-1);
-        }
-    }
-}                             
-                                
-/*-- -------------------------- -->
-<---            CTA             -->
-<--- -------------------------- -*/
-
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
-    #cta-697 {
-        padding: 3rem;
+      .cs-button-solid {
+        font-size: (16/16rem);
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #fff;
+        min-width: (150/16rem);
+        padding: 0 (24/16rem);
         background-color: var(--primary);
+        border-radius: (4/16rem);
+        display: inline-block;
         position: relative;
         z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
 
-        .cs-container {
+        &:before {
+          content: '';
+          position: absolute;
+          height: 100%;
+          width: 0%;
+          background: #000;
+          opacity: 1;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          border-radius: (4/16rem);
+          transition: width 0.3s;
+        }
+
+        &:hover {
+          &:before {
             width: 100%;
-            max-width: (1280/16rem);
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* 48px - 64px */
-            gap: clamp(3rem, 6vw, 4rem);
+          }
         }
-
-        .cs-content {
-            /* set text align to left if content needs to be left aligned */
-            text-align: center;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            /* centers content horizontally, set to flex-start to left align */
-            align-items: center;
-            /* 48px - 64px */
-            gap: clamp(3rem, 6vw, 4rem);
-        }
-
-        .cs-title {
-            color: var(--bodyTextColorWhite);
-        }
-
-        .cs-button-solid {
-            font-size: (16/16rem);
-            /* 46px - 56px */
-            line-height: clamp(2.875rem, 5.5vw, 3.5rem);
-            text-decoration: none;
-            font-weight: 700;
-            text-align: center;
-            margin: 0;
-            color: #000;
-            min-width: (150/16rem);
-            padding: 0 (24/16rem);
-            background-color: var(--secondary);
-            border-radius: (4/16rem);
-            display: inline-block;
-            position: relative;
-            z-index: 1;
-            /* prevents padding from adding to the width */
-            box-sizing: border-box;
-
-            &:before {
-                content: "";
-                position: absolute;
-                height: 100%;
-                width: 0%;
-                background: #000;
-                opacity: 1;
-                top: 0;
-                left: 0;
-                z-index: -1;
-                border-radius: (4/16rem);
-                transition: width 0.3s;
-            }
-
-            &:hover {
-              color: #fff;
-                &:before {
-                    width: 100%;
-                }
-            }
-        }
-
-        .cs-background {
-            width: 100%;
-            height: 100%;
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            /* makes it act like a background image */
-            object-fit: cover;
-        }
-    }
-}
-
-/* Small Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
-    #cta-697 {
-        .cs-content {
-            text-align: left;
-            flex-direction: row;
-            justify-content: space-between;
-        }
-    }
-}
-
-// Services
-@media only screen and (min-width: 0rem) {
-  #services{
-    #services-content{
-      background-color: var(--primary) !important;
-      h3{
-        color: #fff !important;
       }
-      p{
-        color: #ddd !important;
+
+      .cs-picture {
+        width: 100%;
+        max-width: (570/16rem);
+        /* 400px - 712px */
+        height: clamp(25rem, 95vw, 44.5rem);
+        /* 100px - 200px */
+        border-radius: 0 clamp(6.25rem, 17vw, 12.5rem) 0
+          clamp(6.25rem, 17vw, 12.5rem);
+        box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.16);
+        /* clips the img tag corners */
+        overflow: hidden;
+        display: block;
+        position: relative;
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          /* makes image act as a background image */
+          object-fit: cover;
+          /* ensures the top of the images is at the top of the container, no heads getting cut off */
+          object-position: top;
+        }
       }
-      a{
-        background-color: var(--secondary) !important;
+
+      .cs-wave {
+        /* we're stretching the svg wider than the viewport so it's taller and has more of a presence */
+        width: 320%;
+        height: auto;
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: -1px;
+        transform: translateX(-50%);
+        z-index: -1;
       }
     }
   }
-}
 
-/*-- -------------------------- -->
+  /* Small Desktop - 1024px */
+  @media only screen and (min-width: 64rem) {
+    #hero-856 {
+      padding: 2rem (16/16rem) clamp(3.75rem, 7.82vw, 6.25rem);
+      text-align: left;
+      .cs-container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .cs-content {
+        width: 40vw;
+        /* prevents flex-box from squishing it */
+        flex: none;
+        align-items: flex-start;
+        /* sends it to the right in the 2nd position */
+        order: 2;
+      }
+
+      .cs-title,
+      .cs-text {
+        text-align: left;
+      }
+
+      .cs-picture {
+        /* 623px - 814px */
+        height: clamp(38.9375rem, 60vw, 50.875rem);
+      }
+
+      .cs-wave {
+        width: 100%;
+        left: 0;
+        /* flips it horizontally */
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  /*-- -------------------------- -->
+<---            CTA             -->
+<--- -------------------------- -*/
+
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
+    #cta-697 {
+      padding: 3rem;
+      background-color: var(--primary);
+      position: relative;
+      z-index: 1;
+
+      .cs-container {
+        width: 100%;
+        max-width: (1280/16rem);
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-title {
+        color: var(--bodyTextColorWhite);
+      }
+
+      .cs-button-solid {
+        font-size: (16/16rem);
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #000;
+        min-width: (150/16rem);
+        padding: 0 (24/16rem);
+        background-color: var(--secondary);
+        border-radius: (4/16rem);
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+
+        &:before {
+          content: '';
+          position: absolute;
+          height: 100%;
+          width: 0%;
+          background: #000;
+          opacity: 1;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          border-radius: (4/16rem);
+          transition: width 0.3s;
+        }
+
+        &:hover {
+          color: #fff;
+          &:before {
+            width: 100%;
+          }
+        }
+      }
+
+      .cs-background {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        /* makes it act like a background image */
+        object-fit: cover;
+      }
+    }
+  }
+
+  /* Small Desktop - 1024px */
+  @media only screen and (min-width: 64rem) {
+    #cta-697 {
+      .cs-content {
+        text-align: left;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  // Services
+  @media only screen and (min-width: 0rem) {
+    #services {
+      #services-content {
+        background-color: var(--primary) !important;
+        h3 {
+          color: #fff !important;
+        }
+        p {
+          color: #ddd !important;
+        }
+        a {
+          background-color: var(--secondary) !important;
+        }
+      }
+    }
+  }
+
+  /*-- -------------------------- -->
 <---        Why Choose          -->
 <--- -------------------------- -*/
 
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
     #why-choose-289 {
-        text-align: center;
-        padding: var(--sectionPadding);
+      text-align: center;
+      padding: var(--sectionPadding);
 
-        .cs-container {
-            width: 100%;
-            /* changes to 1280px on tablet */
-            max-width: (550/16rem);
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* 48px - 64px */
-            gap: clamp(3rem, 6vw, 4rem);
+      .cs-container {
+        width: 100%;
+        /* changes to 1280px on tablet */
+        max-width: (550/16rem);
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: flex-start;
+      }
+
+      .cs-text {
+        max-width: (522/16rem);
+      }
+
+      .cs-card-group {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: (16/16rem);
+      }
+
+      .cs-item {
+        list-style: none;
+        text-align: left;
+        width: 100%;
+        padding: (32/16rem);
+        background-color: var(--secondaryLight);
+        border-radius: (16/16rem);
+        /* prevents padding from adding to height and width */
+        box-sizing: border-box;
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: var(--primary);
+          cursor: pointer;
+
+          .cs-icon {
+            filter: brightness(0) saturate(100%) invert(100%);
+          }
+
+          .cs-h3 {
+            color: var(--bodyTextColorWhite);
+          }
+
+          .cs-item-text {
+            color: var(--bodyTextColorWhite);
+          }
         }
+      }
 
-        .cs-content {
-            /* set text align to left if content needs to be left aligned */
-            text-align: left;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            /* centers content horizontally, set to flex-start to left align */
-            align-items: flex-start;
-        }
+      .cs-icon {
+        width: auto;
+        height: (48/16rem);
+        margin-bottom: (24/16rem);
+        display: block;
+        transition: filter 0.3s;
+      }
 
-        .cs-text {
-            max-width: (522/16rem);
-        }
+      .cs-h3 {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 2.5vw, 1.5625rem);
+        line-height: 1.2em;
+        margin: 0;
+        margin-bottom: (16/16rem);
+        color: var(--headerColor);
+        transition: color 0.3s;
+      }
 
-        .cs-card-group {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: (16/16rem);
-        }
-
-        .cs-item {
-            list-style: none;
-            text-align: left;
-            width: 100%;
-            padding: (32/16rem);
-            background-color: var(--secondaryLight);
-            border-radius: (16/16rem);
-            /* prevents padding from adding to height and width */
-            box-sizing: border-box;
-            transition: background-color 0.3s;
-            &:hover {
-                background-color: var(--primary);
-                cursor: pointer;
-
-                .cs-icon {
-                    filter: brightness(0) saturate(100%) invert(100%);
-                }
-
-                .cs-h3 {
-                    color: var(--bodyTextColorWhite);
-                }
-
-                .cs-item-text {
-                    color: var(--bodyTextColorWhite);
-                }
-            }
-        }
-
-        .cs-icon {
-            width: auto;
-            height: (48/16rem);
-            margin-bottom: (24/16rem);
-            display: block;
-            transition: filter 0.3s;
-        }
-
-        .cs-h3 {
-            /* 20px - 25px */
-            font-size: clamp(1.25rem, 2.5vw, 1.5625rem);
-            line-height: 1.2em;
-            margin: 0;
-            margin-bottom: (16/16rem);
-            color: var(--headerColor);
-            transition: color 0.3s;
-        }
-
-        .cs-item-text {
-            font-size: (16/16rem);
-            line-height: 1.5em;
-            margin: 0;
-            color: var(--bodyTextColor);
-            transition: color 0.3s;
-        }
+      .cs-item-text {
+        font-size: (16/16rem);
+        line-height: 1.5em;
+        margin: 0;
+        color: var(--bodyTextColor);
+        transition: color 0.3s;
+      }
     }
-}
+  }
 
-/* Tablet - 768px */
-@media only screen and (min-width: 48rem) {
+  /* Tablet - 768px */
+  @media only screen and (min-width: 48rem) {
     #why-choose-289 {
-        .cs-container {
-            max-width: (1280/16rem);
-        }
+      .cs-container {
+        max-width: (1280/16rem);
+      }
 
-        .cs-content {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: (64/16rem);
-        }
+      .cs-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: (64/16rem);
+      }
 
-        .cs-flex {
-            width: 50%;
-        }
+      .cs-flex {
+        width: 50%;
+      }
 
-        .cs-title {
-            margin: 0;
-        }
+      .cs-title {
+        margin: 0;
+      }
 
-        .cs-card-group {
-            justify-content: space-between;
-            /* makes sure every box "stretches" to be the same height as the tallest box */
-            align-items: stretch;
-            flex-direction: row;
-            /* 16px - 20px */
-            gap: clamp(1rem, 1.5vw, 1.25rem);
-        }
+      .cs-card-group {
+        justify-content: space-between;
+        /* makes sure every box "stretches" to be the same height as the tallest box */
+        align-items: stretch;
+        flex-direction: row;
+        /* 16px - 20px */
+        gap: clamp(1rem, 1.5vw, 1.25rem);
+      }
 
-        .cs-item {
-            width: auto;
-            /* 16px - 32px */
-            padding: (32/16rem) clamp(1rem, 2.1vw, 2rem);
-        }
+      .cs-item {
+        width: auto;
+        /* 16px - 32px */
+        padding: (32/16rem) clamp(1rem, 2.1vw, 2rem);
+      }
     }
-}
+  }
 
-/*-- -------------------------- -->
+  /*-- -------------------------- -->
 <---           Steps            -->
 <--- -------------------------- -*/
 
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
     #steps-889 {
-        padding: var(--sectionPadding);
+      padding: var(--sectionPadding);
 
-        .cs-container {
+      .cs-container {
+        width: 100%;
+        max-width: (1280/16rem);
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+      }
+
+      .cs-text {
+        max-width: (1064/16rem);
+      }
+
+      .cs-button-solid {
+        font-size: (16/16rem);
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #fff;
+        min-width: (150/16rem);
+        padding: 0 (24/16rem);
+        background-color: var(--primary);
+        border-radius: (4/16rem);
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+
+        &:before {
+          content: '';
+          position: absolute;
+          height: 100%;
+          width: 0%;
+          background: #000;
+          opacity: 1;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          border-radius: (4/16rem);
+          transition: width 0.3s;
+        }
+
+        &:hover {
+          &:before {
             width: 100%;
-            max-width: (1280/16rem);
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* 48px - 64px */
-            gap: clamp(3rem, 6vw, 4rem);
+          }
         }
+      }
 
-        .cs-content {
-            /* set text align to left if content needs to be left aligned */
-            text-align: center;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            /* centers content horizontally, set to flex-start to left align */
-            align-items: center;
-        }
+      .cs-card-group {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 20px - 40px */
+        gap: clamp(1.25rem, 3vw, 2.5rem);
+      }
 
-        .cs-text {
-            max-width: (1064/16rem);
-        }
+      .cs-item {
+        text-align: center;
+        list-style: none;
+        width: 100%;
+        max-width: (326/16rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        .cs-button-solid {
-            font-size: (16/16rem);
-            /* 46px - 56px */
-            line-height: clamp(2.875rem, 5.5vw, 3.5rem);
-            text-decoration: none;
-            font-weight: 700;
-            text-align: center;
-            margin: 0;
-            color: #fff;
-            min-width: (150/16rem);
-            padding: 0 (24/16rem);
-            background-color: var(--primary);
-            border-radius: (4/16rem);
-            display: inline-block;
-            position: relative;
-            z-index: 1;
-            /* prevents padding from adding to the width */
-            box-sizing: border-box;
+      .cs-picture {
+        margin-bottom: (24/16rem);
+        width: (72/16rem);
+        height: (72/16rem);
+        background-color: rgba(206, 65, 13, 0.05);
+        border-radius: (16/16rem) 0 (16/16rem) 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-            &:before {
-                content: "";
-                position: absolute;
-                height: 100%;
-                width: 0%;
-                background: #000;
-                opacity: 1;
-                top: 0;
-                left: 0;
-                z-index: -1;
-                border-radius: (4/16rem);
-                transition: width 0.3s;
-            }
+      .cs-h3 {
+        font-size: (20/16rem);
+        line-height: 1.2em;
+        text-align: inherit;
+        margin: 0 0 (12/16rem) 0;
+        color: var(--headerColor);
+      }
 
-            &:hover {
-                &:before {
-                    width: 100%;
-                }
-            }
-        }
+      .cs-item-p {
+        font-size: (16/16rem);
+        line-height: 1.5em;
+        text-align: inherit;
+        margin: 0;
+        color: var(--bodyTextColor);
+      }
 
-        .cs-card-group {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* 20px - 40px */
-            gap: clamp(1.25rem, 3vw, 2.5rem);
-        }
+      .cs-arrow {
+        /* 48px - 80px */
+        width: clamp(3rem, 6vw, 5rem);
+        height: auto;
+        display: block;
+        flex: none;
+        transform: rotate(120deg);
+      }
 
-        .cs-item {
-            text-align: center;
-            list-style: none;
-            width: 100%;
-            max-width: (326/16rem);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+      .cs-arrow-img {
+        width: 100%;
+        display: block;
+      }
 
-        .cs-picture {
-            margin-bottom: (24/16rem);
-            width: (72/16rem);
-            height: (72/16rem);
-            background-color: rgba(206, 65, 13, 0.05);
-            border-radius: (16/16rem) 0 (16/16rem) 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .cs-h3 {
-            font-size: (20/16rem);
-            line-height: 1.2em;
-            text-align: inherit;
-            margin: 0 0 (12/16rem) 0;
-            color: var(--headerColor);
-        }
-
-        .cs-item-p {
-            font-size: (16/16rem);
-            line-height: 1.5em;
-            text-align: inherit;
-            margin: 0;
-            color: var(--bodyTextColor);
-        }
-
-        .cs-arrow {
-            /* 48px - 80px */
-            width: clamp(3rem, 6vw, 5rem);
-            height: auto;
-            display: block;
-            flex: none;
-            transform: rotate(120deg);
-        }
-
-        .cs-arrow-img {
-            width: 100%;
-            display: block;
-        }
-
-        .cs-icon {
-            width: (32/16rem);
-            height: auto;
-            display: block;
-        }
+      .cs-icon {
+        width: (32/16rem);
+        height: auto;
+        display: block;
+      }
     }
-}
+  }
 
-/* Tablet - 768px */
-@media only screen and (min-width: 48rem) {
+  /* Tablet - 768px */
+  @media only screen and (min-width: 48rem) {
     #steps-889 {
-        .cs-card-group {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: stretch;
-        }
+      .cs-card-group {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+      }
 
-        .cs-arrow {
-            align-self: center;
-            transform: rotate(40deg);
-        }
+      .cs-arrow {
+        align-self: center;
+        transform: rotate(40deg);
+      }
     }
-}
+  }
 
-/*-- -------------------------- -->
+  /*-- -------------------------- -->
 <---          Contact           -->
 <--- -------------------------- -*/
 
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
     #contact-1150 {
-        padding: var(--sectionPadding);
+      padding: var(--sectionPadding);
+      background-color: #f7f7f7;
+      position: relative;
+      z-index: 1;
+
+      .cs-container {
+        width: 100%;
+        /* changes to 1280px at desktop */
+        max-width: (704/16rem);
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        flex-direction: column;
+        column-gap: auto;
+        /* 48px - 80px */
+        row-gap: clamp(3rem, 6vw, 5rem);
+        position: relative;
+      }
+
+      .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+      }
+
+      .cs-topper {
+        color: var(--primary);
+      }
+
+      .cs-title {
+        max-width: 23ch;
+        margin: 0;
+      }
+
+      .cs-picture {
+        width: 100%;
+        /* 240px - 300px */
+        height: clamp(15rem, 35vw, 18.75rem);
+        margin: 0 0 (24/16rem);
+        border-radius: (24/16rem);
+        /* clips image corners */
+        overflow: hidden;
+        display: block;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+
+      .cs-contact-text {
+        font-size: (16/16rem);
+        line-height: 1.5em;
+        text-align: left;
+        margin: 0 0 (24/16rem);
+        color: var(--bodyTextColor);
+      }
+
+      .cs-ul {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: (24/16rem);
+        position: relative;
+      }
+
+      .cs-li {
+        list-style: none;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: (20/16rem);
+
+        &:hover {
+          .cs-icon-wrapper {
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      .cs-header {
+        font-size: (20/16rem);
+        font-weight: 700;
+        line-height: 1.2em;
+        margin-bottom: (12/16rem);
+        color: var(--headerColor);
+        display: block;
+      }
+
+      .cs-link {
+        font-size: (16/16rem);
+        line-height: 1.5em;
+        text-decoration: none;
+        color: #767676;
+        display: block;
+        position: relative;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .cs-icon-wrapper {
+        width: (60/16rem);
+        height: (60/16rem);
+        margin: 0;
+        border-radius: 50%;
+        border: 1px solid #bababa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* prevents flexbox from squishing it */
+        flex: none;
+        transition: transform 0.3s;
+      }
+
+      .cs-icon {
+        width: (24/16rem);
+        height: auto;
+        display: block;
+      }
+
+      .cs-form {
+        width: 100%;
+        /* 24px - 48px top and bottom */
+        /* 16px - 32px left and right */
+        padding: clamp(1.5rem, 5.18vw, 3rem) clamp(1rem, 4vw, 2rem);
+        /* prevents flexbox from affecting height and width */
+        box-sizing: border-box;
+        background-color: #fff;
+        border-radius: (16/16rem);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: (12/16rem);
+      }
+
+      .cs-label {
+        /* 14px - 16px */
+        font-size: clamp(0.875rem, 1.5vw, 1rem);
+        width: 100%;
+        color: var(--headerColor);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: (4/16rem);
+      }
+
+      .cs-input {
+        font-size: (16/16rem);
+        width: 100%;
+        height: (56/16rem);
+        padding: 0;
+        padding-left: (24/16rem);
+        color: var(--headerColor);
         background-color: #f7f7f7;
+        border-radius: (8/16rem);
+        border: none;
+        /* prevents padding from adding to height and width */
+        box-sizing: border-box;
+        &::placeholder {
+          color: #7d799c;
+          opacity: 0.6;
+        }
+      }
+
+      .cs-textarea {
+        min-height: (120/16rem);
+        padding-top: (24/16rem);
+        margin-bottom: (12/16rem);
+        font-family: inherit;
+      }
+
+      .cs-button-solid {
+        font-size: (16/16rem);
+        /* 46px - 56px */
+        line-height: 3rem;
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #fff;
+        border: none;
+        min-width: (150/16rem);
+        padding: 0 (24/16rem);
+        background-color: var(--primary);
+        border-radius: (4/16rem);
+        overflow: hidden;
+        display: inline-block;
         position: relative;
         z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+        transition: color 0.3s;
 
-        .cs-container {
+        &:before {
+          content: '';
+          position: absolute;
+          height: 100%;
+          width: 0%;
+          background: #000;
+          opacity: 1;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          border-radius: (4/16rem);
+          transition: width 0.3s;
+        }
+
+        &:hover {
+          color: #fff;
+          &:before {
             width: 100%;
-            /* changes to 1280px at desktop */
-            max-width: (704/16rem);
-            margin: auto;
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            flex-direction: column;
-            column-gap: auto;
-            /* 48px - 80px */
-            row-gap: clamp(3rem, 6vw, 5rem);
-            position: relative;
+          }
         }
+      }
 
-        .cs-content {
-            /* set text align to left if content needs to be left aligned */
-            text-align: center;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            /* centers content horizontally, set to flex-start to left align */
-            align-items: center;
+      .cs-submit {
+        width: 100%;
+        min-width: (283/16rem);
+        border-radius: (8/16rem);
+        &:hover {
+          cursor: pointer;
         }
+      }
 
-        .cs-topper {
-            color: var(--primary);
-        }
+      .cs-graphic {
+        display: none;
+      }
 
-        .cs-title {
-            max-width: 23ch;
-            margin: 0;
-        }
+      .cs-graphic1 {
+        width: (208/16rem);
+        height: auto;
+        position: absolute;
+        left: (-120/16rem);
+        top: (138/16rem);
+      }
 
-        .cs-picture {
-            width: 100%;
-            /* 240px - 300px */
-            height: clamp(15rem, 35vw, 18.75rem);
-            margin: 0 0 (24/16rem);
-            border-radius: (24/16rem);
-            /* clips image corners */
-            overflow: hidden;
-            display: block;
-            position: relative;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-        }
-
-        .cs-contact-text {
-            font-size: (16/16rem);
-            line-height: 1.5em;
-            text-align: left;
-            margin: 0 0 (24/16rem);
-            color: var(--bodyTextColor);
-        }
-
-        .cs-ul {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: (24/16rem);
-            position: relative;
-        }
-
-        .cs-li {
-            list-style: none;
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: (20/16rem);
-
-            &:hover {
-                .cs-icon-wrapper {
-                    transform: scale(1.1);
-                }
-            }
-        }
-
-        .cs-header {
-            font-size: (20/16rem);
-            font-weight: 700;
-            line-height: 1.2em;
-            margin-bottom: (12/16rem);
-            color: var(--headerColor);
-            display: block;
-        }
-
-        .cs-link {
-            font-size: (16/16rem);
-            line-height: 1.5em;
-            text-decoration: none;
-            color: #767676;
-            display: block;
-            position: relative;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-
-        .cs-icon-wrapper {
-            width: (60/16rem);
-            height: (60/16rem);
-            margin: 0;
-            border-radius: 50%;
-            border: 1px solid #bababa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* prevents flexbox from squishing it */
-            flex: none;
-            transition: transform 0.3s;
-        }
-
-        .cs-icon {
-            width: (24/16rem);
-            height: auto;
-            display: block;
-        }
-
-        .cs-form {
-            width: 100%;
-            /* 24px - 48px top and bottom */
-            /* 16px - 32px left and right */
-            padding: clamp(1.5rem, 5.18vw, 3rem) clamp(1rem, 4vw, 2rem);
-            /* prevents flexbox from affecting height and width */
-            box-sizing: border-box;
-            background-color: #fff;
-            border-radius: (16/16rem);
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: (12/16rem);
-        }
-
-        .cs-label {
-            /* 14px - 16px */
-            font-size: clamp(0.875rem, 1.5vw, 1rem);
-            width: 100%;
-            color: var(--headerColor);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            gap: (4/16rem);
-        }
-
-        .cs-input {
-            font-size: (16/16rem);
-            width: 100%;
-            height: (56/16rem);
-            padding: 0;
-            padding-left: (24/16rem);
-            color: var(--headerColor);
-            background-color: #f7f7f7;
-            border-radius: (8/16rem);
-            border: none;
-            /* prevents padding from adding to height and width */
-            box-sizing: border-box;
-            &::placeholder {
-                color: #7d799c;
-                opacity: 0.6;
-            }
-        }
-
-        .cs-textarea {
-            min-height: (120/16rem);
-            padding-top: (24/16rem);
-            margin-bottom: (12/16rem);
-            font-family: inherit;
-        }
-
-        .cs-button-solid {
-            font-size: (16/16rem);
-            /* 46px - 56px */
-            line-height: 3rem;
-            text-decoration: none;
-            font-weight: 700;
-            text-align: center;
-            margin: 0;
-            color: #fff;
-            border: none;
-            min-width: (150/16rem);
-            padding: 0 (24/16rem);
-            background-color: var(--primary);
-            border-radius: (4/16rem);
-            overflow: hidden;
-            display: inline-block;
-            position: relative;
-            z-index: 1;
-            /* prevents padding from adding to the width */
-            box-sizing: border-box;
-            transition: color 0.3s;
-
-            &:before {
-                content: "";
-                position: absolute;
-                height: 100%;
-                width: 0%;
-                background: #000;
-                opacity: 1;
-                top: 0;
-                left: 0;
-                z-index: -1;
-                border-radius: (4/16rem);
-                transition: width 0.3s;
-            }
-
-            &:hover {
-                color: #fff;
-                &:before {
-                    width: 100%;
-                }
-            }
-        }
-
-        .cs-submit {
-            width: 100%;
-            min-width: (283/16rem);
-            border-radius: (8/16rem);
-            &:hover {
-                cursor: pointer;
-            }
-        }
-
-        .cs-graphic {
-            display: none;
-        }
-
-        .cs-graphic1 {
-            width: (208/16rem);
-            height: auto;
-            position: absolute;
-            left: (-120/16rem);
-            top: (138/16rem);
-        }
-
-        .cs-graphic2 {
-            width: (205/16rem);
-            height: auto;
-            position: absolute;
-            right: (-156/16rem);
-            top: (8/16rem);
-        }
+      .cs-graphic2 {
+        width: (205/16rem);
+        height: auto;
+        position: absolute;
+        right: (-156/16rem);
+        top: (8/16rem);
+      }
     }
-}
+  }
 
-/* Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
+  /* Desktop - 1024px */
+  @media only screen and (min-width: 64rem) {
     #contact-1150 {
-        .cs-container {
-            max-width: (1280/16rem);
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
+      .cs-container {
+        max-width: (1280/16rem);
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
 
-        .cs-contact-group {
-            width: 50%;
-            max-width: (630/16rem);
-        }
+      .cs-contact-group {
+        width: 50%;
+        max-width: (630/16rem);
+      }
 
-        .cs-form {
-            width: 46%;
-            max-width: (578/16rem);
-        }
+      .cs-form {
+        width: 46%;
+        max-width: (578/16rem);
+      }
 
-        .cs-submit {
-            width: auto;
-        }
+      .cs-submit {
+        width: auto;
+      }
     }
-}
+  }
 
-/* Large Desktop - 1500px */
-@media only screen and (min-width: 93.75rem) {
+  /* Large Desktop - 1500px */
+  @media only screen and (min-width: 93.75rem) {
     #contact-1150 {
-        .cs-graphic {
-            display: block;
-        }
+      .cs-graphic {
+        display: block;
+      }
     }
-}
+  }
 
-                                                                                       
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Smooth dot transitions */
+  .dot {
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
 </style>
+
+<script>
+  // Reviews data - easy to configure
+  const reviews = [
+    {
+      text: 'The service is professional, relaxing, and exactly what I need every time. I always leave feeling so much better!',
+      name: 'Melanie B.',
+    },
+    {
+      text: 'The best Massage in town!!!!! I Feel relaxed everytime. Rutchel is the best',
+      name: 'Febalia C.',
+    },
+    {
+      text: 'The lady was very professional, she knows what she is doing, felt very relaxed, the environment was nice as well as the mood just makes you feel calm. Overall would definitely come back.',
+      name: 'Carl G.',
+    },
+  ];
+
+  // Carousel configuration - easy to adjust
+  const AUTOPLAY_INTERVAL = 1500; // 1.5 seconds - change this value as needed
+
+  // Carousel logic
+  const carousel = document.getElementById('reviews-carousel');
+  const dots = document.querySelectorAll('.dot');
+
+  if (carousel && dots.length > 0) {
+    let currentIndex = 0;
+    let autoplayTimer: number;
+    let isUserInteracting = false;
+
+    // Update active dot
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        if (index === currentIndex) {
+          dot.classList.add('bg-[var(--primary)]');
+          dot.classList.remove('bg-gray-300');
+        } else {
+          dot.classList.add('bg-gray-300');
+          dot.classList.remove('bg-[var(--primary)]');
+        }
+      });
+    }
+
+    // Scroll to specific index
+    function scrollToIndex(index: number) {
+      const items = carousel?.querySelectorAll('[data-review-index]');
+      if (items && items[index]) {
+        items[index].scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center',
+        });
+        currentIndex = index;
+        updateDots();
+      }
+    }
+
+    // Autoplay function
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = window.setInterval(() => {
+        if (!isUserInteracting) {
+          const nextIndex = (currentIndex + 1) % reviews.length;
+          scrollToIndex(nextIndex);
+        }
+      }, AUTOPLAY_INTERVAL);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+      }
+    }
+
+    // Detect scroll position to update dots
+    function handleScroll() {
+      const scrollLeft = carousel?.scrollLeft ?? 0;
+      const itemWidth = carousel?.scrollWidth ?? 0 / reviews.length;
+      const newIndex = Math.round(scrollLeft / itemWidth);
+
+      if (newIndex !== currentIndex) {
+        currentIndex = newIndex;
+        updateDots();
+      }
+    }
+
+    // Dot click handlers
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        isUserInteracting = true;
+        scrollToIndex(index);
+        setTimeout(() => {
+          isUserInteracting = false;
+        }, 1000);
+      });
+    });
+
+    // Touch/scroll event handlers
+    carousel.addEventListener('touchstart', () => {
+      isUserInteracting = true;
+      stopAutoplay();
+    });
+
+    carousel.addEventListener('touchend', () => {
+      setTimeout(() => {
+        isUserInteracting = false;
+        startAutoplay();
+      }, 1000);
+    });
+
+    carousel.addEventListener('scroll', handleScroll);
+
+    // Initialize
+    updateDots();
+    startAutoplay();
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', stopAutoplay);
+  }
+</script>

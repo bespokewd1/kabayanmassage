@@ -6,8 +6,8 @@
 	"address": {
 		"lineOne": "South Gate Mall, Edmonton, Alberta, Canada ",
 		"lineTwo": null,
-		"city": "",
-		"state": "",
+		"city": "Alberta",
+		"state": "Canada",
 		"zip": "",
 		"mapLink": "https://www.google.com/maps?q=South+Gate+Mall,+Edmonton,+Alberta,+Canada"
 	},
