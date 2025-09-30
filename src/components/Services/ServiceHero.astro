@@ -16,7 +16,7 @@ const { title, image, alt, subtitle, highlights, ctaPrimary, ctaSecondary } =
 ---
 
 <section class="bg-orange-50" id="service-hero">
-  <div class="mx-auto max-w-5xl px-6 pt-16 md:pt-20 text-center">
+  <div class="mx-auto max-w-5xl px-6 py-16 md:pt-20 text-center">
     <header>
       <h1 class="font-serif text-3xl md:text-4xl text-gray-900">
         {title}
@@ -49,8 +49,12 @@ const { title, image, alt, subtitle, highlights, ctaPrimary, ctaSecondary } =
       {
         highlights.map((h) => (
           <div class="rounded-lg p-4 ring-1 ring-black/10" id="highlight-card">
-            <p class="font-semibold" id="highlight-title">{h.title}</p>
-            <p class="mt-1" id="highlight-description">{h.body}</p>
+            <p class="font-semibold" id="highlight-title">
+              {h.title}
+            </p>
+            <p class="mt-1" id="highlight-description">
+              {h.body}
+            </p>
           </div>
         ))
       }
@@ -60,13 +64,10 @@ const { title, image, alt, subtitle, highlights, ctaPrimary, ctaSecondary } =
     <div
       class="mt-10 flex items-center justify-center gap-3 sm:flex-row flex-col hidden"
     >
-
-
-
-    <!-- Original href bellow:  {ctaPrimary.href ?? '/booking'}                  -->
-    <!-- !!!!  replace href with original if /booking page exists -->
+      <!-- Original href bellow:  {ctaPrimary.href ?? '/booking'}                  -->
+      <!-- !!!!  replace href with original if /booking page exists -->
       <a
-        href="/contact"        
+        href="/contact"
         class="inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
       >
         {ctaPrimary.label}
@@ -82,13 +83,13 @@ const { title, image, alt, subtitle, highlights, ctaPrimary, ctaSecondary } =
 </section>
 
 <style lang="less">
-  #service-hero{
-    #highlight-card{
+  #service-hero {
+    #highlight-card {
       background-color: var(--secondaryLight) !important;
-      #highlight-title{
+      #highlight-title {
         color: #000 !important;
       }
-      #highlight-description{
+      #highlight-description {
         color: #222 !important;
       }
     }

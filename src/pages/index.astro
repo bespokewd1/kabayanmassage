@@ -24,7 +24,7 @@ import WhyChooseUs from '@components/why-choose-us.astro';
 import ChevronLeftIconFilled from '@components/Icons/Utility/ChevronLeftIconFilled.astro';
 import ChevronRightIconFilled from '@components/Icons/Utility/ChevronRightIconFilled.astro';
 
-const optimizedImage = await getOptimizedImage(landingImage);
+const optimizedImage = await getOptimizedImage(heroImg);
 
 // Reviews data
 const reviews = [
@@ -42,6 +42,24 @@ const reviews = [
   },
 ];
 
+const steps = [
+  {
+    number: 1,
+    title: 'Choose Your Treatment',
+    desc: 'Whether it’s deep tissue, hot stone, or Swedish, pick the style that fits your needs.',
+  },
+  {
+    number: 2,
+    title: 'Schedule Your Session',
+    desc: 'Call or text 1 (778) 891-9558 to book the day and time that works for you.',
+  },
+  {
+    number: 3,
+    title: 'Relax & Enjoy',
+    desc: 'We’ll confirm your appointment—just show up and unwind.',
+  },
+];
+
 const posts = await getCollection('blog');
 posts.sort(
   (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
@@ -52,11 +70,8 @@ posts.sort(
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 />
-<BaseLayout
-  title="Kabayan Healing Touch Massage - Professional Massage Therapy"
-  description="Professional massage therapy for relaxation, pain relief, and overall wellness in Edmonton."
-  preloadedImage={heroImg}
->
+
+<BaseLayout preloadedImage={optimizedImage}>
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
@@ -389,7 +404,7 @@ posts.sort(
             <button class="blaze-prev"
               ><ChevronLeftIconFilled
                 class:list={[
-                  'text-(--secondary) hover:text-(--primary) active:text-(--secondary)  transition-colors duration-300 active:scale-100 hover:scale-105 size-7',
+                  'text-(--secondary) hover:text-(--primary) transition-colors duration-300 active:scale-100 hover:scale-105 size-7',
                 ]}
               /></button
             >
@@ -406,7 +421,7 @@ posts.sort(
             <button class="blaze-next">
               <ChevronRightIconFilled
                 class:list={[
-                  'text-(--secondary) hover:text-(--primary) active:text-(--secondary) active:scale-100  transition-colors duration-300 hover:scale-105 size-7',
+                  'text-(--secondary) hover:text-(--primary) active:scale-100  transition-colors duration-300 hover:scale-105 size-7',
                 ]}
               />
             </button>
@@ -415,27 +430,16 @@ posts.sort(
       </div>
 
       <!-- CTA Button -->
+
+      <!-- class="inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-white bg-[var(--primary)] rounded hover:bg-black transition-colors duration-300" -->
       <div class="text-center mt-12">
         <a
           href="https://share.google/T2TeTP7hO7jAPi3rl"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-white bg-[var(--primary)] rounded hover:bg-black transition-colors duration-300"
+          class="cs-button-solid"
         >
           View More Reviews
-          <svg
-            class="ml-2 w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-            ></path>
-          </svg>
         </a>
       </div>
     </div>
@@ -444,251 +448,135 @@ posts.sort(
   <!-- ============================================ -->
   <!--                   Steps                      -->
   <!-- ============================================ -->
+  <section class="bg-orange-50">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <h2 class="font-serif text-center text-3xl md:text-4xl text-gray-950">
+        Easy Steps to Book Your Massage
+      </h2>
 
-  <section id="steps-889">
-    <div class="cs-container">
-      <div class="cs-content">
-        <span class="cs-topper">Your Path to Relaxation Starts Here</span>
-        <h2 class="cs-title">Booking Made Simple</h2>
-        <!-- <p class="cs-text">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.
-            </p> -->
+      <!-- Steps -->
+      <div
+        class="mt-10 grid grid-cols-1 gap-6 md:mt-12 md:grid-cols-3 md:gap-8"
+      >
+        {
+          steps.map((step) => (
+            <div class="flex flex-col items-center rounded-lg bg-(--secondary) px-8 py-10 text-center shadow-sm ring-1 ring-black/5">
+              <div class="font-serif text-6xl text-gray-900">{step.number}</div>
+              <h3 class="mt-4 font-serif text-3xl text-gray-900 flex-1">
+                {step.title}
+              </h3>
+              <p class="mt-3 text-gray-700 leading-7 ">{step.desc}</p>
+            </div>
+          ))
+        }
       </div>
-      <ul class="cs-card-group">
-        <li class="cs-item">
-          <picture class="cs-picture">
-            <img
-              class="cs-icon"
-              src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Ficon-orange.svg"
-              alt="icon"
-              width="32"
-              height="32"
-              loading="lazy"
-              decoding="async"
-              aria-hidden="true"
-            />
-          </picture>
-          <h3 class="cs-h3">Find Your Treatment</h3>
-          <p class="cs-item-p">
-            Deep tissue, hot stone, Swedish—choose the care your body needs.
-          </p>
-        </li>
-        <!--Arrow-->
-        <li class="cs-item cs-arrow" aria-hidden="true">
-          <img
-            class="cs-arrow-img"
-            src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Farrow-curve-right.svg"
-            alt="icon"
-            width="80"
-            height="76"
-            loading="lazy"
-            decoding="async"
-            aria-hidden="true"
-          />
-        </li>
-        <li class="cs-item">
-          <picture class="cs-picture">
-            <img
-              class="cs-icon"
-              src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Ficon-orange.svg"
-              alt="icon"
-              width="32"
-              height="32"
-              loading="lazy"
-              decoding="async"
-              aria-hidden="true"
-            />
-          </picture>
-          <h3 class="cs-h3">Schedule in Minutes</h3>
-          <p class="cs-item-p">
-            Pick the date and time that works best for you.
-          </p>
-        </li>
-        <!--Arrow-->
-        <li class="cs-item cs-arrow" aria-hidden="true">
-          <img
-            class="cs-arrow-img"
-            src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Farrow-curve-right.svg"
-            alt="icon"
-            width="80"
-            height="76"
-            loading="lazy"
-            decoding="async"
-            aria-hidden="true"
-          />
-        </li>
-        <li class="cs-item">
-          <picture class="cs-picture">
-            <img
-              class="cs-icon"
-              src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Ficon-orange.svg"
-              alt="icon"
-              width="32"
-              height="32"
-              loading="lazy"
-              decoding="async"
-              aria-hidden="true"
-            />
-          </picture>
-          <h3 class="cs-h3">Confirm & Enjoy</h3>
-          <p class="cs-item-p">
-            Secure your spot and let us take care of the rest.
-          </p>
-        </li>
-      </ul>
-      <a href="/direct-billing" class="cs-button-solid">Book Appointment</a>
+
+      <!-- Direct billing + CTA -->
+      <div class="mt-10 text-center">
+        <p class="font-serif text-lg text-gray-900">Direct Billing Available</p>
+        <p class="mt-2 mb-4 text-gray-700">
+          Check with us for accepted providers.
+        </p>
+
+        <a href="/direct-billing" class="cs-button-solid"> Book Appointment </a>
+      </div>
     </div>
   </section>
 
   <!-- ============================================ -->
   <!--                   Contact                    -->
   <!-- ============================================ -->
+  <section id="contact" class="">
+    <!-- max-w-7xl  -->
+    <div class="mx-auto grid grid-cols-1 lg:grid-cols-12">
+      <!-- Left: Info panel (green) -->
+      <div
+        class="lg:col-span-4 bg-(--primary) px-8 py-12 md:px-12 md:py-16 flex flex-col justify-center items-center"
+      >
+        <div class="mt-8 space-y-5 text-orange-50">
+          <h2 class="font-serif text-3xl text-orange-50 md:text-4xl">
+            Get in Touch
+          </h2>
 
-  <section id="contact-1150">
-    <div class="cs-container">
-      <div class="cs-content">
-        <span class="cs-topper">Contact Us</span>
-        <h2 class="cs-title">We Love to Hear from Our Happy Customers</h2>
+          <div class="space-y-3">
+            <p class="text-lg text-orange-50">{client.name}</p>
+            <p class="text-orange-50">
+              {client.address.lineOne}
+            </p>
+            <p class="text-orange-50">
+              {client.phoneForTel}
+              <br />
+              {client.email}
+            </p>
+            <p class="text-orange-50">Mon–Sun: 9:00 AM – 9:00 PM</p>
+            <p class="text-orange-50">
+              Direct Billing Available. Please ask about eligible providers.
+            </p>
+          </div>
+
+          <!-- Socials -->
+          <div class="mt-8 flex items-center gap-4 text-emerald-50/90">
+            <a href="#" aria-label="Facebook" class="hover:text-white">
+              <FacebookIcon class:list={['text-orange-50 ']} />
+            </a>
+            <a href="#" aria-label="Instagram" class="hover:text-white">
+              <InstagramIcon class:list={['text-orange-50 ']} />
+            </a>
+            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+              <LinkedInIcon class:list={['text-orange-50 ']} />
+            </a>
+            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+              <TwitterIcon class:list={['text-orange-50 ']} />
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="cs-contact-group">
-        <picture class="cs-picture">
-          <!--Mobile Image-->
-          <source
-            media="(max-width: 600px)"
-            srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/group.jpg"
-          />
-          <!--Tablet and above Image-->
-          <source
-            media="(min-width: 601px)"
-            srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/group.jpg"
-          />
-          <img
-            loading="lazy"
-            decoding="async"
-            src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/People/group.jpg"
-            alt="people"
-            width="630"
-            height="300"
-          />
-        </picture>
-        <p class="cs-contact-text">
-          Whether you're seeking pain relief, relaxation, or ongoing care, we’d
-          love to hear from you. Contact us today to begin your wellness
-          journey.
-        </p>
-        <ul class="cs-ul">
-          <li class="cs-li">
-            <picture class="cs-icon-wrapper">
-              <img
-                aria-hidden="true"
-                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-phone.svg"
-                alt="phone icon"
-                class="cs-icon"
-                width="40"
-                height="40"
-                decoding="async"
+
+      <!-- Right: Form -->
+      <div class="lg:col-span-8 px-8 py-12 md:px-12 md:py-16">
+        <form class="max-w-2xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-sm text-gray-700 mb-2">First Name</label>
+              <input
+                type="text"
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="First name"
               />
-            </picture>
-            <div class="cs-flex-group">
-              <span class="cs-header">Phone</span>
-              <a href={`tel:${client.phoneForTel}`} class="cs-link">
-                {client.phoneFormatted}
-              </a>
             </div>
-          </li>
-          <li class="cs-li">
-            <picture class="cs-icon-wrapper">
-              <img
-                aria-hidden="true"
-                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/mech-pin.svg"
-                alt="address icon"
-                class="cs-icon"
-                width="40"
-                height="40"
-                decoding="async"
+            <div>
+              <label class="block text-sm text-gray-700 mb-2">Last Name</label>
+              <input
+                type="text"
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Last name"
               />
-            </picture>
-            <div class="cs-flex-group">
-              <span class="cs-header">Address</span>
-              <a href="" class="cs-link">
-                {client.address.lineOne}
-              </a>
             </div>
-          </li>
-        </ul>
+          </div>
+
+          <div class="mt-5">
+            <label class="block text-sm text-gray-700 mb-2">Email *</label>
+            <input
+              type="email"
+              required
+              class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div class="mt-5">
+            <label class="block text-sm text-gray-700 mb-2">Message</label>
+            <textarea
+              rows="5"
+              class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="How can we help?"></textarea>
+          </div>
+
+          <button type="submit" class="cs-button-solid"> Send </button>
+        </form>
       </div>
-      <!--Form-->
-      <form class="cs-form" id="cs-form-1150" name="Contact Form" method="post">
-        <label class="cs-label">
-          Name
-          <input
-            class="cs-input"
-            required
-            type="text"
-            id="name-1150"
-            name="name"
-            placeholder="Name"
-          />
-        </label>
-        <label class="cs-label cs-email">
-          Email
-          <input
-            class="cs-input"
-            required
-            type="email"
-            id="email-1150"
-            name="email"
-            placeholder="Email"
-          />
-        </label>
-        <label class="cs-label cs-phone">
-          Phone
-          <input
-            class="cs-input"
-            required
-            type="number"
-            id="phone-1150"
-            name="phone"
-            placeholder="Phone"
-          />
-        </label>
-        <label class="cs-label">
-          Message
-          <textarea
-            class="cs-input cs-textarea"
-            required
-            name="Message"
-            id="message-1150"
-            placeholder="Write message..."></textarea>
-        </label>
-        <button class="cs-button-solid cs-submit" type="submit"
-          >Make an Appointment</button
-        >
-      </form>
-      <!--Bounce Graphic-->
-      <img
-        class="cs-graphic cs-graphic1"
-        loading="lazy"
-        decoding="async"
-        src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/bounce.svg"
-        alt="bounce"
-        width="208"
-        height="124"
-      />
-      <!--Coin Graphic-->
-      <img
-        class="cs-graphic cs-graphic2"
-        loading="lazy"
-        decoding="async"
-        src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/coin.svg"
-        alt="bounce"
-        width="205"
-        height="161"
-      />
     </div>
   </section>
-
-  <!-- <CTA /> -->
 </BaseLayout>
 
 <style lang="less">
@@ -1152,472 +1040,6 @@ posts.sort(
         width: auto;
         /* 16px - 32px */
         padding: (32/16rem) clamp(1rem, 2.1vw, 2rem);
-      }
-    }
-  }
-
-  /*-- -------------------------- -->
-<---           Steps            -->
-<--- -------------------------- -*/
-
-  /* Mobile - 360px */
-  @media only screen and (min-width: 0rem) {
-    #steps-889 {
-      padding: var(--sectionPadding);
-
-      .cs-container {
-        width: 100%;
-        max-width: (1280/16rem);
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* 48px - 64px */
-        gap: clamp(3rem, 6vw, 4rem);
-      }
-
-      .cs-content {
-        /* set text align to left if content needs to be left aligned */
-        text-align: center;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        /* centers content horizontally, set to flex-start to left align */
-        align-items: center;
-      }
-
-      .cs-text {
-        max-width: (1064/16rem);
-      }
-
-      .cs-button-solid {
-        font-size: (16/16rem);
-        /* 46px - 56px */
-        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
-        text-decoration: none;
-        font-weight: 700;
-        text-align: center;
-        margin: 0;
-        color: #fff;
-        min-width: (150/16rem);
-        padding: 0 (24/16rem);
-        background-color: var(--primary);
-        border-radius: (4/16rem);
-        display: inline-block;
-        position: relative;
-        z-index: 1;
-        /* prevents padding from adding to the width */
-        box-sizing: border-box;
-
-        &:before {
-          content: '';
-          position: absolute;
-          height: 100%;
-          width: 0%;
-          background: #000;
-          opacity: 1;
-          top: 0;
-          left: 0;
-          z-index: -1;
-          border-radius: (4/16rem);
-          transition: width 0.3s;
-        }
-
-        &:hover {
-          &:before {
-            width: 100%;
-          }
-        }
-      }
-
-      .cs-card-group {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* 20px - 40px */
-        gap: clamp(1.25rem, 3vw, 2.5rem);
-      }
-
-      .cs-item {
-        text-align: center;
-        list-style: none;
-        width: 100%;
-        max-width: (326/16rem);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .cs-picture {
-        margin-bottom: (24/16rem);
-        width: (72/16rem);
-        height: (72/16rem);
-        background-color: rgba(206, 65, 13, 0.05);
-        border-radius: (16/16rem) 0 (16/16rem) 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .cs-h3 {
-        font-size: (20/16rem);
-        line-height: 1.2em;
-        text-align: inherit;
-        margin: 0 0 (12/16rem) 0;
-        color: var(--headerColor);
-      }
-
-      .cs-item-p {
-        font-size: (16/16rem);
-        line-height: 1.5em;
-        text-align: inherit;
-        margin: 0;
-        color: var(--bodyTextColor);
-      }
-
-      .cs-arrow {
-        /* 48px - 80px */
-        width: clamp(3rem, 6vw, 5rem);
-        height: auto;
-        display: block;
-        flex: none;
-        transform: rotate(120deg);
-      }
-
-      .cs-arrow-img {
-        width: 100%;
-        display: block;
-      }
-
-      .cs-icon {
-        width: (32/16rem);
-        height: auto;
-        display: block;
-      }
-    }
-  }
-
-  /* Tablet - 768px */
-  @media only screen and (min-width: 48rem) {
-    #steps-889 {
-      .cs-card-group {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: stretch;
-      }
-
-      .cs-arrow {
-        align-self: center;
-        transform: rotate(40deg);
-      }
-    }
-  }
-
-  /*-- -------------------------- -->
-<---          Contact           -->
-<--- -------------------------- -*/
-
-  /* Mobile - 360px */
-  @media only screen and (min-width: 0rem) {
-    #contact-1150 {
-      padding: var(--sectionPadding);
-      background-color: #f7f7f7;
-      position: relative;
-      z-index: 1;
-
-      .cs-container {
-        width: 100%;
-        /* changes to 1280px at desktop */
-        max-width: (704/16rem);
-        margin: auto;
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        flex-direction: column;
-        column-gap: auto;
-        /* 48px - 80px */
-        row-gap: clamp(3rem, 6vw, 5rem);
-        position: relative;
-      }
-
-      .cs-content {
-        /* set text align to left if content needs to be left aligned */
-        text-align: center;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        /* centers content horizontally, set to flex-start to left align */
-        align-items: center;
-      }
-
-      .cs-topper {
-        color: var(--primary);
-      }
-
-      .cs-title {
-        max-width: 23ch;
-        margin: 0;
-      }
-
-      .cs-picture {
-        width: 100%;
-        /* 240px - 300px */
-        height: clamp(15rem, 35vw, 18.75rem);
-        margin: 0 0 (24/16rem);
-        border-radius: (24/16rem);
-        /* clips image corners */
-        overflow: hidden;
-        display: block;
-        position: relative;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
-      }
-
-      .cs-contact-text {
-        font-size: (16/16rem);
-        line-height: 1.5em;
-        text-align: left;
-        margin: 0 0 (24/16rem);
-        color: var(--bodyTextColor);
-      }
-
-      .cs-ul {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: (24/16rem);
-        position: relative;
-      }
-
-      .cs-li {
-        list-style: none;
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: (20/16rem);
-
-        &:hover {
-          .cs-icon-wrapper {
-            transform: scale(1.1);
-          }
-        }
-      }
-
-      .cs-header {
-        font-size: (20/16rem);
-        font-weight: 700;
-        line-height: 1.2em;
-        margin-bottom: (12/16rem);
-        color: var(--headerColor);
-        display: block;
-      }
-
-      .cs-link {
-        font-size: (16/16rem);
-        line-height: 1.5em;
-        text-decoration: none;
-        color: #767676;
-        display: block;
-        position: relative;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      .cs-icon-wrapper {
-        width: (60/16rem);
-        height: (60/16rem);
-        margin: 0;
-        border-radius: 50%;
-        border: 1px solid #bababa;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* prevents flexbox from squishing it */
-        flex: none;
-        transition: transform 0.3s;
-      }
-
-      .cs-icon {
-        width: (24/16rem);
-        height: auto;
-        display: block;
-      }
-
-      .cs-form {
-        width: 100%;
-        /* 24px - 48px top and bottom */
-        /* 16px - 32px left and right */
-        padding: clamp(1.5rem, 5.18vw, 3rem) clamp(1rem, 4vw, 2rem);
-        /* prevents flexbox from affecting height and width */
-        box-sizing: border-box;
-        background-color: #fff;
-        border-radius: (16/16rem);
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: (12/16rem);
-      }
-
-      .cs-label {
-        /* 14px - 16px */
-        font-size: clamp(0.875rem, 1.5vw, 1rem);
-        width: 100%;
-        color: var(--headerColor);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: (4/16rem);
-      }
-
-      .cs-input {
-        font-size: (16/16rem);
-        width: 100%;
-        height: (56/16rem);
-        padding: 0;
-        padding-left: (24/16rem);
-        color: var(--headerColor);
-        background-color: #f7f7f7;
-        border-radius: (8/16rem);
-        border: none;
-        /* prevents padding from adding to height and width */
-        box-sizing: border-box;
-        &::placeholder {
-          color: #7d799c;
-          opacity: 0.6;
-        }
-      }
-
-      .cs-textarea {
-        min-height: (120/16rem);
-        padding-top: (24/16rem);
-        margin-bottom: (12/16rem);
-        font-family: inherit;
-      }
-
-      .cs-button-solid {
-        font-size: (16/16rem);
-        /* 46px - 56px */
-        line-height: 3rem;
-        text-decoration: none;
-        font-weight: 700;
-        text-align: center;
-        margin: 0;
-        color: #fff;
-        border: none;
-        min-width: (150/16rem);
-        padding: 0 (24/16rem);
-        background-color: var(--primary);
-        border-radius: (4/16rem);
-        overflow: hidden;
-        display: inline-block;
-        position: relative;
-        z-index: 1;
-        /* prevents padding from adding to the width */
-        box-sizing: border-box;
-        transition: color 0.3s;
-
-        &:before {
-          content: '';
-          position: absolute;
-          height: 100%;
-          width: 0%;
-          background: #000;
-          opacity: 1;
-          top: 0;
-          left: 0;
-          z-index: -1;
-          border-radius: (4/16rem);
-          transition: width 0.3s;
-        }
-
-        &:hover {
-          color: #fff;
-          &:before {
-            width: 100%;
-          }
-        }
-      }
-
-      .cs-submit {
-        width: 100%;
-        min-width: (283/16rem);
-        border-radius: (8/16rem);
-        &:hover {
-          cursor: pointer;
-        }
-      }
-
-      .cs-graphic {
-        display: none;
-      }
-
-      .cs-graphic1 {
-        width: (208/16rem);
-        height: auto;
-        position: absolute;
-        left: (-120/16rem);
-        top: (138/16rem);
-      }
-
-      .cs-graphic2 {
-        width: (205/16rem);
-        height: auto;
-        position: absolute;
-        right: (-156/16rem);
-        top: (8/16rem);
-      }
-    }
-  }
-
-  /* Desktop - 1024px */
-  @media only screen and (min-width: 64rem) {
-    #contact-1150 {
-      .cs-container {
-        max-width: (1280/16rem);
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-
-      .cs-contact-group {
-        width: 50%;
-        max-width: (630/16rem);
-      }
-
-      .cs-form {
-        width: 46%;
-        max-width: (578/16rem);
-      }
-
-      .cs-submit {
-        width: auto;
-      }
-    }
-  }
-
-  /* Large Desktop - 1500px */
-  @media only screen and (min-width: 93.75rem) {
-    #contact-1150 {
-      .cs-graphic {
-        display: block;
       }
     }
   }

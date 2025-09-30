@@ -1,11 +1,7 @@
 ---
 // StickyCallButton.astro
 // Props definition
-interface Props {
-  phoneNumber: string;
-}
-
-const { phoneNumber } = Astro.props;
+import client from '@data/client.json';
 ---
 
 <div
@@ -13,19 +9,21 @@ const { phoneNumber } = Astro.props;
   class="fixed bottom-8 w-full z-[1000] flex justify-center items-center translate-y-1/2 transition-all duration-200 ease-in gap-6"
 >
   <a
-    href={`tel:${phoneNumber}`}
+    href={`tel:${client.phoneForTel}`}
     class="bg-(--primary) text-sm text-black rounded-full bg-secondary p-3 md:text-base md:py-3 md:px-6 font-medium shadow-md hover:shadow-lg"
     style="color: #fff !important;"
   >
-    Call <span class="hidden md:inline">Now</span> {phoneNumber}
+    Call <span class="hidden md:inline">Now</span>
+    {client.phoneFormatted}
   </a>
 
-  
-          <a href="/contact">
-            <button class="bg-(--primary) rounded-full text-white text-sm md:text-base p-3 md:py-3 md:px-6 font-medium shadow-md hover:shadow-lg">
-              Book Your Massage
-            </button>
-          </a>   
+  <a href={`sms:${client.phoneForTel}`}>
+    <button
+      class="bg-(--primary) rounded-full text-white text-sm md:text-base p-3 md:py-3 md:px-6 font-medium shadow-md hover:shadow-lg"
+    >
+      Book Your Massage
+    </button>
+  </a>
 </div>
 
 <!-- <script>

@@ -1,15 +1,15 @@
 {
 	"name": "Kabayan Healing Touch Massage",
 	"email": "kabayanhealingmassage8@gmail.com",
-	"phoneForTel": "778-891-9558",
+	"phoneForTel": "+1-778-891-9558",
 	"phoneFormatted": "(778) 891-9558",
 	"address": {
-		"lineOne": "South Gate Mall, Edmonton, Alberta, Canada ",
+		"lineOne": "159 st nw, Edmonton, AB, Canada, T5R2E4",
 		"lineTwo": null,
-		"city": "Alberta",
-		"state": "Canada",
+		"city": "",
+		"state": "",
 		"zip": "",
-		"mapLink": "https://www.google.com/maps?q=South+Gate+Mall,+Edmonton,+Alberta,+Canada"
+		"mapLink": "https://www.google.com/maps/place/159+St+NW,+Edmonton,+AB,+Canada"
 	},
 	"domain": "https://kabayanmassage.netlify.app/"
 }

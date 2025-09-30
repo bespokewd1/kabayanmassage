@@ -141,9 +141,10 @@
     width: auto;
     height: (50/16rem);
     padding: 0 (30/16rem);
+    border-radius: 4px;
 
     // Transition Properties
-    color: #000;
+    color: #fff;
     background-color: var(--primary);
     display: inline-block;
     position: relative;
@@ -152,7 +153,7 @@
     transition-delay: 0.1s;
 
     &:hover {
-      color: #fff;
+      color: #000;
       &:before {
         width: 100%;
       }
@@ -161,11 +162,13 @@
     &:before {
       content: '';
 
+      border-radius: inherit;
       //Transition properties
       width: 0;
       height: 100%;
       //hover color
-      background-color: #ff66ad;
+      // background-color: #ff66ad;
+      background-color: var(--secondary);
       opacity: 1;
       display: block;
       position: absolute;

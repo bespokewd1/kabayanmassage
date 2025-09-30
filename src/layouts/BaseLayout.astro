@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import client from '@data/client.json';
+
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import StickyButton from '@components/StickyButton.astro';
@@ -8,8 +9,18 @@ import ScrollToTop from '@components/ScrollToTop.astro';
 import '@styles/root.less';
 // import '@styles/dark.less';
 import '../styles/global.css';
+import { getOptimizedImage } from '@js/utils';
+import heroImg from '@assets/images/hero-img.jpg';
 
-const { description, title, preloadedImage } = Astro.props;
+const ogImage = await getOptimizedImage(heroImg);
+
+// /assets/favicons/favicon-kabayan.jpg
+
+const {
+  description = 'Experience expert care from a certified Registered Massage Therapist. Relieve pain, improve mobility, and restore your wellbeing at Kabayan Healing Touch Massage in West Edmonton.',
+  title = 'Kabayan Healing Touch Massage – West Edmonton’s Trusted RMT Clinic',
+  preloadedImage,
+} = Astro.props;
 ---
 
 <!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
@@ -36,6 +47,7 @@ const { description, title, preloadedImage } = Astro.props;
 
     <!-- Preloads the image passed as a prop -->
     <link rel="preload" href={preloadedImage.src} as="image" />
+    <link rel="preload" href={ogImage.src} as="image" />
 
     <!--Social Media Display-->
     <meta property="og:title" content={title} />
@@ -45,11 +57,8 @@ const { description, title, preloadedImage } = Astro.props;
       property="og:url"
       content={`https://${client.domain}${Astro.url.pathname}`}
     />
-    <meta property="og:image" content="/assets/favicons/favicon-kabayan.jpg" />
-    <meta
-      property="og:image:secure_url"
-      content="/assets/favicons/favicon-kabayan.jpg"
-    />
+    <meta property="og:image" content={ogImage.src} />
+    <meta property="og:image:secure_url" content={ogImage.src} />
 
     <!--Favicons-->
     <link
@@ -109,10 +118,9 @@ const { description, title, preloadedImage } = Astro.props;
       <slot />
 
       <ScrollToTop />
-      <StickyButton phoneNumber='778-891-9558' />
-
+      <StickyButton />
     </main>
-    
+
     <Footer />
 
     <!-- {
