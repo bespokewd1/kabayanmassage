@@ -3,7 +3,7 @@ import BaseLayout from 'src/layouts/BaseLayout.astro';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import { Image } from 'astro:assets';
 // Use your best deep‑tissue hero image here
-import therapeuticMassageHero from '@assets/images/Services-2.DeepTissueMassage.jpg';
+import services1Img from '@assets/images/Services-1.TherapeuticMassage.jpg';
 import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
 import { getOptimizedImage } from '@js/utils';
 import ServiceHero from '@components/Services/ServiceHero.astro';
@@ -18,7 +18,7 @@ const optimizedImage = await getOptimizedImage(landingImage);
 
 const therapeuticMassage: HeroServiceProps = {
   title: 'Therapeutic Massage',
-  image: therapeuticMassageHero,
+  image: services1Img,
   alt: '',
   subtitle: `Customized massage designed to relieve tension, improve circulation, and promote relaxation and well-being.`,
   highlights: [
