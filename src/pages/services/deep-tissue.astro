@@ -3,7 +3,7 @@ import BaseLayout from 'src/layouts/BaseLayout.astro';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
 import { getOptimizedImage } from '@js/utils';
-import services5Img from '@assets/images/Services-5.HotStoneMassage.jpg';
+import services2Img from '@assets/images/Services-2.DeepTissueMassage.jpg';
 import ServiceHero from '@components/Services/ServiceHero.astro';
 import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
 import PriceBenifits from '@components/Services/PriceBenifits.astro';
@@ -12,7 +12,7 @@ const optimizedImage = await getOptimizedImage(landingImage);
 
 export const hotStoneHero: HeroServiceProps = {
   title: 'Deep Tissue Massage',
-  image: services5Img,
+  image: services2Img,
   alt: '',
   subtitle:
     'Targets deeper layers of muscle and connective tissue to release chronic tension, knots, and stiffness. Ideal for persistent pain or tight muscles.',
