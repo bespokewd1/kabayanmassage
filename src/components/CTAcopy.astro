@@ -1,0 +1,35 @@
+---
+// Import the component and all the images you want to use with it
+import CSPicture from '@components/TemplateComponents/CSPicture.astro';
+import mobileImage from '@assets/images/CTA/construction-m.jpg';
+import desktopImage from '@assets/images/CTA/cabinets2.jpg';
+import fallbackImage from '@assets/images/CTA/cabinets2.jpg';
+import ctaBg from '@assets/images/CTA-Background-Image.jpg';
+
+import { Picture } from 'astro:assets';
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<section class="bg-emerald-200/75 text-emerald-900">
+  <div
+    class="mx-auto max-w-6xl px-6 py-12 md:py-14 lg:py-16 text-center flex flex-col items-center gap-6"
+  >
+    <h2 class="font-serif text-3xl leading-tight md:text-4xl lg:text-5xl">
+      {title}
+    </h2>
+    <p class="text-emerald-950">
+      {description}
+    </p>
+    <a
+      href="/contact"
+      class="inline-flex items-center rounded-full bg-orange-200 hover:bg-orange-100 transition-colors text-gray-900 px-6 py-3 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
+    >
+      Contact Us
+    </a>
+  </div>
+</section>

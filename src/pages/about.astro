@@ -1,0 +1,506 @@
+---
+import BaseLayout from 'src/layouts/BaseLayout.astro';
+import CTA from '@components/CTA.astro';
+import Landing from '@components/Landing.astro';
+import FAQ from '@components/FAQ.astro';
+
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
+import { getOptimizedImage } from '@js/utils';
+import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import WhyChooseUs from '@components/why-choose-us.astro';
+const optimizedImage = await getOptimizedImage(landingImage);
+
+type Role = 'Owner/Founder RMT' | 'Therapist';
+
+interface TeamMember {
+  role: Role;
+  occupation: string; // e.g., 'Licensed Massage Therapist'
+  since: string; // e.g., 'Since 2019'
+  where?: string; // optional, e.g., 'Alberta, Canada' or 'BSPT, Philippines'
+  name: string;
+  bio: string;
+}
+
+// Data: owner/founder first in array (we’ll render owners first anyway)
+const team: TeamMember[] = [
+  {
+    role: 'Owner/Founder RMT',
+    occupation: 'Licensed Massage Therapist',
+    since: 'Since 2019',
+    where: 'RMT, Alberta',
+    name: '',
+    bio: 'Clinic founder and registered massage therapist with a restorative approach. Cecilia blends deep tissue and relaxation techniques to relieve pain, ease tension, and support lasting well‑being.',
+  },
+  {
+    role: 'Therapist',
+    occupation: 'Licensed Massage Therapist',
+    since: 'Since 2024',
+    where: 'RMT, Alberta',
+    name: '',
+    bio: ' provides attentive, client‑centered care—combining firm, focused work with a calming touch to reduce stress and help your body move with ease.',
+  },
+  {
+    role: 'Therapist',
+    occupation: 'Licensed Massage Therapist',
+    since: 'Since 2025',
+    where: 'RMT, Alberta',
+    name: '',
+    bio: ' creates a comfortable, relaxing environment while addressing specific concerns. Her thoughtful pressure and technique help release tension and restore balance.',
+  },
+];
+
+// Helpers to keep Owner/Founder at the top
+const owners = team.filter((m) => m.role === 'Owner/Founder RMT');
+const therapists = team.filter((m) => m.role === 'Therapist');
+const orderedTeam = [...owners, ...therapists];
+---
+
+<BaseLayout preloadedImage={optimizedImage}>
+  <!-- ============================================ -->
+  <!--                    LANDING                   -->
+  <!-- ============================================ -->
+
+  <!-- <Landing title="About Us" image={optimizedImage} /> -->
+
+  <!-- ============================================ -->
+  <!--                    Team                      -->
+  <!-- ============================================ -->
+
+  <section id="meet-team-2071">
+    <div class="cs-container">
+      <div class="cs-content">
+        <span class="cs-topper">About Us</span>
+        <h2 class="cs-title">Balance and Healing Await</h2>
+        <p class="cs-text">
+          At Kabayan Healing Touch Massage, we believe that true wellness starts
+          with balance. Our clinic in West Edmonton is led by a certified
+          Registered Massage Therapist dedicated to helping clients reduce pain,
+          improve mobility, and recharge both body and mind. Whether you’re
+          seeking relief from stress, recovering from an injury, or simply
+          needing time to relax, we provide personalized treatments tailored to
+          your needs. With a caring approach and professional expertise, our
+          goal is to help you feel your best—every session, every visit.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                     CTA                      -->
+  <!-- ============================================ -->
+
+  <section id="cta-697">
+    <div class="cs-container">
+      <div class="cs-content">
+        <h2 class="cs-title">Relief for Your Body, Calm for Your Mind</h2>
+        <a href="/contact" class="cs-button-solid">Contact Us</a>
+      </div>
+    </div>
+    <!--SVG Waves Background-->
+    <img
+      class="cs-background"
+      src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FGraphics%2Fwaves-3.svg"
+      alt="wave graphic"
+      width="1920"
+      height="318"
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+    />
+  </section>
+
+  <!-- <FAQ /> -->
+  <!-- <CTA title='Relief for Your Body, Calm for Your Mind' description='Personalized care that eases pain and restores well‑being.' /> -->
+
+  <!-- ============================================ -->
+  <!--                 Why Choose                   -->
+  <!-- ============================================ -->
+
+  <section id="why-choose-289">
+    <div class="cs-container">
+      <div class="cs-content">
+        <div class="cs-flex">
+          <span class="cs-topper">Experience, Expertise, and Real Results</span>
+          <h2 class="cs-title">Why Choose Kabayan Massage</h2>
+        </div>
+        <p class="cs-text">
+          We deliver thoughtful, therapeutic care tailored to your body—so you
+          leave lighter, looser, and genuinely restored.
+        </p>
+      </div>
+      <ul class="cs-card-group">
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iOSIgcj0iMiIvPjxwYXRoIGQ9Ik0xNiAxNWMwIDEuMTA1IDAgMi00IDJzLTQtLjg5NS00LTJzMS43OS0yIDQtMnM0IC44OTUgNCAyWiIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZD0iTTMgMTAuNDE3YzAtMy4xOTggMC00Ljc5Ny4zNzgtNS4zMzVjLjM3Ny0uNTM3IDEuODgtMS4wNTIgNC44ODctMi4wODFsLjU3My0uMTk2QzEwLjQwNSAyLjI2OCAxMS4xODggMiAxMiAyczEuNTk1LjI2OCAzLjE2Mi44MDVsLjU3My4xOTZjMy4wMDcgMS4wMjkgNC41MSAxLjU0NCA0Ljg4NyAyLjA4MUMyMSA1LjYyIDIxIDcuMjIgMjEgMTAuNDE3djEuNTc0YzAgMi41MDUtLjgzNyA0LjQzNy0yIDUuOTEzTTMuMTkzIDE0Yy44NTcgNC4yOTggNC4zODMgNi41MTMgNi43MDYgNy41MjdjLjcyMS4zMTUgMS4wODIuNDczIDIuMTAxLjQ3M2MxLjAyIDAgMS4zOC0uMTU4IDIuMTAxLS40NzNjLjU3OS0uMjUyIDEuMjMxLS41OCAxLjg5OS0uOTk0Ii8+PC9nPjwvc3ZnPg=="
+            alt="icon"
+            width="48"
+            height="48"
+          />
+          <h3 class="cs-h3">Expert Therapists You Can Trust</h3>
+          <p class="cs-item-text">
+            Registered, experienced therapists focused on results.
+          </p>
+        </li>
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik00IDIwdi0yLjhxMC0uODUuNDM4LTEuNTYyVDUuNiAxNC41NXExLjU1LS43NzUgMy4xNS0xLjE2MlQxMiAxM2guMzVxLS4yNzUuNDUtLjQxMy45NjNUMTEuOCAxNXEtMS4zNS4wMjUtMi42ODcuMzYzVDYuNSAxNi4zNXEtLjIyNS4xMjUtLjM2My4zNVQ2IDE3LjJ2LjhoNy4wNzVsMiAyem04LThxLTEuNjUgMC0yLjgyNS0xLjE3NVQ4IDh0MS4xNzUtMi44MjVUMTIgNHQyLjgyNSAxLjE3NVQxNiA4dC0xLjE3NSAyLjgyNVQxMiAxMm0wLTJxLjgyNSAwIDEuNDEzLS41ODdUMTQgOHQtLjU4Ny0xLjQxMlQxMiA2dC0xLjQxMi41ODhUMTAgOHQuNTg4IDEuNDEzVDEyIDEwbTUuOSAxMGwtMy41LTMuNXEtLjMyNS0uMzI1LS40NjItLjd0LS4xMzgtLjc1cTAtLjguNTc1LTEuNDI1VDE1Ljg1IDEzcS43IDAgMS4xLjMyNXQuOTUuODc1cS41LS41LjkxMy0uODVUMTkuOTUgMTNxLjkyNSAwIDEuNDg4LjYzOFQyMiAxNS4wNzRxMCAuMzc1LS4xNS43NXQtLjQ1LjY3NXoiLz48L3N2Zz4="
+            alt="icon"
+            width="40"
+            height="48"
+          />
+          <h3 class="cs-h3">Tailored Care for Your Body</h3>
+          <p class="cs-item-text">
+            Personalized treatment plans for pain relief and relaxation.
+          </p>
+        </li>
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMjI5LjEyIDE0Mi42NWEyMi40MyAyMi40MyAwIDAgMC0xOS41NS0zLjg4bC00LjMyIDFDMjI3IDExOS41NSAyMzggOTkuNTEgMjM4IDgwYzAtMjUuMzYtMjAuMzktNDYtNDUuNDYtNDZBNDUuNTEgNDUuNTEgMCAwIDAgMTU2IDUyYTQ1LjUxIDQ1LjUxIDAgMCAwLTM2LjU0LTE4Qzk0LjM5IDM0IDc0IDU0LjY0IDc0IDgwYzAgMTEuMzggMy42MyAyMi40OSAxMS4yOSAzNC4zNmEyOS43MyAyOS43MyAwIDAgMC0xNi41NiA4LjQzTDQ1LjUyIDE0NkgxNmExNCAxNCAwIDAgMC0xNCAxNHY0MGExNCAxNCAwIDAgMCAxNCAxNGgxMDRhNiA2IDAgMCAwIDEuNDYtLjE4bDY0LTE2YTcgNyAwIDAgMCAuODktLjNMMjI1LjE3IDE4MWwuMzMtLjE1YTIyLjYgMjIuNiAwIDAgMCAzLjYyLTM4LjE4Wk0xMTkuNDYgNDZhMzMuMTYgMzMuMTYgMCAwIDEgMzEgMjAuMjhhNiA2IDAgMCAwIDExLjEgMGEzMy4xNiAzMy4xNiAwIDAgMSAzMS0yMC4yOEMyMTAuNjggNDYgMjI2IDYxLjU3IDIyNiA4MGMwIDIwLjI0LTE2LjE4IDQzLTQ2LjggNjUuNzVsLTE0Ljg3IDMuNDJBMjYgMjYgMCAwIDAgMTQwIDExNEg5OS42N0M5MC4zNiAxMDEuNjcgODYgOTAuODEgODYgODBjMC0xOC40MyAxNS4zMi0zNCAzMy40Ni0zNE0xNCAyMDB2LTQwYTIgMiAwIDAgMSAyLTJoMjZ2NDRIMTZhMiAyIDAgMCAxLTItMm0yMDYuMjgtMzBsLTM4LjIgMTYuMjdMMTE5LjI2IDIwMkg1NHYtNDcuNTFsMjMuMjEtMjMuMjJBMTcuODggMTcuODggMCAwIDEgODkuOTQgMTI2SDE0MGExNCAxNCAwIDAgMSAwIDI4aC0yOGE2IDYgMCAwIDAgMCAxMmgzMmE2IDYgMCAwIDAgMS4zNC0uMTVsNjctMTUuNDFsLjI0LS4wNmExMC42IDEwLjYgMCAwIDEgNy43IDE5LjYyIi8+PC9zdmc+"
+            alt="icon"
+            width="48"
+            height="48"
+          />
+          <h3 class="cs-h3">Proven Techniques That Work</h3>
+          <p class="cs-item-text">
+            Evidence‑based techniques: deep tissue, hot stone, Swedish, and
+            more.
+          </p>
+        </li>
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik01IDhoMTRWNkg1em0wIDBWNnptMCAxNHEtLjgyNSAwLTEuNDEyLS41ODdUMyAyMFY2cTAtLjgyNS41ODgtMS40MTJUNSA0aDFWM3EwLS40MjUuMjg4LS43MTJUNyAydC43MTMuMjg4VDggM3YxaDhWM3EwLS40MjUuMjg4LS43MTJUMTcgMnQuNzEzLjI4OFQxOCAzdjFoMXEuODI1IDAgMS40MTMuNTg4VDIxIDZ2NC42NzVxMCAuNDI1LS4yODguNzEzdC0uNzEyLjI4N3QtLjcxMi0uMjg4dC0uMjg4LS43MTJWMTBINXYxMGg1LjhxLjQyNSAwIC43MTMuMjg4VDExLjggMjF0LS4yODguNzEzVDEwLjggMjJ6bTEzIDFxLTIuMDc1IDAtMy41MzctMS40NjNUMTMgMTh0MS40NjMtMy41MzdUMTggMTN0My41MzggMS40NjNUMjMgMTh0LTEuNDYzIDMuNTM4VDE4IDIzbS41LTUuMnYtMi4zcTAtLjItLjE1LS4zNVQxOCAxNXQtLjM1LjE1dC0uMTUuMzV2Mi4yNzVxMCAuMi4wNzUuMzg4dC4yMjUuMzM3bDEuNTI1IDEuNTI1cS4xNS4xNS4zNS4xNXQuMzUtLjE1dC4xNS0uMzV0LS4xNS0uMzV6Ii8+PC9zdmc+"
+            alt="icon"
+            width="48"
+            height="48"
+          />
+          <h3 class="cs-h3">Relaxing Clinic, On Your Schedule</h3>
+          <p class="cs-item-text">
+            Welcoming clinic with easy booking and flexible hours.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- <WhyChooseUs/> -->
+</BaseLayout>
+
+<style lang="less">
+  /*-- -------------------------- -->
+<!--            Team            -->
+<--- -------------------------- -*/
+
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
+    #meet-team-2071 {
+      /* 240px - 480px top */
+      /* 60px - 100px bottom */
+      /* 16px left & right */
+      padding: clamp(3.75rem, 7.82vw, 6.25rem) (16/16rem)
+        clamp(3.75rem, 7.82vw, 6.25rem) (16/16rem);
+      background-color: #faf6f2;
+      overflow: hidden;
+      position: relative;
+
+      .cs-container {
+        width: 100%;
+        /* changes to 1280px at desktop */
+        max-width: (704/16rem);
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+        position: relative;
+        z-index: 1;
+      }
+
+      .cs-content {
+        text-align: center;
+        width: 100%;
+        max-width: (944/16rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cs-text {
+        max-width: none;
+      }
+    }
+  }
+
+  /* Desktop - 1024px */
+  @media only screen and (min-width: 64rem) {
+    #meet-team-2071 {
+      .cs-container {
+        max-width: (1280/16rem);
+      }
+    }
+  }
+
+  /*-- -------------------------- -->
+<---            CTA             -->
+<--- -------------------------- -*/
+
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
+    #cta-697 {
+      padding: 3rem;
+      background-color: var(--primary);
+      position: relative;
+      z-index: 1;
+
+      .cs-container {
+        width: 100%;
+        max-width: (1280/16rem);
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-title {
+        color: var(--bodyTextColorWhite);
+      }
+
+      .cs-button-solid {
+        font-size: (16/16rem);
+        /* 46px - 56px */
+        //line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #000;
+        min-width: (150/16rem);
+        padding: 0 (24/16rem);
+        background-color: var(--secondary);
+        border-radius: (4/16rem);
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+
+        &:before {
+          content: '';
+          position: absolute;
+          height: 100%;
+          width: 0%;
+          background: #000;
+          opacity: 1;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          border-radius: (4/16rem);
+          transition: width 0.3s;
+        }
+
+        &:hover {
+          color: #fff;
+          &:before {
+            width: 100%;
+          }
+        }
+      }
+
+      .cs-background {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        /* makes it act like a background image */
+        object-fit: cover;
+      }
+    }
+  }
+
+  /* Small Desktop - 1024px */
+  @media only screen and (min-width: 64rem) {
+    #cta-697 {
+      .cs-content {
+        text-align: left;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  /*-- -------------------------- -->
+<---        Why Choose          -->
+<--- -------------------------- -*/
+
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
+    #why-choose-289 {
+      text-align: center;
+      padding: var(--sectionPadding);
+
+      .cs-container {
+        width: 100%;
+        /* changes to 1280px on tablet */
+        max-width: (550/16rem);
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: flex-start;
+      }
+
+      .cs-text {
+        max-width: (522/16rem);
+      }
+
+      .cs-card-group {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: (16/16rem);
+      }
+
+      .cs-item {
+        list-style: none;
+        text-align: left;
+        width: 100%;
+        padding: (32/16rem);
+        background-color: var(--secondaryLight);
+        border-radius: (16/16rem);
+        /* prevents padding from adding to height and width */
+        box-sizing: border-box;
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: var(--primary);
+          cursor: pointer;
+
+          .cs-icon {
+            filter: brightness(0) saturate(100%) invert(100%);
+          }
+
+          .cs-h3 {
+            color: var(--bodyTextColorWhite);
+          }
+
+          .cs-item-text {
+            color: var(--bodyTextColorWhite);
+          }
+        }
+      }
+
+      .cs-icon {
+        width: auto;
+        height: (48/16rem);
+        margin-bottom: (24/16rem);
+        display: block;
+        transition: filter 0.3s;
+      }
+
+      .cs-h3 {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 2.5vw, 1.5625rem);
+        line-height: 1.2em;
+        margin: 0;
+        margin-bottom: (16/16rem);
+        color: var(--headerColor);
+        transition: color 0.3s;
+      }
+
+      .cs-item-text {
+        font-size: (16/16rem);
+        line-height: 1.5em;
+        margin: 0;
+        color: var(--bodyTextColor);
+        transition: color 0.3s;
+      }
+    }
+  }
+
+  /* Tablet - 768px */
+  @media only screen and (min-width: 48rem) {
+    #why-choose-289 {
+      .cs-container {
+        max-width: (1280/16rem);
+      }
+
+      .cs-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: (64/16rem);
+      }
+
+      .cs-flex {
+        width: 50%;
+      }
+
+      .cs-title {
+        margin: 0;
+      }
+
+      .cs-card-group {
+        justify-content: space-between;
+        /* makes sure every box "stretches" to be the same height as the tallest box */
+        align-items: stretch;
+        flex-direction: row;
+        /* 16px - 20px */
+        gap: clamp(1rem, 1.5vw, 1.25rem);
+      }
+
+      .cs-item {
+        width: auto;
+        /* 16px - 32px */
+        padding: (32/16rem) clamp(1rem, 2.1vw, 2rem);
+      }
+    }
+  }
+</style>

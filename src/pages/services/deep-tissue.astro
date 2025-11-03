@@ -1,0 +1,77 @@
+---
+import BaseLayout from 'src/layouts/BaseLayout.astro';
+import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
+import { getOptimizedImage } from '@js/utils';
+import services2Img from '@assets/images/Services-2.DeepTissueMassage.jpg';
+import ServiceHero from '@components/Services/ServiceHero.astro';
+import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
+import PriceBenifits from '@components/Services/PriceBenifits.astro';
+
+const optimizedImage = await getOptimizedImage(landingImage);
+
+export const hotStoneHero: HeroServiceProps = {
+  title: 'Deep Tissue Massage',
+  image: services2Img,
+  alt: '',
+  subtitle:
+    'Targets deeper layers of muscle and connective tissue to release chronic tension, knots, and stiffness. Ideal for persistent pain or tight muscles.',
+  highlights: [
+    {
+      title: 'Deeper Relaxation',
+      body: 'Warm stones soothe tissues and calm the nervous system for a restorative reset.',
+    },
+    {
+      title: 'Circulation Support',
+      body: 'Promotes blood flow to help relieve fatigue and muscle achiness.',
+    },
+    {
+      title: 'Licensed Care',
+      body: 'In‑clinic sessions delivered by experienced therapists in a relaxed setting.',
+    },
+  ],
+  ctaPrimary: { label: 'Book Deep Tissue Massage Session', href: '/contact' },
+  ctaSecondary: { label: 'Ask a Question', href: '/contact' },
+};
+
+export const hotStoneData: PriceBenefitsProps = {
+  benefitsTitle: 'Benefits of Deep Tissue Massage',
+  benefits: [
+    {
+      num: '01',
+      title: 'Deep relaxation',
+      body: 'Heated basalt stones gently melt muscular tension and help settle the nervous system.',
+    },
+    {
+      num: '02',
+      title: 'Enhanced circulation',
+      body: 'Sustained warmth supports blood flow and tissue elasticity for a soothing, restorative effect.',
+    },
+    {
+      num: '03',
+      title: 'Reduced tightness',
+      body: 'Helps release stubborn areas, easing aches from stress, posture, or overuse.',
+    },
+    {
+      num: '04',
+      title: 'Calm the mind',
+      body: 'A tranquil experience designed to quiet busy thoughts and improve overall well‑being.',
+    },
+  ],
+  benefitsTagline: 'Melt Tension, Improve Circulation & Unwind Deeply',
+  prices: [
+    { duration: '60 minutes', price: '$100' },
+    { duration: '75 minutes', price: '$125' },
+    { duration: '90 minutes', price: '$150' },
+  ],
+};
+---
+
+<BaseLayout
+  title="Services"
+  description="Kabayan Healing Touch Massage - Professional Massage Therapy"
+  preloadedImage={optimizedImage}
+>
+  <ServiceHero {...hotStoneHero} />
+  <!-- <PriceBenifits {...hotStoneData} /> -->
+</BaseLayout>

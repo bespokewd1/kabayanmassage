@@ -1,0 +1,1089 @@
+---
+import BaseLayout from 'src/layouts/BaseLayout.astro';
+import CTA from '@components/CTA.astro';
+import { getCollection } from 'astro:content';
+import { Image, Picture } from 'astro:assets';
+import client from '@data/client.json';
+import '@styles/blog.less';
+import BlazeSlider from 'blaze-slider';
+import 'blaze-slider/dist/blaze.css';
+
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
+import { getOptimizedImage } from '@js/utils';
+import aboutImage1 from '@assets/images/Services-1.TherapeuticMassage.jpg';
+import aboutImage2 from '@assets/images/Services-5.HotStoneMassage.jpg';
+import serviceImg5 from '@assets/images/Services-2.DeepTissueMassage.jpg';
+
+import heroImg from '@assets/images/hero-img.jpg';
+import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import FacebookIcon from '@components/Icons/Socials/FacebookIcon.astro';
+import InstagramIcon from '@components/Icons/Socials/InstagramIcon.astro';
+import LinkedInIcon from '@components/Icons/Socials/LinkedInIcon.astro';
+import TwitterIcon from '@components/Icons/Socials/TwitterIcon.astro';
+import WhyChooseUs from '@components/why-choose-us.astro';
+import ChevronLeftIconFilled from '@components/Icons/Utility/ChevronLeftIconFilled.astro';
+import ChevronRightIconFilled from '@components/Icons/Utility/ChevronRightIconFilled.astro';
+
+const optimizedImage = await getOptimizedImage(heroImg);
+
+// Reviews data
+const reviews = [
+  {
+    text: 'The service is professional, relaxing, and exactly what I need every time. I always leave feeling so much better!',
+    name: 'Melanie B.',
+  },
+  {
+    text: 'The best Massage in town!!!!! I Feel relaxed everytime. Rutchel is the best',
+    name: 'Febalia C.',
+  },
+  {
+    text: 'The lady was very professional, she knows what she is doing, felt very relaxed, the environment was nice as well as the mood just makes you feel calm. Overall would definitely come back.',
+    name: 'Carl G.',
+  },
+];
+
+const steps = [
+  {
+    number: 1,
+    title: 'Choose Your Treatment',
+    desc: 'Whether it’s deep tissue, hot stone, or Swedish, pick the style that fits your needs.',
+  },
+  {
+    number: 2,
+    title: 'Schedule Your Session',
+    desc: 'Call or text 1 (778) 891-9558 to book the day and time that works for you.',
+  },
+  {
+    number: 3,
+    title: 'Relax & Enjoy',
+    desc: 'We’ll confirm your appointment—just show up and unwind.',
+  },
+];
+
+const posts = await getCollection('blog');
+posts.sort(
+  (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+);
+---
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+<BaseLayout preloadedImage={optimizedImage}>
+  <!-- ============================================ -->
+  <!--                    Hero                      -->
+  <!-- ============================================ -->
+
+  <section id="hero-856">
+    <div class="cs-container">
+      <div class="cs-content">
+        <span class="cs-topper">Kabayan Healing Touch Massage</span>
+        <h1 class="cs-title">West Edmonton's Premier Massage Clinic</h1>
+        <p class="cs-text">
+          Expert care from a certified Registered Massage Therapist — helping
+          you reduce pain, restore mobility, and recharge your wellbeing.
+        </p>
+        <a
+          href="https://kabayanhealingtouchmassage2.clinicsense.com/book/"
+          target="_blank"
+          id="hero-cta"
+          class="cs-button-solid">Book Your Massage</a
+        >
+      </div>
+      <Picture
+        loading={'eager'}
+        pictureAttributes={{ class: 'cs-picture' }}
+        src={heroImg}
+        formats={['avif', 'webp']}
+        alt="lady in massage"
+      />
+    </div>
+    <!--Change the svg path fill color to whatever color the section below is so you can match it and create the illusion it is all one piece-->
+    <svg
+      class="cs-wave"
+      width="1920"
+      height="179"
+      viewBox="0 0 1920 179"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M1920 179V91.3463C1835.33 91.3463 1715.47 76.615 1549.2 32.9521C1299.48 -32.3214 1132.77 12.1006 947.32 61.5167C810.762 97.9044 664.042 137 466.533 137C331.607 137 256.468 123.447 188.082 111.113C130.974 100.812 78.5746 91.3609 0 91.3609V179H1920Z"
+        fill="white"></path>
+    </svg>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                     CTA                      -->
+  <!-- ============================================ -->
+
+  <section id="cta-697">
+    <div class="cs-container">
+      <div class="cs-content">
+        <h2 class="cs-title">
+          Expert therapeutic massage tailored to your needs.
+        </h2>
+        <a href="/contact" class="cs-button-solid">Contact Us</a>
+      </div>
+    </div>
+    <!--SVG Waves Background-->
+    <img
+      class="cs-background"
+      src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images%2FGraphics%2Fwaves-3.svg"
+      alt="wave graphic"
+      width="1920"
+      height="318"
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+    />
+  </section>
+
+  <!-- ================= CTA (Green band) ================ -->
+  <!-- <CTA
+    title="Restore Balance. Feel Renewed"
+    description="Expert therapeutic massage tailored to your needs."
+  /> -->
+
+  <!-- ================= Services ================= -->
+  <section id="services" class="bg-orange-50">
+    <!-- Intro -->
+    <div class="mx-auto max-w-6xl px-6 py-16 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="font-serif text-3xl md:text-4xl text-gray-950">
+          Our Services
+        </h2>
+        <p class="mt-4 text-gray-700 leading-7">
+          From deep tissue and hot stone to relaxing Swedish massage, each
+          session at Kabayan Therapeutic Clinique is customized to your
+          goals—reducing pain, improving mobility, and helping you feel your
+          best.
+        </p>
+      </div>
+    </div>
+
+    <!-- Image row with overlay card on orange-200 -->
+    <div class="mx-auto max-w-7xl px-0">
+      <div class="grid grid-cols-1 md:grid-cols-12 items-stretch">
+        <!-- Left image -->
+        <div class="md:col-span-6">
+          <Image
+            src={aboutImage1}
+            alt="lady in a stone massage"
+            class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+          />
+        </div>
+
+        <!-- Middle card on orange-200 -->
+        <div
+          class="md:col-span-6 flex items-center justify-center px-6 py-10"
+          id="services-content"
+        >
+          <div class="w-full max-w-xl text-center md:text-left">
+            <h3 class="font-semibold tracking-wide">Therapeutic Massage</h3>
+            <p class="mt-4 leading-7">
+              Customized massage designed to relieve tension, improve
+              circulation, and promote relaxation and well-being.
+            </p>
+            <div class="mt-6">
+              <a
+                href="/services"
+                class="inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+              >
+                View Services
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right image (stretches full width on small, aligns in grid on md+) -->
+        <div class="md:col-span-12">
+          <div class="grid grid-cols-1 md:grid-cols-12">
+            <div class="md:col-span-6 order-2 md:order-1">
+              <div
+                class="w-full h-full flex items-center justify-center px-6 py-10"
+                id="services-content"
+              >
+                <div class="w-full max-w-xl text-center md:text-left">
+                  <h3 class="font-semibold tracking-wide">
+                    Deep Tissue Massage
+                  </h3>
+                  <p class="mt-4 leading-7">
+                    Targets deeper layers of muscle and connective tissue to
+                    release chronic tension, knots, and stiffness. Ideal for
+                    persistent pain or tight muscles.
+                  </p>
+                  <div class="mt-6">
+                    <a
+                      href="/services"
+                      class="inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+                    >
+                      Learn More
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="md:col-span-6 order-1 md:order-2">
+              <Image
+                src={serviceImg5}
+                alt="lady in a stone massage"
+                class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                 Why Choose                   -->
+  <!-- ============================================ -->
+
+  <section id="why-choose-289">
+    <div class="cs-container">
+      <div class="cs-content">
+        <div class="cs-flex">
+          <span class="cs-topper">Experience, Expertise, and Real Results</span>
+          <h2 class="cs-title">Why Choose Kabayan Massage</h2>
+        </div>
+        <p class="cs-text">
+          We deliver thoughtful, therapeutic care tailored to your body—so you
+          leave lighter, looser, and genuinely restored.
+        </p>
+      </div>
+      <ul class="cs-card-group">
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iOSIgcj0iMiIvPjxwYXRoIGQ9Ik0xNiAxNWMwIDEuMTA1IDAgMi00IDJzLTQtLjg5NS00LTJzMS43OS0yIDQtMnM0IC44OTUgNCAyWiIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZD0iTTMgMTAuNDE3YzAtMy4xOTggMC00Ljc5Ny4zNzgtNS4zMzVjLjM3Ny0uNTM3IDEuODgtMS4wNTIgNC44ODctMi4wODFsLjU3My0uMTk2QzEwLjQwNSAyLjI2OCAxMS4xODggMiAxMiAyczEuNTk1LjI2OCAzLjE2Mi44MDVsLjU3My4xOTZjMy4wMDcgMS4wMjkgNC41MSAxLjU0NCA0Ljg4NyAyLjA4MUMyMSA1LjYyIDIxIDcuMjIgMjEgMTAuNDE3djEuNTc0YzAgMi41MDUtLjgzNyA0LjQzNy0yIDUuOTEzTTMuMTkzIDE0Yy44NTcgNC4yOTggNC4zODMgNi41MTMgNi43MDYgNy41MjdjLjcyMS4zMTUgMS4wODIuNDczIDIuMTAxLjQ3M2MxLjAyIDAgMS4zOC0uMTU4IDIuMTAxLS40NzNjLjU3OS0uMjUyIDEuMjMxLS41OCAxLjg5OS0uOTk0Ii8+PC9nPjwvc3ZnPg=="
+            alt="icon"
+            width="48"
+            height="48"
+          />
+          <h3 class="cs-h3">Expert Therapists You Can Trust</h3>
+          <p class="cs-item-text">
+            Registered, experienced therapists focused on results.
+          </p>
+        </li>
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik00IDIwdi0yLjhxMC0uODUuNDM4LTEuNTYyVDUuNiAxNC41NXExLjU1LS43NzUgMy4xNS0xLjE2MlQxMiAxM2guMzVxLS4yNzUuNDUtLjQxMy45NjNUMTEuOCAxNXEtMS4zNS4wMjUtMi42ODcuMzYzVDYuNSAxNi4zNXEtLjIyNS4xMjUtLjM2My4zNVQ2IDE3LjJ2LjhoNy4wNzVsMiAyem04LThxLTEuNjUgMC0yLjgyNS0xLjE3NVQ4IDh0MS4xNzUtMi44MjVUMTIgNHQyLjgyNSAxLjE3NVQxNiA4dC0xLjE3NSAyLjgyNVQxMiAxMm0wLTJxLjgyNSAwIDEuNDEzLS41ODdUMTQgOHQtLjU4Ny0xLjQxMlQxMiA2dC0xLjQxMi41ODhUMTAgOHQuNTg4IDEuNDEzVDEyIDEwbTUuOSAxMGwtMy41LTMuNXEtLjMyNS0uMzI1LS40NjItLjd0LS4xMzgtLjc1cTAtLjguNTc1LTEuNDI1VDE1Ljg1IDEzcS43IDAgMS4xLjMyNXQuOTUuODc1cS41LS41LjkxMy0uODVUMTkuOTUgMTNxLjkyNSAwIDEuNDg4LjYzOFQyMiAxNS4wNzRxMCAuMzc1LS4xNS43NXQtLjQ1LjY3NXoiLz48L3N2Zz4="
+            alt="icon"
+            width="40"
+            height="48"
+          />
+          <h3 class="cs-h3">Tailored Care for Your Body</h3>
+          <p class="cs-item-text">
+            Personalized treatment plans for pain relief and relaxation.
+          </p>
+        </li>
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMjI5LjEyIDE0Mi42NWEyMi40MyAyMi40MyAwIDAgMC0xOS41NS0zLjg4bC00LjMyIDFDMjI3IDExOS41NSAyMzggOTkuNTEgMjM4IDgwYzAtMjUuMzYtMjAuMzktNDYtNDUuNDYtNDZBNDUuNTEgNDUuNTEgMCAwIDAgMTU2IDUyYTQ1LjUxIDQ1LjUxIDAgMCAwLTM2LjU0LTE4Qzk0LjM5IDM0IDc0IDU0LjY0IDc0IDgwYzAgMTEuMzggMy42MyAyMi40OSAxMS4yOSAzNC4zNmEyOS43MyAyOS43MyAwIDAgMC0xNi41NiA4LjQzTDQ1LjUyIDE0NkgxNmExNCAxNCAwIDAgMC0xNCAxNHY0MGExNCAxNCAwIDAgMCAxNCAxNGgxMDRhNiA2IDAgMCAwIDEuNDYtLjE4bDY0LTE2YTcgNyAwIDAgMCAuODktLjNMMjI1LjE3IDE4MWwuMzMtLjE1YTIyLjYgMjIuNiAwIDAgMCAzLjYyLTM4LjE4Wk0xMTkuNDYgNDZhMzMuMTYgMzMuMTYgMCAwIDEgMzEgMjAuMjhhNiA2IDAgMCAwIDExLjEgMGEzMy4xNiAzMy4xNiAwIDAgMSAzMS0yMC4yOEMyMTAuNjggNDYgMjI2IDYxLjU3IDIyNiA4MGMwIDIwLjI0LTE2LjE4IDQzLTQ2LjggNjUuNzVsLTE0Ljg3IDMuNDJBMjYgMjYgMCAwIDAgMTQwIDExNEg5OS42N0M5MC4zNiAxMDEuNjcgODYgOTAuODEgODYgODBjMC0xOC40MyAxNS4zMi0zNCAzMy40Ni0zNE0xNCAyMDB2LTQwYTIgMiAwIDAgMSAyLTJoMjZ2NDRIMTZhMiAyIDAgMCAxLTItMm0yMDYuMjgtMzBsLTM4LjIgMTYuMjdMMTE5LjI2IDIwMkg1NHYtNDcuNTFsMjMuMjEtMjMuMjJBMTcuODggMTcuODggMCAwIDEgODkuOTQgMTI2SDE0MGExNCAxNCAwIDAgMSAwIDI4aC0yOGE2IDYgMCAwIDAgMCAxMmgzMmE2IDYgMCAwIDAgMS4zNC0uMTVsNjctMTUuNDFsLjI0LS4wNmExMC42IDEwLjYgMCAwIDEgNy43IDE5LjYyIi8+PC9zdmc+"
+            alt="icon"
+            width="48"
+            height="48"
+          />
+          <h3 class="cs-h3">Proven Techniques That Work</h3>
+          <p class="cs-item-text">
+            Evidence‑based techniques: deep tissue, hot stone, Swedish, and
+            more.
+          </p>
+        </li>
+        <li class="cs-item">
+          <img
+            class="cs-icon"
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik01IDhoMTRWNkg1em0wIDBWNnptMCAxNHEtLjgyNSAwLTEuNDEyLS41ODdUMyAyMFY2cTAtLjgyNS41ODgtMS40MTJUNSA0aDFWM3EwLS40MjUuMjg4LS43MTJUNyAydC43MTMuMjg4VDggM3YxaDhWM3EwLS40MjUuMjg4LS43MTJUMTcgMnQuNzEzLjI4OFQxOCAzdjFoMXEuODI1IDAgMS40MTMuNTg4VDIxIDZ2NC42NzVxMCAuNDI1LS4yODguNzEzdC0uNzEyLjI4N3QtLjcxMi0uMjg4dC0uMjg4LS43MTJWMTBINXYxMGg1LjhxLjQyNSAwIC43MTMuMjg4VDExLjggMjF0LS4yODguNzEzVDEwLjggMjJ6bTEzIDFxLTIuMDc1IDAtMy41MzctMS40NjNUMTMgMTh0MS40NjMtMy41MzdUMTggMTN0My41MzggMS40NjNUMjMgMTh0LTEuNDYzIDMuNTM4VDE4IDIzbS41LTUuMnYtMi4zcTAtLjItLjE1LS4zNVQxOCAxNXQtLjM1LjE1dC0uMTUuMzV2Mi4yNzVxMCAuMi4wNzUuMzg4dC4yMjUuMzM3bDEuNTI1IDEuNTI1cS4xNS4xNS4zNS4xNXQuMzUtLjE1dC4xNS0uMzV0LS4xNS0uMzV6Ii8+PC9zdmc+"
+            alt="icon"
+            width="48"
+            height="48"
+          />
+          <h3 class="cs-h3">Relaxing Clinic, On Your Schedule</h3>
+          <p class="cs-item-text">
+            Welcoming clinic with easy booking and flexible hours.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                  Reviews                     -->
+  <!-- ============================================ -->
+  <section id="reviews-section" class="py-16 md:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <span
+          class="text-sm font-bold tracking-wider uppercase text-[var(--primary)] mb-2 block"
+          >Client Testimonials</span
+        >
+        <h2 class="text-3xl md:text-4xl font-serif text-gray-900">
+          What Our Clients Say
+        </h2>
+      </div>
+
+      <!-- Desktop: Static 3-column grid on lg+ -->
+      <div class="hidden lg:grid lg:grid-cols-3 gap-6">
+        {
+          reviews.map((review) => (
+            <div class="bg-gray-50 rounded-2xl p-8 flex flex-col">
+              <div class="mb-6">
+                <svg
+                  class="w-10 h-10 text-[var(--secondary)] opacity-50"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+              </div>
+              <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
+                "{review.text}"
+              </p>
+              <p class="font-semibold text-gray-900">— {review.name}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Mobile/Tablet: Blaze Slider below lg -->
+      <div class="lg:hidden">
+        <div class="blaze-slider" id="reviews-blaze">
+          <!-- Track -->
+          <div class="blaze-container">
+            <div class="blaze-track-container">
+              <div class="blaze-track">
+                {
+                  reviews.map((review) => (
+                    <div class="blaze-slide px-2">
+                      <div class="bg-gray-50 rounded-2xl p-8 h-full flex flex-col">
+                        <div class="mb-6">
+                          <svg
+                            class="w-10 h-10 text-[var(--secondary)] opacity-50"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                          </svg>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
+                          "{review.text}"
+                        </p>
+                        <p class="font-semibold text-gray-900">
+                          — {review.name}
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="mx-auto mt-4 flex items-center justify-center gap-4">
+            <!-- navigation buttons -->
+            <button class="blaze-prev"
+              ><ChevronLeftIconFilled
+                class:list={[
+                  'text-(--secondary) hover:text-(--primary) transition-colors duration-300 active:scale-100 hover:scale-105 size-7',
+                ]}
+              /></button
+            >
+
+            <!-- pagination container -->
+            <div
+              class:list={[
+                'blaze-pagination [&>button]:w-3 [&>button]:h-3 [&>button]:rounded-full [&>button]:bg-gray-300 [&>button]:p-0 [&>button]:border-0 [&>button]:text-transparent [&>button]:leading-none [&>button]:overflow-hidden [&>button]:transition [&>button]:duration-200 [&>button:hover]:scale-110 [&>button.active]:bg-[var(--primary)]',
+                'flex items-center justify-center gap-2',
+              ]}
+            >
+            </div>
+
+            <button class="blaze-next">
+              <ChevronRightIconFilled
+                class:list={[
+                  'text-(--secondary) hover:text-(--primary) active:scale-100  transition-colors duration-300 hover:scale-105 size-7',
+                ]}
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+
+      <!-- class="inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-white bg-[var(--primary)] rounded hover:bg-black transition-colors duration-300" -->
+      <div class="text-center mt-12">
+        <a
+          href="https://share.google/T2TeTP7hO7jAPi3rl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cs-button-solid"
+        >
+          View More Reviews
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                   Steps                      -->
+  <!-- ============================================ -->
+  <section class="bg-orange-50">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <h2 class="font-serif text-center text-3xl md:text-4xl text-gray-950">
+        Easy Steps to Book Your Massage
+      </h2>
+
+      <!-- Steps -->
+      <div
+        class="mt-10 grid grid-cols-1 gap-6 md:mt-12 md:grid-cols-3 md:gap-8"
+      >
+        {
+          steps.map((step) => (
+            <div class="flex flex-col items-center rounded-lg bg-(--secondary) px-8 py-10 text-center shadow-sm ring-1 ring-black/5">
+              <div class="font-serif text-6xl text-gray-900">{step.number}</div>
+              <h3 class="mt-4 font-serif text-3xl text-gray-900 flex-1">
+                {step.title}
+              </h3>
+              <p class="mt-3 text-gray-700 leading-7 ">{step.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Direct billing + CTA -->
+      <div class="mt-10 text-center">
+        <p class="font-serif text-lg text-gray-900">Direct Billing Available</p>
+        <p class="mt-2 mb-4 text-gray-700">
+          Check with us for accepted providers.
+        </p>
+
+        <a href="https://kabayanhealingtouchmassage2.clinicsense.com/book/" target="_blank" class="cs-button-solid"> Book Appointment </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                   Contact                    -->
+  <!-- ============================================ -->
+  <section id="contact" class="">
+    <!-- max-w-7xl  -->
+    <div class="mx-auto grid grid-cols-1 lg:grid-cols-12">
+      <!-- Left: Info panel (green) -->
+      <div
+        class="lg:col-span-4 bg-(--primary) px-8 py-12 md:px-12 md:py-16 flex flex-col justify-center items-center"
+      >
+        <div class="mt-8 space-y-5 text-orange-50">
+          <h2 class="font-serif text-3xl text-orange-50 md:text-4xl">
+            Get in Touch
+          </h2>
+
+          <div class="space-y-3">
+            <p class="text-lg text-orange-50">{client.name}</p>
+            <p class="text-orange-50">
+              {client.address.lineOne}<br>
+              {client.address.lineTwo}
+            </p>
+            <p class="text-orange-50">
+              {client.phoneForTel}
+              <br />
+              {client.email}
+            </p>
+            <p class="text-orange-50">Mon–Sun: 9:00 AM – 9:00 PM</p>
+            <p class="text-orange-50">
+              Direct Billing Available. Please ask about eligible providers.
+            </p>
+          </div>
+
+          <!-- Socials -->
+          <div class="mt-8 flex items-center gap-4 text-emerald-50/90">
+            <a href="#" aria-label="Facebook" class="hover:text-white">
+              <FacebookIcon class:list={['text-orange-50 ']} />
+            </a>
+            <a href="#" aria-label="Instagram" class="hover:text-white">
+              <InstagramIcon class:list={['text-orange-50 ']} />
+            </a>
+            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+              <LinkedInIcon class:list={['text-orange-50 ']} />
+            </a>
+            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+              <TwitterIcon class:list={['text-orange-50 ']} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="lg:col-span-8 px-8 py-12 md:px-12 md:py-16">
+        <form class="max-w-2xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-sm text-gray-700 mb-2">First Name</label>
+              <input
+                type="text"
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="First name"
+              />
+            </div>
+            <div>
+              <label class="block text-sm text-gray-700 mb-2">Last Name</label>
+              <input
+                type="text"
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Last name"
+              />
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label class="block text-sm text-gray-700 mb-2">Email *</label>
+            <input
+              type="email"
+              required
+              class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div class="mt-5">
+            <label class="block text-sm text-gray-700 mb-2">Message</label>
+            <textarea
+              rows="5"
+              class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="How can we help?"></textarea>
+          </div>
+
+          <button type="submit" class="cs-button-solid"> Send </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="less">
+  /* Add smooth scrolling to the entire HTML document */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /*-- -------------------------- -->
+<---            Hero            -->
+<--- -------------------------- -*/
+
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
+    #hero-856 {
+      /* centers button */
+      text-align: center;
+      /* 116px - 164px top */
+      /* 60px - 100px  bottom */
+      padding: clamp(7.25rem, 16.82vw, 10.25rem) (16/16rem)
+        clamp(3.75rem, 7.82vw, 6.25rem);
+      background-color: #f7f7f7;
+      /* clips the svg wave from overflowing */
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+
+      .cs-container {
+        width: 100%;
+        max-width: (1280/16rem);
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: (48/16rem);
+      }
+
+      .cs-content {
+        max-width: (630/16rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .cs-topper {
+        font-size: (16/16rem);
+        line-height: 1.2em;
+        text-transform: uppercase;
+        text-align: inherit;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: (4/16rem);
+        display: block;
+      }
+
+      .cs-title {
+        /* 39px - 61px */
+        font-size: clamp(2.4375rem, 5vw, 3.8125rem);
+        font-weight: 900;
+        line-height: 1.2em;
+        text-align: center;
+        /* 23 characters including spaces wide */
+        max-width: 23ch;
+        margin: 0 0 (16/16rem) 0;
+        color: var(--headerColor);
+        position: relative;
+      }
+
+      .cs-text {
+        /* 16px - 20px */
+        font-size: clamp(1rem, 1.5vw, 1.25rem);
+        line-height: 1.5em;
+        text-align: center;
+        width: 100%;
+        max-width: (531/16rem);
+        /* 28px - 40px */
+        margin: 0 0 clamp(1.75rem, 3.92vw, 2.5rem) 0;
+        color: var(--bodyTextColor);
+      }
+
+      .cs-button-solid {
+        font-size: (16/16rem);
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #fff;
+        min-width: (150/16rem);
+        padding: 0 (24/16rem);
+        background-color: var(--primary);
+        border-radius: (4/16rem);
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+
+        &:before {
+          content: '';
+          position: absolute;
+          height: 100%;
+          width: 0%;
+          background: #000;
+          opacity: 1;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          border-radius: (4/16rem);
+          transition: width 0.3s;
+        }
+
+        &:hover {
+          &:before {
+            width: 100%;
+          }
+        }
+      }
+
+      .cs-picture {
+        width: 100%;
+        max-width: (570/16rem);
+        /* 400px - 712px */
+        height: clamp(25rem, 95vw, 44.5rem);
+        /* 100px - 200px */
+        border-radius: 0 clamp(6.25rem, 17vw, 12.5rem) 0
+          clamp(6.25rem, 17vw, 12.5rem);
+        box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.16);
+        /* clips the img tag corners */
+        overflow: hidden;
+        display: block;
+        position: relative;
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          /* makes image act as a background image */
+          object-fit: cover;
+          /* ensures the top of the images is at the top of the container, no heads getting cut off */
+          object-position: top;
+        }
+      }
+
+      .cs-wave {
+        /* we're stretching the svg wider than the viewport so it's taller and has more of a presence */
+        width: 320%;
+        height: auto;
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: -1px;
+        transform: translateX(-50%);
+        z-index: -1;
+      }
+    }
+  }
+
+  /* Small Desktop - 1024px */
+  @media only screen and (min-width: 64rem) {
+    #hero-856 {
+      padding: 2rem (16/16rem) clamp(3.75rem, 7.82vw, 6.25rem);
+      text-align: left;
+      .cs-container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .cs-content {
+        width: 40vw;
+        /* prevents flex-box from squishing it */
+        flex: none;
+        align-items: flex-start;
+        /* sends it to the right in the 2nd position */
+        order: 2;
+      }
+
+      .cs-title,
+      .cs-text {
+        text-align: left;
+      }
+
+      .cs-picture {
+        /* 623px - 814px */
+        height: clamp(38.9375rem, 60vw, 50.875rem);
+      }
+
+      .cs-wave {
+        width: 100%;
+        left: 0;
+        /* flips it horizontally */
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  /*-- -------------------------- -->
+<---            CTA             -->
+<--- -------------------------- -*/
+
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
+    #cta-697 {
+      padding: 3rem;
+      background-color: var(--primary);
+      position: relative;
+      z-index: 1;
+
+      .cs-container {
+        width: 100%;
+        max-width: (1280/16rem);
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-title {
+        color: var(--bodyTextColorWhite);
+      }
+
+      .cs-button-solid {
+        font-size: (16/16rem);
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #000;
+        min-width: (150/16rem);
+        padding: 0 (24/16rem);
+        background-color: var(--secondary);
+        border-radius: (4/16rem);
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+
+        &:before {
+          content: '';
+          position: absolute;
+          height: 100%;
+          width: 0%;
+          background: #000;
+          opacity: 1;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          border-radius: (4/16rem);
+          transition: width 0.3s;
+        }
+
+        &:hover {
+          color: #fff;
+          &:before {
+            width: 100%;
+          }
+        }
+      }
+
+      .cs-background {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        /* makes it act like a background image */
+        object-fit: cover;
+      }
+    }
+  }
+
+  /* Small Desktop - 1024px */
+  @media only screen and (min-width: 64rem) {
+    #cta-697 {
+      .cs-content {
+        text-align: left;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  // Services
+  @media only screen and (min-width: 0rem) {
+    #services {
+      #services-content {
+        background-color: var(--primary) !important;
+        h3 {
+          color: #fff !important;
+        }
+        p {
+          color: #ddd !important;
+        }
+        a {
+          background-color: var(--secondary) !important;
+        }
+      }
+    }
+  }
+
+  /*-- -------------------------- -->
+<---        Why Choose          -->
+<--- -------------------------- -*/
+
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0rem) {
+    #why-choose-289 {
+      text-align: center;
+      padding: var(--sectionPadding);
+
+      .cs-container {
+        width: 100%;
+        /* changes to 1280px on tablet */
+        max-width: (550/16rem);
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+      }
+
+      .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: flex-start;
+      }
+
+      .cs-text {
+        max-width: (522/16rem);
+      }
+
+      .cs-card-group {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: (16/16rem);
+      }
+
+      .cs-item {
+        list-style: none;
+        text-align: left;
+        width: 100%;
+        padding: (32/16rem);
+        background-color: var(--secondaryLight);
+        border-radius: (16/16rem);
+        /* prevents padding from adding to height and width */
+        box-sizing: border-box;
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: var(--primary);
+          cursor: pointer;
+
+          .cs-icon {
+            filter: brightness(0) saturate(100%) invert(100%);
+          }
+
+          .cs-h3 {
+            color: var(--bodyTextColorWhite);
+          }
+
+          .cs-item-text {
+            color: var(--bodyTextColorWhite);
+          }
+        }
+      }
+
+      .cs-icon {
+        width: auto;
+        height: (48/16rem);
+        margin-bottom: (24/16rem);
+        display: block;
+        transition: filter 0.3s;
+      }
+
+      .cs-h3 {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 2.5vw, 1.5625rem);
+        line-height: 1.2em;
+        margin: 0;
+        margin-bottom: (16/16rem);
+        color: var(--headerColor);
+        transition: color 0.3s;
+      }
+
+      .cs-item-text {
+        font-size: (16/16rem);
+        line-height: 1.5em;
+        margin: 0;
+        color: var(--bodyTextColor);
+        transition: color 0.3s;
+      }
+    }
+  }
+
+  /* Tablet - 768px */
+  @media only screen and (min-width: 48rem) {
+    #why-choose-289 {
+      .cs-container {
+        max-width: (1280/16rem);
+      }
+
+      .cs-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: (64/16rem);
+      }
+
+      .cs-flex {
+        width: 50%;
+      }
+
+      .cs-title {
+        margin: 0;
+      }
+
+      .cs-card-group {
+        justify-content: space-between;
+        /* makes sure every box "stretches" to be the same height as the tallest box */
+        align-items: stretch;
+        flex-direction: row;
+        /* 16px - 20px */
+        gap: clamp(1rem, 1.5vw, 1.25rem);
+      }
+
+      .cs-item {
+        width: auto;
+        /* 16px - 32px */
+        padding: (32/16rem) clamp(1rem, 2.1vw, 2rem);
+      }
+    }
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Smooth dot transitions */
+  .dot {
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+</style>
+
+<script>
+  import BlazeSlider from 'blaze-slider';
+  import 'blaze-slider/dist/blaze.css';
+
+  document.querySelectorAll('.blaze-slider').forEach((el) => {
+    new BlazeSlider(el as HTMLElement, {
+      all: {
+        enableAutoplay: true,
+        autoplayInterval: 2000,
+        transitionDuration: 300,
+        slidesToShow: 3,
+      },
+      '(max-width: 900px)': {
+        slidesToShow: 2,
+      },
+      '(max-width: 650px)': {
+        slidesToShow: 1,
+      },
+    });
+  });
+</script>
