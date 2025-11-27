@@ -77,6 +77,24 @@ posts.sort(
   <!-- ============================================ -->
 
   <section id="hero-856">
+    <div 
+  class="promo-banner w-full text-center font-bold animate-blink"
+  style="
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin: auto auto 2rem auto;
+  "
+>
+  <h1 class="text-xl" style="color: white; ">
+    New Client Special! Get 20% off your first session:
+    <span style="color: var(--secondary-light);">
+      $92 for 60 min • $135 for 90 min.
+    </span>
+  </h1>
+</div>
+          
     <div class="cs-container">
       <div class="cs-content">
         <span class="cs-topper">Kabayan Healing Touch Massage</span>
@@ -601,6 +619,7 @@ posts.sort(
       /* 60px - 100px  bottom */
       padding: clamp(7.25rem, 16.82vw, 10.25rem) (16/16rem)
         clamp(3.75rem, 7.82vw, 6.25rem);
+      padding-top: 1rem;
       background-color: #f7f7f7;
       /* clips the svg wave from overflowing */
       overflow: hidden;
@@ -1064,6 +1083,15 @@ posts.sort(
     &:hover {
       transform: scale(1.2);
     }
+  }
+   @keyframes soft-blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+
+  .animate-blink {
+    animation: soft-blink 2s ease-in-out infinite;
   }
 </style>
 
