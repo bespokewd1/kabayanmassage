@@ -1,20 +1,19 @@
 ---
 import BaseLayout from 'src/layouts/BaseLayout.astro';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
-import { Image, Picture } from 'astro:assets';
+import { Picture } from 'astro:assets';
+import { Image } from 'astro-lqip/components';
 import clientData from '@data/client.json';
 
-// services images
-import services1Img from '@assets/images/Services-1.TherapeuticMassage.jpg';
-import services2Img from '@assets/images/Services-2.DeepTissueMassage.jpg';
-import services3Img from '@assets/images/Services-3.RelaxationMassage.jpg';
-import services4Img from '@assets/images/Services-4.CuppingMassage.jpg';
-import services5Img from '@assets/images/Services-5.HotStoneMassage.jpg';
-import services6Img from '@assets/images/Services-6.LymphaticMassage.jpg';
-import services7Img from '@assets/images/Services-7.TMJMassage.jpg';
-import services8Img from '@assets/images/Services-8.JapaneseHeadSpa.jpg';
-import services9Img from '@assets/images/Services-8.jpg';
-import services10Img from '@assets/images/Services-10.jpg';
+import { getOptimizedImage } from '@js/utils';
+import { resolveImage } from '@js/imageUtils';
+import { getCollection } from 'astro:content';
+import type { GetImageResult } from 'astro';
+
+import MapPinFilled from '@components/Icons/Utility/MapPinFilled.astro';
+import PhoneIcon from '@components/Icons/Utility/PhoneIcon.astro';
+import CheckIcon from '@components/Icons/Utility/CheckIcon.astro';
+import CheckIconFilled from '@components/Icons/Utility/CheckIconFilled.astro';
 
 import serviceIcon1 from '@assets/images/service-icons-transparent/deep-tissue.png';
 import serviceIcon2 from '@assets/images/service-icons-transparent/hot-stone.png';
@@ -22,12 +21,6 @@ import serviceIcon3 from '@assets/images/service-icons-transparent/cupping.png';
 import serviceIcon4 from '@assets/images/service-icons-transparent/thai-oil.png';
 
 import benefitImg from '@assets/images/About-Section.TherapistImage.jpg';
-
-import { getOptimizedImage } from '@js/utils';
-import MapPinFilled from '@components/Icons/Utility/MapPinFilled.astro';
-import PhoneIcon from '@components/Icons/Utility/PhoneIcon.astro';
-import CheckIcon from '@components/Icons/Utility/CheckIcon.astro';
-import CheckIconFilled from '@components/Icons/Utility/CheckIconFilled.astro';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
@@ -39,95 +32,99 @@ type Service = {
   href?: string;
 };
 
-//
-//
-//
-//
-//
-//
-//
-//
-const services: Service[] = [
-  {
-    title: 'Therapeutic Massage',
-    blurb:
-      'Customized massage designed to relieve tension, improve circulation, and promote relaxation and well-being.',
-    cta: 'Read More',
-    img: services1Img,
-    href: '/services/therapeutic',
-  },
-  {
-    title: 'Deep Tissue Massage',
-    blurb:
-      'Targets deeper layers of muscle and connective tissue to release chronic tension, knots, and stiffness. Ideal for persistent pain or tight muscles.',
-    cta: 'Read More',
-    img: services2Img,
-    href: '/services/deep-tissue',
-  },
-  {
-    title: 'Prenatal Massage',
-    blurb:
-      'Gentle massage tailored for expectant mothers to reduce discomfort, ease stress, and support a healthy pregnancy.',
-    cta: 'Read More',
-    img: services3Img,
-    href: '/services/prenatal',
-  },
-  {
-    title: 'Sports Massage',
-    blurb:
-      'Improves flexibility, prevents injuries, and accelerates recovery for athletes and active individuals.',
-    cta: 'Read More',
-    img: services9Img,
-    href: '/services/sports',
-  },
-  {
-    title: 'Cupping Therapy',
-    blurb:
-      'Ancient technique using suction cups to improve blood flow, relieve muscle tension, and promote healing.',
-    cta: 'Read More',
-    img: services4Img,
-    href: '/services/cupping',
-  },
-  {
-    title: 'Hot Stone Massage',
-    blurb: 'Warm stones gently ease muscle tension, creating deep relaxation.',
-    cta: 'Read More',
-    img: services5Img,
-    href: '/services/hot-stone',
-  },
-  {
-    title: 'Lymphatic Drainage Massage',
-    blurb:
-      'Light, rhythmic massage that stimulates the lymphatic system to reduce swelling and improve circulation.',
-    cta: 'Read More',
-    img: services6Img,
-    href: '/services/lymphatic-drainage',
-  },
-  {
-    title: 'TMJ Massage',
-    blurb:
-      'Relieves pain and tension in the jaw, neck, and head caused by temporomandibular joint issues.',
-    cta: 'Read More',
-    img: services7Img,
-    href: '/services/tmj',
-  },
-  {
-    title: 'Japanese Head Spa',
-    blurb:
-      'Scalp treatment that improves blood flow, reduces stress, and promotes healthy hair.',
-    cta: 'Read More',
-    img: services8Img,
-    href: '/services/japanese',
-  },
-  {
-    title: '90-Minute Wellness Package',
-    blurb:
-      'Includes Japanese head massage, back massage, hand and foot massage, and face massage for a full-body reset.',
-    cta: 'Read More',
-    img: services10Img,
-    href: '/services/90-min',
-  },
-];
+const services: Service[] = (await getCollection('services'))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .map((service) => {
+    return {
+      title: service.data.title,
+      blurb: service.data.cardDescription || service.data.subtitle,
+      cta: 'Read More',
+      img: service.data.image,
+      href: `/services/${service.id}`,
+    };
+  });
+
+// const services: Service[] = [
+//   {
+//     title: 'Therapeutic Massage',
+//     blurb:
+//       'Customized massage designed to relieve tension, improve circulation, and promote relaxation and well-being.',
+//     cta: 'Read More',
+//     img: services1Img,
+//     href: '/services/therapeutic',
+//   },
+//   {
+//     title: 'Deep Tissue Massage',
+//     blurb:
+//       'Targets deeper layers of muscle and connective tissue to release chronic tension, knots, and stiffness. Ideal for persistent pain or tight muscles.',
+//     cta: 'Read More',
+//     img: services2Img,
+//     href: '/services/deep-tissue',
+//   },
+//   {
+//     title: 'Prenatal Massage',
+//     blurb:
+//       'Gentle massage tailored for expectant mothers to reduce discomfort, ease stress, and support a healthy pregnancy.',
+//     cta: 'Read More',
+//     img: services3Img,
+//     href: '/services/prenatal',
+//   },
+//   {
+//     title: 'Sports Massage',
+//     blurb:
+//       'Improves flexibility, prevents injuries, and accelerates recovery for athletes and active individuals.',
+//     cta: 'Read More',
+//     img: services9Img,
+//     href: '/services/sports',
+//   },
+//   {
+//     title: 'Cupping Therapy',
+//     blurb:
+//       'Ancient technique using suction cups to improve blood flow, relieve muscle tension, and promote healing.',
+//     cta: 'Read More',
+//     img: services4Img,
+//     href: '/services/cupping',
+//   },
+//   {
+//     title: 'Hot Stone Massage',
+//     blurb: 'Warm stones gently ease muscle tension, creating deep relaxation.',
+//     cta: 'Read More',
+//     img: services5Img,
+//     href: '/services/hot-stone',
+//   },
+//   {
+//     title: 'Lymphatic Drainage Massage',
+//     blurb:
+//       'Light, rhythmic massage that stimulates the lymphatic system to reduce swelling and improve circulation.',
+//     cta: 'Read More',
+//     img: services6Img,
+//     href: '/services/lymphatic-drainage',
+//   },
+//   {
+//     title: 'TMJ Massage',
+//     blurb:
+//       'Relieves pain and tension in the jaw, neck, and head caused by temporomandibular joint issues.',
+//     cta: 'Read More',
+//     img: services7Img,
+//     href: '/services/tmj',
+//   },
+//   {
+//     title: 'Japanese Head Spa',
+//     blurb:
+//       'Scalp treatment that improves blood flow, reduces stress, and promotes healthy hair.',
+//     cta: 'Read More',
+//     img: services8Img,
+//     href: '/services/japanese',
+//   },
+//   {
+//     title: '90-Minute Wellness Package',
+//     blurb:
+//       'Includes Japanese head massage, back massage, hand and foot massage, and face massage for a full-body reset.',
+//     cta: 'Read More',
+//     img: services10Img,
+//     href: '/services/90-min',
+//   },
+// ];
 
 type Benefit = {
   title: string;
@@ -215,7 +212,8 @@ const phoneDisplay = clientData.phoneFormatted?.trim() || '(587) 938-0458';
 const phoneHref = `tel:${clientData.phoneForTel?.replace(/\s+/g, '') || '5879380458'}`;
 const email = clientData.email || 'info@yourclinic.ca';
 const bookingHref = '/contact'; // change to your actual booking link if different
-const mapNote = 'We offer in‑clinic massage services at Belmead Professional Building, right beside Red Apple Daycare, Edmonton, Alberta. See our contact page for directions and parking details.';
+const mapNote =
+  'We offer in‑clinic massage services at Belmead Professional Building, right beside Red Apple Daycare, Edmonton, Alberta. See our contact page for directions and parking details.';
 ---
 
 <BaseLayout
@@ -248,12 +246,22 @@ const mapNote = 'We offer in‑clinic massage services at Belmead Professional B
             <article class="relative bg-transparent overflow-hidden grid grid-rows-[min-content,1fr] sm:grid-rows-1 sm:grid-cols-2 rounded-xl ring-1 ring-black/10 ">
               {/* <div class="absolute  inset-0 bg-gradient-to-l from-emerald-900 from-35% via-emerald-900/80 via-55% to-emerald-900/10" /> */}
               <div class="">
-                <Picture
+                <Image
+                  src={s.img}
+                  alt={s.title ?? 'Service Image'}
+                  class="relative block aspect-square size-full object-cover"
+                  loading={'eager'}
+                  decoding="sync"
+                  fetchpriority="high"
+                  lqip="base64"
+                  lqipSize={10}
+                />
+                {/* <Picture
                   src={s.img}
                   alt={s.title}
                   formats={['avif', 'webp']}
                   class={'block w-full aspect-square size-full object-cover'}
-                />
+                /> */}
                 {/* <div class="absolute inset-0 bg-gradient-to-l from-emerald-900 from-10% via-10% to-emerald-500/10" /> */}
               </div>
 

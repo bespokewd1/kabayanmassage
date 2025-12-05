@@ -20,6 +20,7 @@
     "@types/react-dom": "^19.0.4",
     "astro": "^5.13.7",
     "astro-icon": "^1.1.1",
+    "astro-lqip": "^1.7.1",
     "autoprefixer": "^10.4.20",
     "blaze-slider": "^1.9.3",
     "clsx": "^2.1.1",

@@ -1,13 +1,18 @@
 ---
 import client from '@data/client.json';
-import navData from '@data/navData.json';
+import { getNavData } from '@data/navData';
+import navInfo from '@data/navInfo.json';
+import { resolveImage } from '@js/imageUtils';
 import { getCurrentYear } from '@js/utils';
 // import MainLogo from '@components/Icons/MainLogo.astro';
-import MainLogo from '@assets/images/logo/kabayan-logo.jpg';
+// import MainLogo from '@assets/images/logo/kabayan-logo.jpg';
 import { Image } from 'astro:assets';
 import { Picture } from 'astro:assets';
 import googleReviewsLogo from '@assets/images/google-reviews-banner.png';
+
+const navData = await getNavData();
 const currentYear = getCurrentYear();
+const MainLogo = await resolveImage(navInfo.image);
 
 const servicesNode = navData.find((e) => e.key === 'Services');
 const services = Array.isArray(servicesNode?.children)
@@ -33,7 +38,7 @@ const services = Array.isArray(servicesNode?.children)
         <Image
           src={MainLogo}
           class="object-fill w-40 h-auto"
-          alt="Main logo massage"
+          alt={navInfo.alt}
         />
       </a>
       <div class="socials hidden">

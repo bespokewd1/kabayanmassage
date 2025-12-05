@@ -1,15 +1,21 @@
 ---
-import navData from '@data/navData.json';
+// import navData from '@data/navData.json';
+import { getNavData } from '@data/navData';
+import navInfo from '@data/navInfo.json';
 import { Icon } from 'astro-icon/components';
 import DarkModeToggle from '@components/DarkModeToggle.astro';
-import MainLogo from '@assets/images/logo/kabayan-logo.jpg';
+// import MainLogo from '@assets/images/logo/kabayan-logo.jpg';
 import { Image } from 'astro:assets';
+import { resolveImage } from '@js/imageUtils';
 
 import type { HTMLAttributes } from 'astro/types';
 import ChevronDown from './Icons/Utility/ChevronDown.astro';
 import ChevronUp from './Icons/Utility/ChevronUp.astro';
 
 interface Props extends HTMLAttributes<'header'> {}
+
+const navData = await getNavData();
+const MainLogo = await resolveImage(navInfo.image);
 
 const props = Astro.props as Props;
 ---
@@ -25,7 +31,7 @@ const props = Astro.props as Props;
     <a href="/" class="cs-logo mr-0" aria-label="back to home">
       <Image
         src={MainLogo}
-        alt="Main logo massage"
+        alt={navInfo.alt}
         class="px-2 drop-shadow-md max-w-[100px]"
       />
     </a>

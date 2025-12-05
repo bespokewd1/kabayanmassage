@@ -19,7 +19,44 @@ const blogsCollection = defineCollection({
 		}),
 });
 
+const servicesCollection = defineCollection({
+  loader: glob({
+    pattern: '**/[^_]*.{md,mdx}',
+    base: './src/content/services',
+  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      cardDescription: z.string().optional(),
+      subtitle: z.string(),
+      image: image(),
+      imageAlt: z.string(),
+      hightlights: z.array(
+        z.object({
+          featName: z.string(),
+          featBody: z.string(),
+        }),
+      ),
+      benefitsTitle: z.string(),
+      benefitsTagline: z.string(),
+      benefits: z.array(
+        z.object({
+          benefitName: z.string(),
+          benefitBody: z.string(),
+        }),
+      ),
+      prices: z.array(
+        z.object({
+          duration: z.string(),
+          price: z.string(),
+        }),
+      ).optional(),
+    }),
+});
+
+
 export const collections = {
 	blog: blogsCollection,
+	services: servicesCollection,
 };
 

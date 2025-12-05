@@ -77,24 +77,24 @@ posts.sort(
   <!-- ============================================ -->
 
   <section id="hero-856">
-    <div 
-  class="promo-banner w-full text-center font-bold animate-blink"
-  style="
+    <div
+      class="promo-banner w-full text-center font-bold animate-blink"
+      style="
     background: var(--primary);
     color: white;
     padding: 1.2rem;
     border-radius: 10px;
     margin: auto auto 2rem auto;
   "
->
-  <h1 class="text-xl" style="color: white; ">
-    New Client Special! Get 20% off your first session:
-    <span style="color: var(--secondary-light);">
-      $92 for 60 min • $135 for 90 min.
-    </span>
-  </h1>
-</div>
-          
+    >
+      <h1 class="text-xl" style="color: white; ">
+        New Client Special! Get 20% off your first session:
+        <span style="color: var(--secondary-light);">
+          $92 for 60 min • $135 for 90 min.
+        </span>
+      </h1>
+    </div>
+
     <div class="cs-container">
       <div class="cs-content">
         <span class="cs-topper">Kabayan Healing Touch Massage</span>
@@ -138,7 +138,7 @@ posts.sort(
   <!-- ============================================ -->
   <!--                     CTA                      -->
   <!-- ============================================ -->
-   <!--  -->
+  <!--  -->
 
   <section id="cta-697">
     <div class="cs-container">
@@ -498,7 +498,13 @@ posts.sort(
           Check with us for accepted providers.
         </p>
 
-        <a href="https://clients.mindbodyonline.com/classic/ws?studioid=5749623" target="_blank" class="cs-button-solid"> Book Appointment </a>
+        <a
+          href="https://clients.mindbodyonline.com/classic/ws?studioid=5749623"
+          target="_blank"
+          class="cs-button-solid"
+        >
+          Book Appointment
+        </a>
       </div>
     </div>
   </section>
@@ -521,7 +527,7 @@ posts.sort(
           <div class="space-y-3">
             <p class="text-lg text-orange-50">{client.name}</p>
             <p class="text-orange-50">
-              {client.address.lineOne}<br>
+              {client.address.lineOne}<br />
               {client.address.lineTwo}
             </p>
             <p class="text-orange-50">
@@ -1084,10 +1090,16 @@ posts.sort(
       transform: scale(1.2);
     }
   }
-   @keyframes soft-blink {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
+  @keyframes soft-blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   .animate-blink {
