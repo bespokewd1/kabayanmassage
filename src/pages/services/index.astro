@@ -1,9 +1,9 @@
 ---
 import BaseLayout from 'src/layouts/BaseLayout.astro';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
-import { Picture } from 'astro:assets';
-import { Image } from 'astro-lqip/components';
-import clientData from '@data/client.json';
+// import { Picture } from 'astro:assets';
+import { Image, Picture } from 'astro-lqip/components';
+import clientData from '@data/clientData';
 
 import { getOptimizedImage } from '@js/utils';
 import { resolveImage } from '@js/imageUtils';
@@ -21,6 +21,14 @@ import serviceIcon3 from '@assets/images/service-icons-transparent/cupping.png';
 import serviceIcon4 from '@assets/images/service-icons-transparent/thai-oil.png';
 
 import benefitImg from '@assets/images/About-Section.TherapistImage.jpg';
+
+import seoSetting from '@data/seo-pages.json';
+const seo = seoSetting.services;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
@@ -214,12 +222,19 @@ const email = clientData.email || 'info@yourclinic.ca';
 const bookingHref = '/contact'; // change to your actual booking link if different
 const mapNote =
   'We offer in‑clinic massage services at Belmead Professional Building, right beside Red Apple Daycare, Edmonton, Alberta. See our contact page for directions and parking details.';
+
+async function reloadImages() {
+  return Promise.all(services.map(async (s) => await getOptimizedImage(s.img)));
+}
+
+const preloadedImages = await reloadImages();
 ---
 
 <BaseLayout
-  title="Services"
-  description="Kabayan Healing Touch Massage - Professional Massage Therapy"
-  preloadedImage={optimizedImage}
+  ogImage={ogImage}
+  title={seo.title}
+  description={seo.description}
+  preloadedImage={preloadedImages}
 >
   <section class="bg-orange-50">
     <div class="mx-auto max-w-[120rem] px-6 py-16 md:py-20">
@@ -307,6 +322,8 @@ const mapNote =
           src={benefitImg}
           formats={['avif', 'webp']}
           alt="benefit massage"
+          lqip="base64"
+          lqipSize={10}
         />
 
         <!--SVG Graphic-->

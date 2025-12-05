@@ -1,6 +1,6 @@
 ---
 import BaseLayout from 'src/layouts/BaseLayout.astro';
-import client from '@data/client.json';
+import client from '@data/clientData';
 import Landing from '@components/Landing.astro';
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
@@ -15,6 +15,16 @@ import MapPinFilled from '@components/Icons/Utility/MapPinFilled.astro';
 
 import heroImg from '@assets/images/hero-img.jpg';
 import { Image, Picture } from 'astro:assets';
+
+import { resolveImage } from '@js/imageUtils';
+import type { GetImageResult } from 'astro';
+import seoSetting from '@data/seo-pages.json';
+const seo = seoSetting.contact;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
 
 const contactImg = heroImg;
 
@@ -45,8 +55,8 @@ const addressOne =
   client.address.lineOne?.trim() ||
   'South Gate Mall, Edmonton, Alberta, Canada';
 const mapHref =
-  client.address.mapLink ||
-  'https://www.google.com/maps?q=South+Gate+Mall,+Edmonton,+Alberta,+Canada';
+  `${client.address.mapLink}&output=embed` ||
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1185.9209425369352!2d-113.63989199216438!3d53.524880655557624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a0208aaf5a2dbf%3A0xd3322407d1260cc!2s8944%20182%20St%20NW%20Unit%20104%2C%20Edmonton%2C%20AB%20T5T%202K6%2C%20Canada!5e0!3m2!1sen!2sph!4v1762129828518!5m2!1sen!2sph';
 
 const hours = [
   { label: 'Mon – Sat', value: '10:00 am – 10:00 pm' },
@@ -55,8 +65,9 @@ const hours = [
 ---
 
 <BaseLayout
-  title="Contact"
-  description="iMassage Therapeutic Clinique- Professional Massage Therapy"
+  title={seo.title || 'Contact'}
+  description={seo.description}
+  ogImage={ogImage}
   preloadedImage={optimizedImage}
 >
   <!-- ============================================ -->
@@ -140,10 +151,11 @@ const hours = [
         </form>
       </div>
       <!--Map Image, pin is made in the Figma then export as one image-->
+      <!-- src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1185.9209425369352!2d-113.63989199216438!3d53.524880655557624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a0208aaf5a2dbf%3A0xd3322407d1260cc!2s8944%20182%20St%20NW%20Unit%20104%2C%20Edmonton%2C%20AB%20T5T%202K6%2C%20Canada!5e0!3m2!1sen!2sph!4v1762129828518!5m2!1sen!2sph" -->
       <div class="cs-map">
         <div class="cs-iframe-wrapper">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1185.9209425369352!2d-113.63989199216438!3d53.524880655557624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a0208aaf5a2dbf%3A0xd3322407d1260cc!2s8944%20182%20St%20NW%20Unit%20104%2C%20Edmonton%2C%20AB%20T5T%202K6%2C%20Canada!5e0!3m2!1sen!2sph!4v1762129828518!5m2!1sen!2sph"
+            src={mapHref}
             width="600"
             height="450"
             style="border:0;"
@@ -181,8 +193,9 @@ const hours = [
 
       <div class="cs-hours">
         <div class="cs-topper">Working Hours</div>
-        <span class="cs-hours-info"
-          >Monday - Sunday: <br /> 09:00AM - 09:00PM</span
+        <span class="cs-hours-info">
+          {client.openingHours.daysOpen}: <br />
+          {client.openingHours.hours}</span
         >
       </div>
     </div>

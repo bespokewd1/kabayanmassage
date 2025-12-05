@@ -7,8 +7,21 @@ import faqImg from '@assets/images/stack-stones.jpeg';
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
 import landingImage from '@assets/images/stone-massage-background1.png'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
-import { Image, Picture } from 'astro:assets';
+// import { Image, Picture } from 'astro:assets';
+import { Image, Picture } from 'astro-lqip/components';
+
 import FAQ from '@components/FAQ.astro';
+import CtaLink from '../components/CtaLink.astro';
+
+import { resolveImage } from '@js/imageUtils';
+import type { GetImageResult } from 'astro';
+import seoSetting from '@data/seo-pages.json';
+const seo = seoSetting.directBilling;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
 
 const faqs = [
   {
@@ -38,10 +51,15 @@ const faqs = [
   },
 ];
 
-const optimizedImage = await getOptimizedImage(landingImage);
+const optimizedImage = await getOptimizedImage(allLogos);
 ---
 
-<BaseLayout preloadedImage={optimizedImage}>
+<BaseLayout
+  title={seo.title || 'Direct Billing'}
+  description={seo.description}
+  ogImage={ogImage}
+  preloadedImage={optimizedImage}
+>
   <section class="bg-orange-50" id="direct-billing">
     <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
       <!-- Header -->
@@ -115,13 +133,16 @@ const optimizedImage = await getOptimizedImage(landingImage);
           </ol>
 
           <div class="mt-8 flex justify-center">
-            <a
+            <CtaLink
+              class="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold transition-colors"
+            />
+            <!-- <a
               href="https://kabayanhealingtouchmassage2.clinicsense.com/book/"
               target="_blank"
               class="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold transition-colors"
             >
               Book Appointment
-            </a>
+            </a> -->
           </div>
         </div>
       </div>

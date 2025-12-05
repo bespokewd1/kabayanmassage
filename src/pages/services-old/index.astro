@@ -2,7 +2,7 @@
 import BaseLayout from 'src/layouts/BaseLayout.astro';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import { Image, Picture } from 'astro:assets';
-import clientData from '@data/client.json';
+import clientData from '@data/clientData';
 
 // services images
 import services1Img from '@assets/images/Services-1.TherapeuticMassage.jpg';
@@ -215,7 +215,8 @@ const phoneDisplay = clientData.phoneFormatted?.trim() || '(587) 938-0458';
 const phoneHref = `tel:${clientData.phoneForTel?.replace(/\s+/g, '') || '5879380458'}`;
 const email = clientData.email || 'info@yourclinic.ca';
 const bookingHref = '/contact'; // change to your actual booking link if different
-const mapNote = 'We offer in‑clinic massage services at Belmead Professional Building, right beside Red Apple Daycare, Edmonton, Alberta. See our contact page for directions and parking details.';
+const mapNote =
+  'We offer in‑clinic massage services at Belmead Professional Building, right beside Red Apple Daycare, Edmonton, Alberta. See our contact page for directions and parking details.';
 ---
 
 <BaseLayout

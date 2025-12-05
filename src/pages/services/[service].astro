@@ -58,12 +58,19 @@ const benefitsData: PriceBenefitsProps = {
   prices: data.prices ?? [],
   ctaLabel: 'Book A Massage Session',
 };
+
+const serviceImage = await getOptimizedImage(data.image);
+
+// title="Services"
+// description="Kabayan Healing Touch Massage - Professional Massage Therapy"
+// preloadedImage={optimizedImage}
 ---
 
 <BaseLayout
-  title="Services"
-  description="Kabayan Healing Touch Massage - Professional Massage Therapy"
-  preloadedImage={optimizedImage}
+  title={data.title}
+  description={data.cardDescription}
+  ogImage={serviceImage}
+  preloadedImage={serviceImage}
 >
   <ServiceHero {...heroData} />
   <!-- <PriceBenifits {...benefitsData} /> -->

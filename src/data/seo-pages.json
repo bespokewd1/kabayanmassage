@@ -1,0 +1,42 @@
+{
+  "global": {
+    "title": "Kabayan Healing Touch Massage – West Edmonton’s Trusted RMT Clinic",
+    "description": "Experience expert care from a certified Registered Massage Therapist. Relieve pain, improve mobility, and restore your wellbeing at Kabayan Healing Touch Massage in West Edmonton.",
+    "ogImage": "/src/assets/images/og/hero-img.jpg"
+  },
+  "home": {
+    "title": "",
+    "description": "",
+    "ogImage": ""
+  },
+  "about": {
+    "title": "",
+    "description": "",
+    "ogImage": ""
+  },
+  "services": {
+    "title": "Services",
+    "description": "Kabayan Healing Touch Massage - Professional Massage Therapy",
+    "ogImage": ""
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "iMassage Therapeutic Clinique- Professional Massage Therapy",
+    "ogImage": ""
+  },
+  "directBilling": {
+    "title": "",
+    "description": "",
+    "ogImage": ""
+  },
+  "gallery": {
+    "title": "",
+    "description": "",
+    "ogImage": ""
+  },
+  "reviews": {
+    "title": "",
+    "description": "",
+    "ogImage": ""
+  }
+}

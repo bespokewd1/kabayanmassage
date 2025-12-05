@@ -1,8 +1,7 @@
 {
 	"name": "Kabayan Healing Touch Massage",
 	"email": "kabayanhealingmassage8@gmail.com",
-	"phoneForTel": "+1-780-690-8616",
-	"phoneFormatted": "(780) 690-8616",
+	"phone": "780-690-8616",
 	"address": {
 		"lineOne": "Suite 104, 8944 182 Street NW, Edmonton, AB",
 		"lineTwo": "Located in the Belmead Professional Building, right beside Red Apple Daycare",
@@ -11,5 +10,15 @@
 		"zip": "",
 		"mapLink": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1185.9209425369352!2d-113.63989199216438!3d53.524880655557624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a0208aaf5a2dbf%3A0xd3322407d1260cc!2s8944%20182%20St%20NW%20Unit%20104%2C%20Edmonton%2C%20AB%20T5T%202K6%2C%20Canada!5e0!3m2!1sen!2sph!4v1762129828518!5m2!1sen!2sph"
 	},
+  "socials": {
+    "facebook": "https://www.facebook.com/yourpage",
+    "instagram": "https://www.instagram.com/yourpage",
+    "twitter": "https://www.twitter.com/yourpage",
+    "linkedin": "https://www.linkedin.com/yourpage"
+  },
+  "openingHours": {
+    "daysOpen": "Monday – Sunday",
+    "hours": "9:00 AM – 9:00 PM"
+  },
 	"domain": "https://kabayanmassage.netlify.app/"
 }

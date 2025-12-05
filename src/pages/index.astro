@@ -2,14 +2,17 @@
 import BaseLayout from 'src/layouts/BaseLayout.astro';
 import CTA from '@components/CTA.astro';
 import { getCollection } from 'astro:content';
-import { Image, Picture } from 'astro:assets';
-import client from '@data/client.json';
+import { Image, Picture } from 'astro-lqip/components';
+
+import client from '@data/clientData';
 import '@styles/blog.less';
 import BlazeSlider from 'blaze-slider';
 import 'blaze-slider/dist/blaze.css';
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
+import { resolveImage } from '@js/imageUtils';
+
 import aboutImage1 from '@assets/images/Services-1.TherapeuticMassage.jpg';
 import aboutImage2 from '@assets/images/Services-5.HotStoneMassage.jpg';
 import serviceImg5 from '@assets/images/Services-2.DeepTissueMassage.jpg';
@@ -23,6 +26,16 @@ import TwitterIcon from '@components/Icons/Socials/TwitterIcon.astro';
 import WhyChooseUs from '@components/why-choose-us.astro';
 import ChevronLeftIconFilled from '@components/Icons/Utility/ChevronLeftIconFilled.astro';
 import ChevronRightIconFilled from '@components/Icons/Utility/ChevronRightIconFilled.astro';
+import CtaLink from '../components/CtaLink.astro';
+
+import seoSetting from '@data/seo-pages.json';
+import announcement from '@data/announcement.json';
+const seo = seoSetting.home;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
 
 const optimizedImage = await getOptimizedImage(heroImg);
 
@@ -71,7 +84,12 @@ posts.sort(
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 />
 
-<BaseLayout preloadedImage={optimizedImage}>
+<BaseLayout
+  title={seoSetting.home.title}
+  description={seoSetting.home.description}
+  ogImage={ogImage}
+  preloadedImage={[heroImg]}
+>
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
@@ -88,9 +106,9 @@ posts.sort(
   "
     >
       <h1 class="text-xl" style="color: white; ">
-        New Client Special! Get 20% off your first session:
+        {announcement.message}
         <span style="color: var(--secondary-light);">
-          $92 for 60 min • $135 for 90 min.
+          {announcement.highlight}
         </span>
       </h1>
     </div>
@@ -103,19 +121,25 @@ posts.sort(
           Expert care from a certified Registered Massage Therapist — helping
           you reduce pain, restore mobility, and recharge your wellbeing.
         </p>
-        <a
+        <CtaLink id="hero-cta" class="cs-button-solid" />
+        <!-- <a
           href="https://clients.mindbodyonline.com/classic/ws?studioid=5749623"
           target="_blank"
           id="hero-cta"
-          class="cs-button-solid">Book Your Massage</a
-        >
+          class="cs-button-solid"
+          >Book Your Massage</a
+        > -->
       </div>
       <Picture
-        loading={'eager'}
         pictureAttributes={{ class: 'cs-picture' }}
         src={heroImg}
         formats={['avif', 'webp']}
         alt="lady in massage"
+        loading={'eager'}
+        decoding="sync"
+        fetchpriority="high"
+        lqip="base64"
+        lqipSize={10}
       />
     </div>
     <!--Change the svg path fill color to whatever color the section below is so you can match it and create the illusion it is all one piece-->
@@ -194,6 +218,8 @@ posts.sort(
             src={aboutImage1}
             alt="lady in a stone massage"
             class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+            lqip="base64"
+            lqipSize={10}
           />
         </div>
 
@@ -252,6 +278,8 @@ posts.sort(
                 src={serviceImg5}
                 alt="lady in a stone massage"
                 class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+                lqip="base64"
+                lqipSize={10}
               />
             </div>
           </div>
@@ -498,13 +526,15 @@ posts.sort(
           Check with us for accepted providers.
         </p>
 
-        <a
+        <CtaLink class="cs-button-solid" />
+        <!-- <a
           href="https://clients.mindbodyonline.com/classic/ws?studioid=5749623"
           target="_blank"
           class="cs-button-solid"
         >
           Book Appointment
         </a>
+        -->
       </div>
     </div>
   </section>
@@ -535,7 +565,9 @@ posts.sort(
               <br />
               {client.email}
             </p>
-            <p class="text-orange-50">Mon–Sun: 9:00 AM – 9:00 PM</p>
+            <p class="text-orange-50">
+              {client.openingHours.daysOpen}: {client.openingHours.hours}
+            </p>
             <p class="text-orange-50">
               Direct Billing Available. Please ask about eligible providers.
             </p>
@@ -543,16 +575,32 @@ posts.sort(
 
           <!-- Socials -->
           <div class="mt-8 flex items-center gap-4 text-emerald-50/90">
-            <a href="#" aria-label="Facebook" class="hover:text-white">
+            <a
+              href={client.socials.facebook}
+              aria-label="Facebook"
+              class="hover:text-white"
+            >
               <FacebookIcon class:list={['text-orange-50 ']} />
             </a>
-            <a href="#" aria-label="Instagram" class="hover:text-white">
+            <a
+              href={client.socials.instagram}
+              aria-label="Instagram"
+              class="hover:text-white"
+            >
               <InstagramIcon class:list={['text-orange-50 ']} />
             </a>
-            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+            <a
+              href={client.socials.linkedin}
+              aria-label="LinkedIn"
+              class="hover:text-white"
+            >
               <LinkedInIcon class:list={['text-orange-50 ']} />
             </a>
-            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+            <a
+              href={client.socials.twitter}
+              aria-label="LinkedIn"
+              class="hover:text-white"
+            >
               <TwitterIcon class:list={['text-orange-50 ']} />
             </a>
           </div>
